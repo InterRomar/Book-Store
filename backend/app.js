@@ -12,7 +12,8 @@ app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Methods", "GET, PATCH, PUT, POST, DELETE, OPTIONS");
   next();
 });
-app.use('/auth', require('./routes/auth.routes'))
+app.use('/auth', require('./routes/auth.routes'));
+app.use('/books', require('./routes/books.routes'));
 
 app.use(function (err, req, res, next) {
   if (err.name === 'UnauthorizedError') {
