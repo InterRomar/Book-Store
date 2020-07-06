@@ -15,10 +15,11 @@ function generateToken(user) {
 
   const data =  {
     id: user.id,
-    email: user.email
+    email: user.email,
+    createdAt: new Date().getTime()
   };
   
-  const expiration = '1h';
+  const expiration = 10;
 
   return jwt.sign({ data }, config.get("secretKey"), { expiresIn: expiration });
   
@@ -60,12 +61,21 @@ router.get('/profile', async (req, res) => {
   try {
     const token = req.headers.authorization;
     const decodedToken = await jwt.verify(token, config.get('secretKey'))
-  
+    
+
+    const tokenLifetime = new Date().getTime() - decodedToken.data.createdAt;
+    if (tokenLifetime >= decodedToken.exp) {
+      res.json({
+        success: false,
+        message: "token is expired"
+      })
+    }
     return res.json({
       user: decodedToken.data,
       success: true
     });
   } catch (error) {
+    console.log(error)
     return res.json({ success: false, message: error.message })
   }
 });

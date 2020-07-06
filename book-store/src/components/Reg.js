@@ -89,7 +89,7 @@ class Reg extends Component {
     return (
       <Container>
         <Form onSubmit={this.handleSubmit}>
-          <Title>Sign Up For An Account</Title>
+          <Title>Регистрация</Title>
           <FormErrors formErrors={this.state.formErrors} />
 
 
@@ -97,18 +97,18 @@ class Reg extends Component {
             <label>Email </label>
             <Input
               name='email'
-              placeholder='email'
+              placeholder='Email'
               value={this.state.email}
               onChange={this.handleChange}
             />
           </FormCol>
 
           <FormCol>
-            <label>Password </label>
+            <label>Пароль </label>
             <Input
               type='password'
               name='password'
-              placeholder='Password'
+              placeholder='Пароль'
               value={this.state.password}
               onChange={this.handleChange}
             />
@@ -116,17 +116,17 @@ class Reg extends Component {
 
 
           <FormCol>
-            <label>Confirm password </label>
+            <label>Повторите пароль </label>
             <Input
               type='password'
               name='confirm_password'
-              placeholder='Confirm password'
+              placeholder='Повторите пароль'
               value={this.state.confirm_password}
               onChange={this.handleChange}
             />
           </FormCol>
 
-          <SubmitBtn type='submit' disabled={!this.state.formValid}/>
+          <SubmitBtn type='submit' disabled={!this.state.formValid} value="Регистрация"/>
         </Form>
       </Container>
     );

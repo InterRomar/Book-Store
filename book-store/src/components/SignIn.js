@@ -138,7 +138,7 @@ class SignIn extends React.Component {
     return (
       <Container>
         <Form onSubmit={this.handleSubmit}>
-          <Title>Sign In</Title>
+          <Title>Войти</Title>
           <FormErrors formErrors={this.state.formErrors} />
 
           <FormCol>
@@ -152,11 +152,11 @@ class SignIn extends React.Component {
           </FormCol>
 
           <FormCol>
-            <label>Password </label>
+            <label>Пароль </label>
             <Input
               type='password'
               name='password'
-              placeholder='Password'
+              placeholder='Пароль'
               value={this.state.password}
               onChange={this.handleChange}
             />

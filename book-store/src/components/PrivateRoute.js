@@ -45,7 +45,7 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, null)(PrivateRoute);
 
 PrivateRoute.propTypes = {
-  isAuth: PropTypes.bool,
+  isAuth: PropTypes.func,
   path: PropTypes.string,
   children: PropTypes.element
 };

@@ -5,7 +5,7 @@ import { MainTitle } from './Home';
 const Profile = () => {
   return (
     <Container>
-      <MainTitle>Profile component</MainTitle>
+      <MainTitle>Профиль</MainTitle>
     </Container>
   );
 };

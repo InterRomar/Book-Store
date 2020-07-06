@@ -80,9 +80,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(App);
 
 App.propTypes = {
   getProfileFetch: PropTypes.func,
-  isAuth: PropTypes.bool,
+  isAuth: PropTypes.func,
   logOut: PropTypes.func,
-  user: PropTypes.shape({
-    email: PropTypes.string
-  })
+  user: PropTypes.func
 };

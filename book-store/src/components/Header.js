@@ -118,9 +118,7 @@ const Header = ({ isAuth, user, logOut }) => {
 export default Header;
 
 Header.propTypes = {
-  isAuth: PropTypes.bool,
+  isAuth: PropTypes.func,
   logOut: PropTypes.func,
-  user: PropTypes.shape({
-    email: PropTypes.string
-  })
+  user: PropTypes.func
 };
