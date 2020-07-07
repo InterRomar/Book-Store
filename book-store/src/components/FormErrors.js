@@ -5,6 +5,11 @@ const FormErrors = ({ formErrors }) => {
   return (
     <div className='formErrors'>
     {Object.keys(formErrors).map((fieldName, i) => {
+      if (formErrors[fieldName].message && formErrors[fieldName].message.length > 0) {
+        return (
+          <p key={i}> {formErrors[fieldName].message} </p>
+        );
+      }
       if (formErrors[fieldName].length > 0) {
         return (
           <p key={i}> {formErrors[fieldName]}</p>
@@ -12,8 +17,7 @@ const FormErrors = ({ formErrors }) => {
       }
       return '';
     })}
-  </div>
-  );
+  </div>);
 };
 
 export default FormErrors;

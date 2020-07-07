@@ -73,7 +73,8 @@ class Reg extends Component {
 
   handleSubmit = async event => {
     event.preventDefault();
-    const res = await this.props.userPostReg(this.state);
+    const { email, password } = this.state;
+    const res = await this.props.userPostReg({ email, password });
     if (!res.success) {
       this.setState({
         formErrors: {

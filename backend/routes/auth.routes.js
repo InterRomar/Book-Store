@@ -19,7 +19,7 @@ function generateToken(user) {
     createdAt: new Date().getTime()
   };
   
-  const expiration = 10;
+  const expiration = '1h';
 
   return jwt.sign({ data }, config.get("secretKey"), { expiresIn: expiration });
   
@@ -48,7 +48,7 @@ router.post('/reg', async (req, res) => {
     return res.status(200).json({
       success: true, 
       message: 'Успешно!', 
-      user: { email }, 
+      user: { email, id: newUser.id }, 
       token: `Fusion ${token}`
   });
   } catch (error) { 

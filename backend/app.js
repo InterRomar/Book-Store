@@ -14,6 +14,7 @@ app.use(function(req, res, next) {
 });
 app.use('/auth', require('./routes/auth.routes'));
 app.use('/books', require('./routes/books.routes'));
+app.use('/category', require('./routes/category.routes'));
 
 app.use(function (err, req, res, next) {
   if (err.name === 'UnauthorizedError') {

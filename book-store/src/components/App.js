@@ -10,6 +10,10 @@ import SignIn from './SignIn';
 import Home from './Home';
 import PrivateRoute from './PrivateRoute';
 import Profile from './Profile';
+import AddBook from './AddBook';
+import { getAllBooks } from '../store/book_store/actions';
+import { getAllCategories } from '../store/categories_store/actions';
+import AddCategory from './AddCategory';
 
 
 class App extends React.Component {
@@ -22,10 +26,13 @@ class App extends React.Component {
   }
 
   componentDidMount = async () => {
-    this.props.getProfileFetch()
-      .then(() => {
-        this.setState({ loading: false });
-      });
+    const { getProfileFetch, getAllBooks, getAllCategories } = this.props;
+    await getProfileFetch();
+    await getAllBooks();
+    await getAllCategories();
+    this.setState({
+      loading: false
+    });
   }
 
 
@@ -57,6 +64,12 @@ class App extends React.Component {
               <PrivateRoute path="/profile">
                 <Profile/>
               </PrivateRoute>
+              <PrivateRoute path="/addBook">
+                <AddBook/>
+              </PrivateRoute>
+              <PrivateRoute path="/addCategory">
+                <AddCategory/>
+              </PrivateRoute>
             </Switch>
         </main>
       </div>
@@ -72,7 +85,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getProfileFetch: () => dispatch(getProfileFetch()),
-  logOut: () => dispatch(userLogOut())
+  logOut: () => dispatch(userLogOut()),
+  getAllBooks: () => dispatch(getAllBooks()),
+  getAllCategories: () => dispatch(getAllCategories())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
@@ -82,5 +97,7 @@ App.propTypes = {
   getProfileFetch: PropTypes.func,
   isAuth: PropTypes.func,
   logOut: PropTypes.func,
-  user: PropTypes.func
+  user: PropTypes.func,
+  getAllBooks: PropTypes.func,
+  getAllCategories: PropTypes.func
 };

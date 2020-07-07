@@ -31,6 +31,9 @@ export const FormCol = styled.div`
   & input {
     display: block;
   }
+  & select {
+    display: block;
+  }
 `;
 
 export const Input = styled.input`

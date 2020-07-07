@@ -38,6 +38,7 @@ export const userPostReg = user => {
   return async dispatch => {
     dispatch(requestReg());
     try {
+      console.log(user);
       const res = await axiosInstance.post('auth/reg', user);
       if (res.data.success) {
         localStorage.setItem('token', res.data.token);
@@ -76,7 +77,6 @@ export const getProfileFetch = () => {
         dispatch(userLogOut());
         return;
       }
-      console.log(res);
       dispatch(successLogin(res.data.user));
     }
   };

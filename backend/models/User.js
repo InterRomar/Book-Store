@@ -3,8 +3,8 @@
 const {
   Model
 } = require('sequelize');
-const Book = require('./Book');
 module.exports = (sequelize, DataTypes) => {
+  const Book = require('./Book')(sequelize, DataTypes);
   class User extends Model {
 
     static associate(models) {
@@ -12,9 +12,9 @@ module.exports = (sequelize, DataTypes) => {
     }
 
     async getBooks() {
-      const books = await Book.find({
+      const books = await Book.findAll({
         where: {
-          userID: this.id
+          UserID: this.id
         }
       });
 
