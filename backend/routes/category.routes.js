@@ -1,14 +1,12 @@
 const express = require('express');
 
 const { sequelize, Sequelize } = require('../models/index');
-// const User = require('../models/User')(sequelize, Sequelize);
-// const Book = require('../models/Book')(sequelize, Sequelize);
 const Category = require('../models/Category')(sequelize, Sequelize);
 
 const router = express.Router();
 
 
-router.get('/getAllCategories', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const categories = await Category.findAll();
   
@@ -18,7 +16,7 @@ router.get('/getAllCategories', async (req, res) => {
   }
 });
 
-router.post('/addCategory', async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const { title } = req.body;
     if (!title) {
@@ -32,8 +30,6 @@ router.post('/addCategory', async (req, res) => {
 
     const newCategory = await Category.create({
       title,
-      createdAt: new Date(),
-      updatedAt: new Date()
     });
     
     res.status(200).json({

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
 import styled from 'styled-components';
-import { Container } from './Header';
-import { Title, Form, FormCol, Input, SubmitBtn } from './SignIn';
+
+import { Container } from '../components/Header';
+import { Title, Form, FormCol, Input, SubmitBtn } from '../forms/SignInForm';
+import FormErrors from '../forms/FormErrors';
 import { addBookAxios } from '../store/book_store/actions';
-import FormErrors from './FormErrors';
 
 export const Textarea = styled.textarea`
   width: 100%;
@@ -35,10 +35,10 @@ class AddBook extends Component {
       description: '',
       price: 0,
       rating: 0,
-      CategoryID: 0,
+      category_id: 0,
       img: '',
       demo_fragment: '',
-      UserID: this.props.current_user().id,
+      user_id: this.props.current_user.id,
 
       formValid: false,
       formErrors: {
@@ -62,6 +62,10 @@ class AddBook extends Component {
           isValid: false,
           message: ''
         },
+        category_id: {
+          isValid: false,
+          message: ''
+        },
         global: {
           isValid: false,
           message: ''
@@ -70,10 +74,11 @@ class AddBook extends Component {
     };
   }
 
-  handleChange = event => {
+  handleChange = async event => {
     const name = event.target.name;
     const value = event.target.value;
-    this.setState({
+
+    await this.setState({
       [name]: value
     }, () => {
       this.validateField(name, value);
@@ -86,19 +91,19 @@ class AddBook extends Component {
       author,
       description,
       price,
-      rating,
       img,
       demo_fragment,
-      UserID } = this.state;
+      user_id,
+      category_id } = this.state;
 
     const res = await this.props.addBookAxios({ title,
       author,
       description,
       price,
-      rating,
       img,
       demo_fragment,
-      UserID,
+      user_id,
+      category_id: +category_id
     });
     if (res.success) {
       this.setState({
@@ -109,7 +114,8 @@ class AddBook extends Component {
         rating: 0,
         img: '',
         demo_fragment: '',
-        UserID: this.props.current_user().id,
+        user_id: this.props.current_user.id,
+        category_id: 0,
         formErrors: {
           ...this.state.formErrors,
           global: {
@@ -138,7 +144,8 @@ class AddBook extends Component {
       author,
       description,
       price,
-      demo_fragment } = formErrors;
+      demo_fragment,
+      category_id } = formErrors;
 
     switch (fieldName) {
       case 'title':
@@ -161,6 +168,10 @@ class AddBook extends Component {
         demo_fragment.isValid = value.length >= 0;
         demo_fragment.message = demo_fragment.isValid ? '' : '';
         break;
+      case 'category_id':
+        category_id.isValid = +value > 0;
+        category_id.message = category_id.isValid ? '' : 'Выберите категорию!';
+        break;
 
       default:
         break;
@@ -172,6 +183,7 @@ class AddBook extends Component {
         description,
         price,
         demo_fragment,
+        category_id
       }
     }, this.validateForm);
   }
@@ -180,13 +192,15 @@ class AddBook extends Component {
     const { title,
       author,
       description,
-      price } = this.state.formErrors;
+      price,
+      category_id } = this.state.formErrors;
 
     this.setState({
       formValid: title.isValid
                  && author.isValid
                  && description.isValid
                  && price.isValid
+                 && category_id.isValid
     });
   }
 
@@ -198,10 +212,12 @@ class AddBook extends Component {
       description,
       price,
       demo_fragment,
+      category_id,
       formValid
     } = this.state;
 
     const { categories } = this.props;
+
     return (
       <Container>
         <Title>Add Book</Title>
@@ -237,8 +253,14 @@ class AddBook extends Component {
           </FormCol>
           <FormCol>
             <label>Category </label>
-            <Select>
-              {categories().map(category => <option
+            <Select
+              placeholder='Select category'
+              name='category_id'
+              value={+category_id}
+              onChange={this.handleChange}
+            >
+              <option value={0} disabled>Select a category</option>
+              {categories.map(category => <option
                 key={category.id}
                 value={category.id}> {
                   category.title}
@@ -274,8 +296,8 @@ class AddBook extends Component {
 }
 
 const mapStateToProps = state => ({
-  current_user: () => state.current_user.user,
-  categories: () => state.categories_store.categories
+  current_user: state.current_user.user,
+  categories: state.categories_store.categories
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -284,8 +306,8 @@ const mapDispatchToProps = dispatch => ({
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddBook);
 
-AddBook.propTypes = {
-  addBookAxios: PropTypes.func,
-  current_user: PropTypes.func,
-  categories: PropTypes.func,
-};
+// AddBook.propTypes = {
+//   addBookAxios: PropTypes.func,
+//   current_user: PropTypes.func,
+//   categories: PropTypes.func,
+// };

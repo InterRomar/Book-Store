@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { Container } from './Header';
+import { Container } from '../components/Header';
 import { MainTitle } from './Home';
 
 

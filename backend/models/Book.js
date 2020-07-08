@@ -8,7 +8,9 @@ module.exports = (sequelize, DataTypes) => {
   class Book extends Model {
 
     static associate(models) {
-      Book.belongsTo(models.User, {foreignKey: 'ID', as: 'Book'});
+      console.log(models)
+      Book.belongsTo(models.user, {foreignKey: 'id', as: 'Book'});
+      Book.belongsTo(models.category, {foreignKey: 'id', as: 'CategoryBook'});
     }
   };
   Book.init({
@@ -22,42 +24,35 @@ module.exports = (sequelize, DataTypes) => {
     },
     description: DataTypes.STRING,
     price: {
-      type: DataTypes.NUMBER,
+      type: DataTypes.DECIMAL,
       allowNull: false
     },
-    rating: DataTypes.NUMBER,
+    rating: {
+      type: DataTypes.DECIMAL,
+      defaultValue: 3.5
+    },
     img: DataTypes.STRING,
     demo_fragment: DataTypes.STRING,
-    UserID: {
+    user_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-          model: User,
-          key: "UserID"
+          model: "users",
+          key: "user_id"
       }
     },
-    CategoryID: {
+    category_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-          model: Category,
-          key: "CategoryID"
+          model: "categories",
+          key: "category_id"
       }
     },
-  
-    createdAt: {
-      allowNull: false,
-      type: DataTypes.DATE,
-      default: new Date()
-    },
-    updatedAt: {
-      allowNull: false,
-      type: DataTypes.DATE,
-      default: new Date()
-    }
   }, {
     sequelize,
-    modelName: 'Book',
+    timestamps: true,
+    modelName: 'book',
   });
   return Book;
 };

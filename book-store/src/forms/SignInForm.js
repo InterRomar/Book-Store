@@ -1,12 +1,7 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 
 import styled from 'styled-components';
-import { userPostLogin } from '../store/current_user/actions';
 import FormErrors from './FormErrors';
-import { Container } from './Header';
-
 
 export const Title = styled.h1`
   font-family: 'Arial';
@@ -71,7 +66,8 @@ export const SubmitBtn = styled.input`
   }
 `;
 
-class SignIn extends React.Component {
+
+class SignInForm extends Component {
   constructor(props) {
     super(props);
 
@@ -124,10 +120,12 @@ class SignIn extends React.Component {
     });
   }
 
-  handleSubmit = async event => {
+  handleSubmit = async (event) => {
     event.preventDefault();
-    const res = await this.props.userPostLogin(this.state);
+    const { email, password } = this.state;
+    const res = await this.props.onSubmit(email, password);
     if (!res.success) {
+      console.log(res);
       this.setState({
         formErrors: {
           ...this.state.formErrors,
@@ -139,48 +137,37 @@ class SignIn extends React.Component {
 
   render() {
     return (
-      <Container>
-        <Form onSubmit={this.handleSubmit}>
-          <Title>Войти</Title>
-          <FormErrors formErrors={this.state.formErrors} />
+      <Form onSubmit={this.handleSubmit}>
+        <Title>Войти</Title>
+        <FormErrors formErrors={this.state.formErrors} />
 
-          <FormCol>
-            <label>Email </label>
-            <Input
-              name='email'
-              placeholder='Email'
-              value={this.state.email}
-              onChange={this.handleChange}
-            />
-          </FormCol>
+        <FormCol>
+          <label>Email </label>
+          <Input
+            name='email'
+            placeholder='Email'
+            value={this.state.email}
+            onChange={this.handleChange}
+          />
+        </FormCol>
 
-          <FormCol>
-            <label>Пароль </label>
-            <Input
-              type='password'
-              name='password'
-              placeholder='Пароль'
-              value={this.state.password}
-              onChange={this.handleChange}
-            />
-          </FormCol>
+        <FormCol>
+          <label>Пароль </label>
+          <Input
+            type='password'
+            name='password'
+            placeholder='Пароль'
+            value={this.state.password}
+            onChange={this.handleChange}
+          />
+        </FormCol>
 
-          <FormCol>
-            <SubmitBtn type='submit' disabled={!this.state.formValid} value='Войти'/>
-          </FormCol>
-        </Form>
-      </Container>
+        <FormCol>
+          <SubmitBtn type='submit' disabled={!this.state.formValid} value='Войти'/>
+        </FormCol>
+      </Form>
     );
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  userPostLogin: userInfo => dispatch(userPostLogin(userInfo))
-});
-
-export default connect(null, mapDispatchToProps)(SignIn);
-
-
-SignIn.propTypes = {
-  userPostLogin: PropTypes.func,
-};
+export default SignInForm;

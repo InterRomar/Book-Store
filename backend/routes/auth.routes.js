@@ -5,7 +5,6 @@ const config = require('config');
 
 const { sequelize, Sequelize } = require('../models/index');
 const User = require('../models/User')(sequelize, Sequelize);
-const isAuth = require('../middlewares/isAuth');
 const attachCurrentUser = require('../middlewares/attachCurrentUser')
 
 const router = express.Router();
@@ -35,12 +34,9 @@ router.post('/reg', async (req, res) => {
     }
     const hashPass = bcrypt.hashSync(password, salt);
 
-
     const newUser = await User.create({
       email,
       password: hashPass,
-      createdAt: new Date(),
-      updatedAt: new Date()
     });
     const token = generateToken(newUser);
     
@@ -52,26 +48,17 @@ router.post('/reg', async (req, res) => {
       token: `Fusion ${token}`
   });
   } catch (error) { 
-    console.log(error)
+    console.log(error.message)
     return res.status(500).json({ success: false, message: `Что-то пошло не так, повторите попытку... ${error}`});
   }
 });
 
-router.get('/profile', async (req, res) => {
+router.get('/profile', attachCurrentUser, async (req, res) => {
   try {
-    const token = req.headers.authorization;
-    const decodedToken = await jwt.verify(token, config.get('secretKey'))
-    
-
-    const tokenLifetime = new Date().getTime() - decodedToken.data.createdAt;
-    if (tokenLifetime >= decodedToken.exp) {
-      res.json({
-        success: false,
-        message: "token is expired"
-      })
-    }
+    const user = await User.findByPk(Number(+req.currentUserId));
+    if (!user) throw new Error('user not found');
     return res.json({
-      user: decodedToken.data,
+      user,
       success: true
     });
   } catch (error) {

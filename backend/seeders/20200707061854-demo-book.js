@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('Books', [{
+    return queryInterface.bulkInsert('books', [{
       title: 'War and Peace',
       author: 'Leo Tolstoy',
       description: 'Awesome book...',
@@ -10,8 +10,8 @@ module.exports = {
       rating: 4.75,
       img: '',
       demo_fragment: 'Bla-bla-bla',
-      UserID: 2,
-      CategoryID: 9,
+      user_id: 2,
+      category_id: 9,
       createdAt: new Date(),
       updatedAt: new Date()
     },
@@ -23,8 +23,8 @@ module.exports = {
       rating: 4.75,
       img: '',
       demo_fragment: 'Bla-bla-bla',
-      UserID: 2,
-      CategoryID: 8,
+      user_id: 2,
+      category_id: 9,
       createdAt: new Date(),
       updatedAt: new Date()
     },
@@ -36,8 +36,8 @@ module.exports = {
       rating: 4.75,
       img: '',
       demo_fragment: 'Bla-bla-bla',
-      UserID: 2,
-      CategoryID: 5,
+      user_id: 2,
+      category_id: 9,
       createdAt: new Date(),
       updatedAt: new Date()
     },
@@ -49,8 +49,8 @@ module.exports = {
       rating: 4.75,
       img: '',
       demo_fragment: 'Bla-bla-bla',
-      UserID: 2,
-      CategoryID: 7,
+      user_id: 2,
+      category_id: 9,
       createdAt: new Date(),
       updatedAt: new Date()
     },
@@ -62,21 +62,21 @@ module.exports = {
       rating: 4.75,
       img: '',
       demo_fragment: 'Bla-bla-bla',
-      UserID: 2,
-      CategoryID: 8,
+      user_id: 2,
+      category_id: 9,
       createdAt: new Date(),
       updatedAt: new Date()
     },
     {
-      title: 'War and Peace5',
+      title: 'War and Peace4',
       author: 'Leo Tolstoy',
       description: 'Awesome book...',
       price: 15.2,
-      rating: 4.75,
+      // rating: 4.75,
       img: '',
       demo_fragment: 'Bla-bla-bla',
-      UserID: 2,
-      CategoryID: 9,
+      user_id: 2,
+      category_id: 9,
       createdAt: new Date(),
       updatedAt: new Date()
     },
@@ -84,6 +84,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('Books', null, {});
+    return queryInterface.bulkDelete('books', null, {});
   }
 };

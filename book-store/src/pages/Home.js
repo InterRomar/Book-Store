@@ -2,15 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Container } from './Header';
-import BookCard from './BookCard';
+
+import { Container } from '../components/Header';
+import BookCard from '../components/BookCard';
+import Sidebar from '../components/Sidebar';
 
 
 export const MainTitle = styled.h1`
   text-align: center;
   font-family: "Arial";
   margin-top: 70px;
-  font-size: 60px
+  font-size: 60px;
 `;
 
 const BookList = styled.ul`
@@ -31,28 +33,21 @@ const MainPage = styled.section`
   justify-content: space-between;
 `;
 
-const Sidebar = styled.section`
-  width: 23%;
-  margin-top: 20px;
-  border: 1px solid #ccc;
-
-  
-`;
 
 const Home = ({ books }) => {
   return (
     <Container>
       <MainPage>
-        <Sidebar></Sidebar>
+        <Sidebar />
         <BookList>
-          {books().map(book => <BookCard key={book.id} book={book}/>)}
+          {books.map(book => <BookCard key={book.id} book={book}/>)}
         </BookList>
       </MainPage>
     </Container>
   );
 };
 const mapStateToProps = state => ({
-  books: () => state.book_store.books
+  books: state.book_store.books
 });
 
 // const mapDispatchToProps = dispatch => ({
@@ -62,5 +57,5 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, null)(Home);
 
 Home.propTypes = {
-  books: PropTypes.func
+  // books: PropTypes.func
 };

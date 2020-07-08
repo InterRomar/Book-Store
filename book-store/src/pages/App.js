@@ -4,16 +4,16 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { getProfileFetch, userLogOut } from '../store/current_user/actions';
-import Header from './Header';
+import Header from '../components/Header';
 import Reg from './Reg';
 import SignIn from './SignIn';
 import Home from './Home';
-import PrivateRoute from './PrivateRoute';
+import PrivateRoute from '../components/PrivateRoute';
 import Profile from './Profile';
 import AddBook from './AddBook';
+import AddCategory from './AddCategory';
 import { getAllBooks } from '../store/book_store/actions';
 import { getAllCategories } from '../store/categories_store/actions';
-import AddCategory from './AddCategory';
 
 
 class App extends React.Component {
@@ -79,8 +79,8 @@ class App extends React.Component {
 
 
 const mapStateToProps = state => ({
-  isAuth: () => !!Object.keys(state.current_user.user).length,
-  user: () => state.current_user.user
+  isAuth: !!Object.keys(state.current_user.user).length,
+  user: state.current_user.user
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -95,9 +95,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(App);
 
 App.propTypes = {
   getProfileFetch: PropTypes.func,
-  isAuth: PropTypes.func,
+  isAuth: PropTypes.bool,
   logOut: PropTypes.func,
-  user: PropTypes.func,
+  // user: PropTypes.func,
   getAllBooks: PropTypes.func,
   getAllCategories: PropTypes.func
 };

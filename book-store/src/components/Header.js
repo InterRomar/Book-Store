@@ -87,17 +87,17 @@ const Header = ({ isAuth, user, logOut }) => {
         <Nav>
           <Logo to='/' >Book Store</Logo>
           <NavList className="nav__list">
-            {isAuth() &&
+            {isAuth &&
               <Fragment>
                 <NavItem >
-                  <ProfileLink to="/profile">{user().email}</ProfileLink>
+                  <ProfileLink to="/profile">{user.email}</ProfileLink>
                 </NavItem>
                 <NavItem >
                   <NavLink to="/login" onClick={logOut}>Выйти</NavLink>
                 </NavItem>
               </Fragment>
             }
-            {isAuth() === false &&
+            {isAuth === false &&
               <Fragment>
                 <NavItem >
                   <NavLink to='/login'>Войти</NavLink>
@@ -117,8 +117,8 @@ const Header = ({ isAuth, user, logOut }) => {
 
 export default Header;
 
-Header.propTypes = {
-  isAuth: PropTypes.func,
-  logOut: PropTypes.func,
-  user: PropTypes.func
-};
+// Header.propTypes = {
+//   isAuth: PropTypes.func,
+//   logOut: PropTypes.func,
+//   user: PropTypes.func
+// };

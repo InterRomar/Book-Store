@@ -1,14 +1,15 @@
-import axios from 'axios';
 import axiosInstance from '../../axios';
 
 import { registerActions, loginActions, LOGOUT_USER } from '../action_names/action_names';
 
 
-const { LOGIN_USER_REQUEST,
+const {
+  LOGIN_USER_REQUEST,
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAILURE } = loginActions;
 
-const { REGISTER_USER_REQUEST,
+const {
+  REGISTER_USER_REQUEST,
   REGISTER_USER_SUCCESS,
   REGISTER_USER_FAILURE } = registerActions;
 
@@ -18,15 +19,15 @@ export const userPostLogin = user => {
     dispatch(requestLogin());
     try {
       const res = await axiosInstance.post('auth/login', user);
-      if (res.data.success) {
-        localStorage.setItem('token', res.data.token);
-        dispatch(successLogin(res.data.currentUser));
-      } else {
-        dispatch(failureLogin(res.data.message));
-      }
+
+      if (!res.data.success) throw new Error(res.data.message);
+
+      localStorage.setItem('token', res.data.token);
+      dispatch(successLogin(res.data.currentUser));
+
       return res.data;
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
       dispatch(failureLogin(error.message));
       return error;
     }
@@ -40,15 +41,13 @@ export const userPostReg = user => {
     try {
       console.log(user);
       const res = await axiosInstance.post('auth/reg', user);
-      if (res.data.success) {
-        localStorage.setItem('token', res.data.token);
-        dispatch(successReg(res.data.user));
-      } else {
-        dispatch(failureReg(res.data.message));
-      }
+
+      if (!res.data.success) throw new Error(res.data.message);
+
+      localStorage.setItem('token', res.data.token);
+      dispatch(successReg(res.data.user));
       return res.data;
     } catch (error) {
-      console.log(error);
       dispatch(failureReg(error.message));
       return error;
     }
@@ -67,12 +66,7 @@ export const getProfileFetch = () => {
     dispatch(requestLogin());
     const token = localStorage.token;
     if (token) {
-      const instance = axios.create({
-        headers: {
-          Authorization: token.split(' ')[1]
-        }
-      });
-      const res = await instance.get('http://localhost:5000/auth/profile');
+      const res = await axiosInstance.get('auth/profile');
       if (!res.data.success) {
         dispatch(userLogOut());
         return;

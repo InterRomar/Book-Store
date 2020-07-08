@@ -3,10 +3,12 @@ import axiosInstance from '../../axios';
 import { addCategoryActions, getCategoriesActions } from '../action_names/action_names';
 
 
-const { ADD_CATEGORY_REQUEST,
+const {
+  ADD_CATEGORY_REQUEST,
   ADD_CATEGORY_SUCCESS,
   ADD_CATEGORY_FAILURE, } = addCategoryActions;
-const { GET_CATEGORIES_REQUEST,
+const {
+  GET_CATEGORIES_REQUEST,
   GET_CATEGORIES_SUCCESS,
   GET_CATEGORIES_FAILURE, } = getCategoriesActions;
 
@@ -15,13 +17,11 @@ export const addCategoryAxios = category => {
   return async dispatch => {
     dispatch(requestAddCategory());
     try {
-      const res = await axiosInstance.post('category/addCategory', category);
-      if (res.data.success) {
-        dispatch(successAddCategory(res.data.category));
-      } else {
-        console.log(res.data.message);
-        dispatch(failureAddCategory(res.data.message));
-      }
+      const res = await axiosInstance.post('category', category);
+
+      if (!res.data.success) throw new Error(res);
+
+      dispatch(successAddCategory(res.data.category));
       return res.data;
     } catch (error) {
       console.log(error.response.data.message);
@@ -36,7 +36,7 @@ export const getAllCategories = () => {
     console.log('requst cate');
     dispatch(requestGetAllCategories());
 
-    const res = await axiosInstance.get('category/getAllCategories');
+    const res = await axiosInstance.get('category');
     if (!res.data.success) {
       console.log('тут');
       dispatch(failureGetAllCategories(res.data.message));

@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { Container } from './Header';
-import { Title, Form, FormCol, Input, SubmitBtn } from './SignIn';
+import { Container } from '../components/Header';
+import { Title, Form, FormCol, Input, SubmitBtn } from '../forms/SignInForm';
+import FormErrors from '../forms/FormErrors';
 import { addCategoryAxios } from '../store/categories_store/actions';
-import FormErrors from './FormErrors';
 
 class AddBook extends Component {
   constructor(props) {

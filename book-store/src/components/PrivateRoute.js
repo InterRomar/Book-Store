@@ -8,7 +8,7 @@ function PrivateRoute({ children, isAuth, path, ...rest }) {
     return (
       <Route
       {...rest}
-      render={() => (!isAuth() ? (
+      render={() => (!isAuth ? (
         children
       ) : (
           <Redirect
@@ -24,7 +24,7 @@ function PrivateRoute({ children, isAuth, path, ...rest }) {
   return (
     <Route
       {...rest}
-      render={() => (isAuth() ? (
+      render={() => (isAuth ? (
         children
       ) : (
           <Redirect
@@ -39,13 +39,13 @@ function PrivateRoute({ children, isAuth, path, ...rest }) {
 }
 
 const mapStateToProps = state => ({
-  isAuth: () => !!Object.keys(state.current_user.user).length
+  isAuth: !!Object.keys(state.current_user.user).length
 });
 
 export default connect(mapStateToProps, null)(PrivateRoute);
 
 PrivateRoute.propTypes = {
-  isAuth: PropTypes.func,
+  // isAuth: PropTypes.func,
   path: PropTypes.string,
   children: PropTypes.element
 };

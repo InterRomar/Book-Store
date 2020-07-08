@@ -2,12 +2,19 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return await queryInterface.addColumn('Books', 'CategoryID', {
-      type: Sequelize.DataTypes.INTEGER
+    await queryInterface.addColumn('books', 'category_id', {
+      type: Sequelize.DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+          model: "categories",
+          key: "id"
+      },
+      onDelete: 'SET NULL',
+      onUpdate: 'CASCADE'
     });
   },
 
   down: async (queryInterface, Sequelize) => {
-    return await queryInterface.removeColumn('Books', 'CategoryID', {});
+    await queryInterface.removeColumn('books', 'category_id', {});
   }
 };

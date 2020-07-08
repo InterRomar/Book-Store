@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-
-import { userPostReg, userLogOut } from '../store/current_user/actions';
 import FormErrors from './FormErrors';
-import { Container } from './Header';
-import { Form, FormCol, Input, SubmitBtn, Title } from './SignIn';
+import { Form, FormCol, Input, SubmitBtn, Title } from './SignInForm';
 
-class Reg extends Component {
+class RegForm extends Component {
   constructor(props) {
     super(props);
 
@@ -22,7 +17,6 @@ class Reg extends Component {
       formValid: false
     };
   }
-
 
   validateField(fieldName, value) {
     const fieldValidationErrors = this.state.formErrors;
@@ -60,7 +54,6 @@ class Reg extends Component {
     });
   }
 
-
   handleChange = event => {
     const name = event.target.name;
     const value = event.target.value;
@@ -71,11 +64,12 @@ class Reg extends Component {
     });
   }
 
-  handleSubmit = async event => {
+  handleSubmit = async (event) => {
     event.preventDefault();
     const { email, password } = this.state;
-    const res = await this.props.userPostReg({ email, password });
+    const res = await this.props.onSubmit(email, password);
     if (!res.success) {
+      console.log(res);
       this.setState({
         formErrors: {
           ...this.state.formErrors,
@@ -85,11 +79,10 @@ class Reg extends Component {
     }
   }
 
-
   render() {
+    const { onSubmit } = this.props;
     return (
-      <Container>
-        <Form onSubmit={this.handleSubmit}>
+      <Form onSubmit={this.handleSubmit}>
           <Title>Регистрация</Title>
           <FormErrors formErrors={this.state.formErrors} />
 
@@ -129,18 +122,10 @@ class Reg extends Component {
 
           <SubmitBtn type='submit' disabled={!this.state.formValid} value="Регистрация"/>
         </Form>
-      </Container>
+
+
     );
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  userPostReg: userInfo => dispatch(userPostReg(userInfo)),
-  userLogOut: () => dispatch(userLogOut()),
-});
-
-export default connect(null, mapDispatchToProps)(Reg);
-
-Reg.propTypes = {
-  userPostReg: PropTypes.func,
-};
+export default RegForm;
