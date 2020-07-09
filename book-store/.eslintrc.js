@@ -25,6 +25,7 @@ module.exports = {
   parser: 'babel-eslint',
   rules: {
     'styled-components-config/rule-name': 2,
+    "quotes": ["error", "single", { "avoidEscape": true }],
     'eol-last': ['error', 'always'],
     semi: ['error', 'always'],
     'no-plusplus': 'off',

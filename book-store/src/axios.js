@@ -22,6 +22,7 @@ axiosInstance.interceptors.request.use(config => {
 axiosInstance.interceptors.response.use(response => {
   return response;
 }, error => {
+  console.log(error.message);
   if (error.response.statusText === 'Unauthorized') {
     console.log(error.response.data.message);
     return error.response;

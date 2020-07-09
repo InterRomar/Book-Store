@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { Container } from '../components/Header';
-import BookCard from '../components/BookCard';
 import Sidebar from '../components/Sidebar';
+import BookList from '../components/BookList';
 
 
 export const MainTitle = styled.h1`
@@ -15,18 +15,6 @@ export const MainTitle = styled.h1`
   font-size: 60px;
 `;
 
-const BookList = styled.ul`
-  list-style: none;
-  margin: 0;
-  padding: 0;
-
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  width: 75%;
-  margin-top: 70px;
-  
-`;
 
 const MainPage = styled.section`
   display: flex;
@@ -34,27 +22,18 @@ const MainPage = styled.section`
 `;
 
 
-const Home = ({ books }) => {
+const Home = () => {
   return (
     <Container>
       <MainPage>
         <Sidebar />
-        <BookList>
-          {books.map(book => <BookCard key={book.id} book={book}/>)}
-        </BookList>
+        <BookList />
       </MainPage>
     </Container>
   );
 };
-const mapStateToProps = state => ({
-  books: state.book_store.books
-});
 
-// const mapDispatchToProps = dispatch => ({
-
-// });
-
-export default connect(mapStateToProps, null)(Home);
+export default Home;
 
 Home.propTypes = {
   // books: PropTypes.func

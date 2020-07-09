@@ -31,10 +31,14 @@ export const addBookAxios = book => {
     }
   };
 };
-export const getAllBooks = () => {
+export const getAllBooks = (page, size) => {
+  console.log(page, size);
   return async dispatch => {
     dispatch(requestGetAllBooks());
-    const res = await axiosInstance.get('books');
+
+    const url = `books/testUrl?page=${page}&size=${size}`;
+    const res = await axiosInstance.get(url);
+
     if (!res.data.success) {
       dispatch(failureGetAllBooks(res.data.message));
       return;
