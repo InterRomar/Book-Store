@@ -1,4 +1,4 @@
-import { addBookActions, getBooksActions } from '../action_names/action_names';
+import { addBookActions, getBooksActions, SET_CURRENT_PAGE } from '../action_names/action_names';
 
 
 const { ADD_BOOK_REQUEST,
@@ -13,6 +13,9 @@ const initialState = {
   loading: false,
   error: '',
   books: [],
+  currentPage: 1,
+  pageSize: 10,
+  totalCount: 0
 };
 
 const book_store = (state = initialState, action) => {
@@ -51,7 +54,13 @@ const book_store = (state = initialState, action) => {
         ...state,
         loading: false,
         error: '',
-        books: [...state.books, ...action.payload]
+        books: [...action.payload]
+      }
+      );
+    case SET_CURRENT_PAGE:
+      return ({
+        ...state,
+        currentPage: action.payload
       }
       );
     default:

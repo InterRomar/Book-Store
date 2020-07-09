@@ -9,31 +9,34 @@ const attachCurrentUser = require('../middlewares/attachCurrentUser')
 const router = express.Router();
 
 router.get('/testUrl', async (req, res) => {
-    try {
-      
-      const books = await Book.findAndCountAll({
-        offset: 0,
-        limit: 50
-      })
-      
-      const { rows } = books;
-      rows.forEach(r => console.log(r.dataValues.title))
-      
-      
-      
-      res.status(200).json({success: true})
+  try {
     
+    const { page, size } = req.query
+    const allBooks = await Book.findAll();
+    const totalCount = allBooks.length;
+
+    const books = await Book.findAll({
+      offset: size * (page - 1),
+      limit: size
+    })
     
-    
-    
-    
-    } catch (error) {
-      res.json({message: error.message})
-    }
+    res.status(200).json({success: true, books, totalCount })
+
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({success: false, message: "Что-то пошло не так, повторите попытку"})
+  }
 });
 
-
-
+router.get('/', async (req, res) => {
+  try {
+    const books = await Book.findAll();
+    res.status(200).json({success: true, books})
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({success: false, message: "Что-то пошло не так, повторите попытку"})
+  }
+});
 
 router.get('/:id', async (req, res) => {
   try {
@@ -43,16 +46,7 @@ router.get('/:id', async (req, res) => {
     res.status(200).json({success: true, books})   
   } catch (error) {
       console.log(error)
-      res.status(500).json({success: false, message: "Что-то пошло не так, повторите попытку", dfasd: error.message})
-  }
-});
-router.get('/', async (req, res) => {
-  try {
-    const books = await Book.findAll();
-    res.status(200).json({success: true, books})
-  } catch (error) {
-    console.log(error)
-    res.status(500).json({success: false, message: "Что-то пошло не так, повторите попытку"})
+      res.status(500).json({success: false, message: "Что-то пошло не так, повторите попытку" })
   }
 });
 // router.get('/', async (req, res) => {

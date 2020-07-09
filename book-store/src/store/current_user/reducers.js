@@ -30,8 +30,6 @@ const current_user = (state = initialState, action) => {
 
       });
     case LOGIN_USER_SUCCESS:
-      console.log(action.payload);
-      
       return ({
         ...state,
         loading: false,

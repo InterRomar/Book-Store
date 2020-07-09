@@ -30,3 +30,6 @@ export const getCategoriesActions = {
 };
 
 export const LOGOUT_USER = 'LOGOUT_USER';
+export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
+
+
