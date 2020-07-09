@@ -11,32 +11,26 @@ const router = express.Router();
 router.get('/', async (req, res) => {
   try {
     
-    const { page, size } = req.query
-    const allBooks = await Book.findAll();
+    const { page, size, category } = req.query
+    console.log(category)
+    const allBooks = await Book.findAll({
+      where: category ? {category_id: category} : null,
+    });
     const totalCount = allBooks.length;
 
     const books = await Book.findAll({
+      where: category ? {category_id: category} : null,
       offset: size * (page - 1),
       limit: size
-    })
+    });
     
     res.status(200).json({success: true, books, totalCount })
 
   } catch (error) {
-    console.log(error)
+    // console.log(error)
     res.status(500).json({success: false, message: "Что-то пошло не так, повторите попытку"})
   }
 });
-
-// router.get('/', async (req, res) => {
-//   try {
-//     const books = await Book.findAll();
-//     res.status(200).json({success: true, books})
-//   } catch (error) {
-//     console.log(error)
-//     res.status(500).json({success: false, message: "Что-то пошло не так, повторите попытку"})
-//   }
-// });
 
 // Здесь должно искать по id книги, а ищет по user id (исправить)
 router.get('/:id', async (req, res) => {

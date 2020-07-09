@@ -78,19 +78,11 @@ export const getProfileFetch = () => {
 
     if (token) {
       const decodedToken = parseJwt(token);
-      const tokenLifetime = new Date().getTime() - decodedToken.data.createdAt;
-      if (tokenLifetime >= decodedToken.exp) {
-        dispatch(userLogOut());
-        return dispatch(failureLogin('token is expired'));
-      }
 
-      // const res = await axiosInstance.get('auth/profile');
-      // if (!res.data.success) {
-      //   dispatch(userLogOut());
-      //   return;
-      // }
-      const { id, email } = decodedToken.data;
-      return dispatch(successLogin({ id, email }));
+      const res = await axiosInstance.get('auth/profile');
+      if (res.data.success) {
+        return dispatch(successLogin(res.data.user));
+      }
     }
     dispatch(userLogOut());
     return dispatch(failureLogin('token not found'));

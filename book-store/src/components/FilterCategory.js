@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { getAllBooks, setCurrentPage } from '../store/book_store/actions';
 
 export const FilterTitle = styled.h4`
   margin: 0 0 25px;
@@ -41,37 +42,74 @@ const CategoryButton = styled.button`
     color: rgb(150, 68, 197);
   }
 
+  &.selected {
+    color: rgb(150, 68, 197);
+  }
+  &:focus {
+    outline: none;
+  }
+
 `;
 
 class FilterCategory extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      currentCategory: this.props.currentCategory
+    };
+  }
+
+  changeCategory = async (event) => {
+    const { currentPage, pageSize, currentCategory, getFilteredBooks, resetCurrentPage } = this.props;
+    console.log(this.props);
+    const category = +event.target.value;
+
+    this.setState({
+      currentCategory: category
+    });
+    await resetCurrentPage();
+    getFilteredBooks(1, pageSize, category);
+  }
+
   render() {
     const { categories } = this.props;
+    const { currentCategory } = this.state;
     return (
-        <div>
-          <FilterTitle>Категории</FilterTitle>
-          <CategoriesList>
-            {categories.map(category => <li
-              key={category.id}
+      <div>
+        <FilterTitle>Категории</FilterTitle>
+        <CategoriesList>
+          {categories.map(category => <li
+            key={category.id}
+          >
+            <CategoryButton
+              className={currentCategory === category.id ? 'selected' : ''}
+              value={category.id}
+              onClick={this.changeCategory}
             >
-              <CategoryButton>
-                {category.title}
-              </CategoryButton>
-            </li>)}
-          </CategoriesList>
-        </div>
+              {category.title}
+            </CategoryButton>
+          </li>)}
+        </CategoriesList>
+      </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  categories: state.categories_store.categories
+  categories: state.categories_store.categories,
+  currentPage: state.book_store.currentPage,
+  totalCount: state.book_store.totalCount,
+  pageSize: state.book_store.pageSize,
+  currentCategory: state.book_store.currentCategory,
 });
 
-// const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = dispatch => ({
+  getFilteredBooks: (page, size, category) => dispatch(getAllBooks(page, size, category)),
+  resetCurrentPage: () => dispatch(setCurrentPage(1))
+});
 
-// });
-
-export default connect(mapStateToProps, null)(FilterCategory);
+export default connect(mapStateToProps, mapDispatchToProps)(FilterCategory);
 
 FilterCategory.propTypes = {
   // categories: PropTypes.func

@@ -1,10 +1,10 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { getProfileFetch, userLogOut } from '../store/current_user/actions';
-import Header from '../components/Header';
+import Header, { Container } from '../components/Header';
 import Reg from './Reg';
 import SignIn from './SignIn';
 import Home from './Home';
@@ -53,8 +53,12 @@ class App extends React.Component {
       <div className="App">
         <Header isAuth={isAuth} user={user} logOut={logOut}/>
         <main className="page">
+            <Container>
+              <Link to="/?q=test">Test link</Link>
+            </Container>
             <Switch>
               <Route exact path='/' component={Home}/>
+
               <PrivateRoute path="/reg">
                 <Reg/>
               </PrivateRoute>

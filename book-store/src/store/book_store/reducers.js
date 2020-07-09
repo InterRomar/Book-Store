@@ -1,4 +1,4 @@
-import { addBookActions, getBooksActions, SET_CURRENT_PAGE, SET_TOTAL_COUNT } from '../action_names/action_names';
+import { addBookActions, getBooksActions, SET_CURRENT_PAGE, SET_TOTAL_COUNT, SET_CURRENT_CATEGORY } from '../action_names/action_names';
 
 
 const { ADD_BOOK_REQUEST,
@@ -15,7 +15,8 @@ const initialState = {
   books: [],
   currentPage: 1,
   pageSize: 10,
-  totalCount: 0
+  totalCount: 0,
+  currentCategory: 0,
 };
 
 const book_store = (state = initialState, action) => {
@@ -58,6 +59,7 @@ const book_store = (state = initialState, action) => {
       }
       );
     case SET_CURRENT_PAGE:
+      console.log('reducer SET_CURRENT_PAGE', action.payload);
       return ({
         ...state,
         currentPage: action.payload
@@ -67,6 +69,12 @@ const book_store = (state = initialState, action) => {
       return ({
         ...state,
         totalCount: action.payload
+      }
+      );
+    case SET_CURRENT_CATEGORY:
+      return ({
+        ...state,
+        currentCategory: action.payload
       }
       );
     default:

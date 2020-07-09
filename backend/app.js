@@ -7,7 +7,6 @@ const { sequelize, Sequelize } = db;
 app.use(jsonParser);
 
 app.use(function(req, res, next) {
-  console.log(req.method)
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
   res.header("Access-Control-Allow-Methods", "GET, PATCH, PUT, POST, DELETE, OPTIONS");  

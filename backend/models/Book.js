@@ -8,7 +8,6 @@ module.exports = (sequelize, DataTypes) => {
   class Book extends Model {
 
     static associate(models) {
-      console.log(models)
       Book.belongsTo(models.user, {foreignKey: 'id', as: 'Book'});
       Book.belongsTo(models.category, {foreignKey: 'id', as: 'CategoryBook'});
     }

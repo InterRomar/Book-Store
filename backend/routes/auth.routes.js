@@ -53,7 +53,7 @@ router.post('/reg', async (req, res) => {
   }
 });
 
-router.get('/profile', async (req, res) => {
+router.get('/profile', attachCurrentUser, async (req, res) => {
   try {
     const user = await User.findByPk(Number(+req.currentUserId));
     if (!user) throw new Error('user not found');
@@ -71,7 +71,6 @@ router.post('/login', async (req, res) => {
     try {
       const { email, password } = req.body;
       const candidate = await User.findOne({ where: { email } });
-      console.log('dfa');
       
 
       if (!candidate) {

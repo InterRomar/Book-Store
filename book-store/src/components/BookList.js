@@ -36,18 +36,19 @@ class BookList extends Component {
   }
 
   changePage = (event) => {
-    const { getBooks, pageSize } = this.props;
+    const { getBooks, pageSize, currentCategory } = this.props;
     const page = +event.target.value;
     this.setState({
       currentPage: page
     });
-
-    getBooks(page, pageSize);
+    console.log('CURRENT CATEGORY', currentCategory);
+    getBooks(page, pageSize, currentCategory);
   }
 
   render() {
-    const { books, totalCount, pageSize } = this.props;
-    const { currentPage } = this.state;
+    const { books, totalCount, pageSize, currentPage } = this.props;
+    // const { currentPage } = this.state;
+    console.log(currentPage, 'CURRENT PAGE IN THE BOOK LIST');
 
     let pageCount = totalCount / pageSize;
     const pages = [];
@@ -78,11 +79,12 @@ const mapStateToProps = state => ({
   books: state.book_store.books,
   currentPage: state.book_store.currentPage,
   totalCount: state.book_store.totalCount,
-  pageSize: state.book_store.pageSize
+  pageSize: state.book_store.pageSize,
+  currentCategory: state.book_store.currentCategory
 });
 
 const mapDispatchToProps = dispatch => ({
-  getBooks: (page, size) => dispatch(getAllBooks(page, size)),
+  getBooks: (page, size, currentCategory) => dispatch(getAllBooks(page, size, currentCategory)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(BookList);

@@ -22,7 +22,8 @@ const MainPage = styled.section`
 `;
 
 
-const Home = () => {
+const Home = ({ match, location }) => {
+  console.log(location.search);
   return (
     <Container>
       <MainPage>

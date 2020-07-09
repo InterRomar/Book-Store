@@ -131,7 +131,7 @@ class AddBook extends Component {
           ...this.state.formErrors,
           global: {
             isValid: false,
-            message: res
+            message: res.message
           }
         }
       });

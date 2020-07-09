@@ -1,6 +1,6 @@
 import axiosInstance from '../../axios';
 
-import { addBookActions, getBooksActions, SET_CURRENT_PAGE, SET_TOTAL_COUNT } from '../action_names/action_names';
+import { addBookActions, getBooksActions, SET_CURRENT_PAGE, SET_TOTAL_COUNT, SET_CURRENT_CATEGORY } from '../action_names/action_names';
 
 
 const {
@@ -19,30 +19,32 @@ export const addBookAxios = book => {
     try {
       const res = await axiosInstance.post('books', book);
 
-      console.log(res.data.message);
       if (!res.data.success) throw new Error(res.data.message);
 
       dispatch(successAddBook(res.data.book));
 
       return res.data;
     } catch (error) {
-      console.log('error ');
-      console.log(error.message);
-      return error;
+      console.log(error.response.data.message);
+      return { succes: false, message: error.response.data.message };
     }
   };
 };
-export const getAllBooks = (page, size) => {
+export const getAllBooks = (page, size, category) => {
   return async dispatch => {
     dispatch(requestGetAllBooks());
-
-    const url = `books?page=${page}&size=${size}`;
+    console.log('CATEGORY', category);
+    const categoryURL = category ? `&category=${category}` : '';
+    const url = `books?page=${page}&size=${size}${categoryURL}`;
     const res = await axiosInstance.get(url);
 
     if (!res.data.success) {
       dispatch(failureGetAllBooks(res.data.message));
       return;
     }
+
+    if (category) dispatch(setCurrentCategory(category));
+
     dispatch(setTotalCount(res.data.totalCount));
     dispatch(setCurrentPage(page));
     dispatch(successGetAllBooks(res.data.books));
@@ -74,11 +76,15 @@ const failureGetAllBooks = (err) => ({
   message: err
 });
 
-const setCurrentPage = (page) => ({
+export const setCurrentPage = (page) => ({
   type: SET_CURRENT_PAGE,
   payload: page
 });
 const setTotalCount = (totalCount) => ({
   type: SET_TOTAL_COUNT,
   payload: totalCount
+});
+const setCurrentCategory = (category) => ({
+  type: SET_CURRENT_CATEGORY,
+  payload: category
 });
