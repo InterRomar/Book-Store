@@ -65,13 +65,28 @@ export const getProfileFetch = () => {
   return async dispatch => {
     dispatch(requestLogin());
     const token = localStorage.token;
+
+    function parseJwt (token) {
+      var base64Url = token.split('.')[1];
+      var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      }).join(''));
+  
+      return JSON.parse(jsonPayload);
+    }; 
+
     if (token) {
-      const res = await axiosInstance.get('auth/profile');
-      if (!res.data.success) {
-        dispatch(userLogOut());
-        return;
-      }
-      dispatch(successLogin(res.data.user));
+      const decodeToken = parseJwt(token);
+      // const res = await axiosInstance.get('auth/profile');
+      // if (!res.data.success) {
+      //   dispatch(userLogOut());
+      //   return;
+      // }
+      const { id, email} = decodeToken.data;
+      return dispatch(successLogin({ id, email }));
+    } else {
+      return dispatch(failureLogin('token not found'))
     }
   };
 };

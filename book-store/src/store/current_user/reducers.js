@@ -26,9 +26,12 @@ const current_user = (state = initialState, action) => {
       return ({
         ...state,
         loading: false,
+        error: action.message
 
       });
     case LOGIN_USER_SUCCESS:
+      console.log(action.payload);
+      
       return ({
         ...state,
         loading: false,

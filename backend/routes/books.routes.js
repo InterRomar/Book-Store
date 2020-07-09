@@ -8,9 +8,25 @@ const attachCurrentUser = require('../middlewares/attachCurrentUser')
 
 const router = express.Router();
 
-router.get('/testUrl', attachCurrentUser, async (req, res) => {
+router.get('/testUrl', async (req, res) => {
     try {
+      
+      const books = await Book.findAndCountAll({
+        offset: 0,
+        limit: 50
+      })
+      
+      const { rows } = books;
+      rows.forEach(r => console.log(r.dataValues.title))
+      
+      
+      
       res.status(200).json({success: true})
+    
+    
+    
+    
+    
     } catch (error) {
       res.json({message: error.message})
     }
