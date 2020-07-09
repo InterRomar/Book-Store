@@ -31,5 +31,4 @@ export const getCategoriesActions = {
 
 export const LOGOUT_USER = 'LOGOUT_USER';
 export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
-
-
+export const SET_TOTAL_COUNT = 'SET_TOTAL_COUNT';

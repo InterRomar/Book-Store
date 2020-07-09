@@ -1,4 +1,4 @@
-import { addBookActions, getBooksActions, SET_CURRENT_PAGE } from '../action_names/action_names';
+import { addBookActions, getBooksActions, SET_CURRENT_PAGE, SET_TOTAL_COUNT } from '../action_names/action_names';
 
 
 const { ADD_BOOK_REQUEST,
@@ -55,15 +55,18 @@ const book_store = (state = initialState, action) => {
         loading: false,
         error: '',
         books: [...action.payload]
-<<<<<<< HEAD
       }
       );
     case SET_CURRENT_PAGE:
       return ({
         ...state,
         currentPage: action.payload
-=======
->>>>>>> 89ca242f3f139822f92f2d73adcf75e0e26e4a38
+      }
+      );
+    case SET_TOTAL_COUNT:
+      return ({
+        ...state,
+        totalCount: action.payload
       }
       );
     default:

@@ -8,7 +8,7 @@ const attachCurrentUser = require('../middlewares/attachCurrentUser')
 
 const router = express.Router();
 
-router.get('/testUrl', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     
     const { page, size } = req.query
@@ -28,16 +28,17 @@ router.get('/testUrl', async (req, res) => {
   }
 });
 
-router.get('/', async (req, res) => {
-  try {
-    const books = await Book.findAll();
-    res.status(200).json({success: true, books})
-  } catch (error) {
-    console.log(error)
-    res.status(500).json({success: false, message: "Что-то пошло не так, повторите попытку"})
-  }
-});
+// router.get('/', async (req, res) => {
+//   try {
+//     const books = await Book.findAll();
+//     res.status(200).json({success: true, books})
+//   } catch (error) {
+//     console.log(error)
+//     res.status(500).json({success: false, message: "Что-то пошло не так, повторите попытку"})
+//   }
+// });
 
+// Здесь должно искать по id книги, а ищет по user id (исправить)
 router.get('/:id', async (req, res) => {
   try {
     const user = await User.findByPk(req.params.id);
@@ -49,17 +50,6 @@ router.get('/:id', async (req, res) => {
       res.status(500).json({success: false, message: "Что-то пошло не так, повторите попытку" })
   }
 });
-// router.get('/', async (req, res) => {
-//   try {
-//     // const { category, price, page, limit } = req.query;
-    
-    
-    
-//     res.json({success: true, books})
-//   } catch (error) {
-//     res.status(500).json({success: false, message: "Что-то пошло не так, повторите попытку"})
-//   }
-// });
 
 router.post('/', attachCurrentUser, async (req, res) => {
   try {

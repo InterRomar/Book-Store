@@ -26,9 +26,9 @@ class App extends React.Component {
   }
 
   componentDidMount = async () => {
-    const { getProfileFetch, getAllBooks, getAllCategories } = this.props;
+    const { getProfileFetch, getAllBooks, getAllCategories, currentPage, pageSize } = this.props;
     await getProfileFetch();
-    await getAllBooks(1, 10);
+    await getAllBooks(currentPage, pageSize);
     await getAllCategories();
     this.setState({
       loading: false
@@ -80,7 +80,9 @@ class App extends React.Component {
 
 const mapStateToProps = state => ({
   isAuth: !!Object.keys(state.current_user.user).length,
-  user: state.current_user.user
+  user: state.current_user.user,
+  pageSize: state.book_store.pageSize,
+  currentPage: state.book_store.currentPage
 });
 
 const mapDispatchToProps = dispatch => ({

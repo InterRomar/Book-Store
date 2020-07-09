@@ -39,7 +39,6 @@ export const userPostReg = user => {
   return async dispatch => {
     dispatch(requestReg());
     try {
-      console.log(user);
       const res = await axiosInstance.post('auth/reg', user);
 
       if (!res.data.success) throw new Error(res.data.message);
@@ -64,30 +63,37 @@ export const userLogOut = () => {
 export const getProfileFetch = () => {
   return async dispatch => {
     dispatch(requestLogin());
-    const token = localStorage.token;
+    if (!localStorage.token) return dispatch(failureLogin('token not found'));
+    const token = localStorage.token.split(' ')[1];
 
     function parseJwt (token) {
-      var base64Url = token.split('.')[1];
-      var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-      var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      const base64Url = token.split('.')[1];
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      const jsonPayload = decodeURIComponent(atob(base64).split('').map((c) => {
+        return `%${(`00${c.charCodeAt(0).toString(16)}`).slice(-2)}`;
       }).join(''));
-  
+
       return JSON.parse(jsonPayload);
-    }; 
+    }
 
     if (token) {
-      const decodeToken = parseJwt(token);
+      const decodedToken = parseJwt(token);
+      const tokenLifetime = new Date().getTime() - decodedToken.data.createdAt;
+      if (tokenLifetime >= decodedToken.exp) {
+        dispatch(userLogOut());
+        return dispatch(failureLogin('token is expired'));
+      }
+
       // const res = await axiosInstance.get('auth/profile');
       // if (!res.data.success) {
       //   dispatch(userLogOut());
       //   return;
       // }
-      const { id, email} = decodeToken.data;
+      const { id, email } = decodedToken.data;
       return dispatch(successLogin({ id, email }));
-    } else {
-      return dispatch(failureLogin('token not found'))
     }
+    dispatch(userLogOut());
+    return dispatch(failureLogin('token not found'));
   };
 };
 

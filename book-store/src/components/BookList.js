@@ -16,20 +16,38 @@ const StyledBookList = styled.ul`
 
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
+  flex-wrap: wrap;  
+`;
+const PageButton = styled.button`
+  cursor: pointer;
 
-  
+  &.selected {
+    color: red;
+  }
 `;
 
 class BookList extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      currentPage: this.props.currentPage
+    };
+  }
+
   changePage = (event) => {
+    const { getBooks, pageSize } = this.props;
     const page = +event.target.value;
-    this.props.getBooks(page, 10);
+    this.setState({
+      currentPage: page
+    });
+
+    getBooks(page, pageSize);
   }
 
   render() {
-<<<<<<< HEAD
     const { books, totalCount, pageSize } = this.props;
+    const { currentPage } = this.state;
 
     let pageCount = totalCount / pageSize;
     const pages = [];
@@ -41,18 +59,14 @@ class BookList extends Component {
 
     return (
       <BookListWrapper>
-      {pages.map(page => 
-        <button value={page}> {page}</button> 
-      )}
-=======
-    const { books } = this.props;
-    return (
-      <BookListWrapper>
-        <button onClick={this.changePage} value='1'>1</button>
-        <button onClick={this.changePage} value='2'>2</button>
-        <button onClick={this.changePage} value='3'>3</button>
-        <button onClick={this.changePage} value='4'>4</button>
->>>>>>> 89ca242f3f139822f92f2d73adcf75e0e26e4a38
+      {pages.map(page => <PageButton
+        key={page}
+        value={page}
+        onClick={(event) => this.changePage(event)}
+        className={currentPage === page && 'selected'}
+      >
+        {page}
+      </PageButton>)}
         <StyledBookList>
           {books.map(book => <BookCard key={book.id} book={book}/>)}
         </StyledBookList>
@@ -61,14 +75,10 @@ class BookList extends Component {
   }
 }
 const mapStateToProps = state => ({
-<<<<<<< HEAD
   books: state.book_store.books,
   currentPage: state.book_store.currentPage,
   totalCount: state.book_store.totalCount,
   pageSize: state.book_store.pageSize
-=======
-  books: state.book_store.books
->>>>>>> 89ca242f3f139822f92f2d73adcf75e0e26e4a38
 });
 
 const mapDispatchToProps = dispatch => ({

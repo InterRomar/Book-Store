@@ -31,14 +31,11 @@ export const addCategoryAxios = category => {
   };
 };
 export const getAllCategories = () => {
-  console.log('getAllCategories');
   return async dispatch => {
-    console.log('requst cate');
     dispatch(requestGetAllCategories());
 
     const res = await axiosInstance.get('category');
     if (!res.data.success) {
-      console.log('тут');
       dispatch(failureGetAllCategories(res.data.message));
       return;
     }

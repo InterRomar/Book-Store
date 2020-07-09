@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { store } from './store/index';
+import { userLogOut } from './store/current_user/actions';
 
 const axiosInstance = axios.create({
   baseURL: 'http://localhost:5000/',
@@ -23,8 +25,9 @@ axiosInstance.interceptors.response.use(response => {
   return response;
 }, error => {
   console.log(error.message);
-  if (error.response.statusText === 'Unauthorized') {
-    console.log(error.response.data.message);
+  console.log(error.response);
+  if (error.response.statusText && error.response.statusText === 'Unauthorized') {
+    store.dispatch(userLogOut());
     return error.response;
   }
   return Promise.reject(error);
