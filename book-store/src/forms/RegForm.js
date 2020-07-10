@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import FormErrors from './FormErrors';
 import { Form, FormCol, Input, SubmitBtn, Title } from './SignInForm';
 
@@ -69,7 +71,6 @@ class RegForm extends Component {
     const { email, password } = this.state;
     const res = await this.props.onSubmit(email, password);
     if (!res.success) {
-      console.log(res);
       this.setState({
         formErrors: {
           ...this.state.formErrors,
@@ -80,48 +81,45 @@ class RegForm extends Component {
   }
 
   render() {
-    const { onSubmit } = this.props;
     return (
       <Form onSubmit={this.handleSubmit}>
-          <Title>Регистрация</Title>
-          <FormErrors formErrors={this.state.formErrors} />
+        <Title>Регистрация</Title>
+        <FormErrors formErrors={this.state.formErrors} />
 
+        <FormCol>
+          <label>Email </label>
+          <Input
+            name='email'
+            placeholder='Email'
+            value={this.state.email}
+            onChange={this.handleChange}
+          />
+        </FormCol>
 
-          <FormCol>
-            <label>Email </label>
-            <Input
-              name='email'
-              placeholder='Email'
-              value={this.state.email}
-              onChange={this.handleChange}
-            />
-          </FormCol>
+        <FormCol>
+          <label>Пароль </label>
+          <Input
+            type='password'
+            name='password'
+            placeholder='Пароль'
+            value={this.state.password}
+            onChange={this.handleChange}
+          />
+        </FormCol>
 
-          <FormCol>
-            <label>Пароль </label>
-            <Input
-              type='password'
-              name='password'
-              placeholder='Пароль'
-              value={this.state.password}
-              onChange={this.handleChange}
-            />
-          </FormCol>
+        <FormCol>
+          <label>Повторите пароль </label>
+          <Input
+            type='password'
+            name='confirm_password'
+            placeholder='Повторите пароль'
+            value={this.state.confirm_password}
+            onChange={this.handleChange}
+          />
+        </FormCol>
 
-
-          <FormCol>
-            <label>Повторите пароль </label>
-            <Input
-              type='password'
-              name='confirm_password'
-              placeholder='Повторите пароль'
-              value={this.state.confirm_password}
-              onChange={this.handleChange}
-            />
-          </FormCol>
-
-          <SubmitBtn type='submit' disabled={!this.state.formValid} value="Регистрация"/>
-        </Form>
+        <SubmitBtn type='submit' disabled={!this.state.formValid} value="Регистрация"/>
+      </Form>
 
 
     );
@@ -129,3 +127,9 @@ class RegForm extends Component {
 }
 
 export default RegForm;
+
+
+RegForm.propTypes = {
+  onSubmit: PropTypes.func,
+
+};

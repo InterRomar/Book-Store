@@ -1,3 +1,4 @@
+import QueryParser from 'query-string';
 import axiosInstance from '../../axios';
 
 import { addBookActions, getBooksActions, SET_CURRENT_PAGE, SET_TOTAL_COUNT, SET_CURRENT_CATEGORY } from '../action_names/action_names';
@@ -26,16 +27,19 @@ export const addBookAxios = book => {
       return res.data;
     } catch (error) {
       console.log(error.response.data.message);
+      dispatch(failureAddBook(error.response.data.message));
       return { succes: false, message: error.response.data.message };
     }
   };
 };
-export const getAllBooks = (page, size, category) => {
+export const getAllBooks = (url) => {
   return async dispatch => {
     dispatch(requestGetAllBooks());
-    const categoryURL = category ? `&category=${category}` : '';
-    const url = `books?page=${page}&size=${size}${categoryURL}`;
-    const res = await axiosInstance.get(url);
+
+    const params = QueryParser.parse(url);
+    const { page, category } = params;
+
+    const res = await axiosInstance.get(`books${url}`);
 
     if (!res.data.success) {
       dispatch(failureGetAllBooks(res.data.message));

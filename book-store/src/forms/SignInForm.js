@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
 import FormErrors from './FormErrors';
@@ -171,3 +172,8 @@ class SignInForm extends Component {
 }
 
 export default SignInForm;
+
+
+SignInForm.propTypes = {
+  onSubmit: PropTypes.func,
+};

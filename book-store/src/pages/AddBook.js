@@ -306,8 +306,11 @@ const mapDispatchToProps = dispatch => ({
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddBook);
 
-// AddBook.propTypes = {
-//   addBookAxios: PropTypes.func,
-//   current_user: PropTypes.func,
-//   categories: PropTypes.func,
-// };
+AddBook.propTypes = {
+  addBookAxios: PropTypes.func,
+  current_user: PropTypes.shape({
+    id: PropTypes.number,
+    email: PropTypes.string
+  }),
+  categories: PropTypes.func,
+};

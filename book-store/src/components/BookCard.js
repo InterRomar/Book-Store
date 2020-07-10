@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const Card = styled.li`
   border-radius: 5px;
@@ -78,3 +79,12 @@ const BookCard = ({ book }) => {
 };
 
 export default BookCard;
+
+BookCard.propTypes = {
+  book: PropTypes.shape({
+    title: PropTypes.string,
+    author: PropTypes.string,
+    price: PropTypes.number,
+    img: PropTypes.string
+  })
+};

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+
 import BookCard from './BookCard';
-import { getAllBooks } from '../store/book_store/actions';
+
 
 const BookListWrapper = styled.div`
   width: 75%;
@@ -33,31 +34,14 @@ class BookList extends Component {
     super(props);
 
     this.state = {
-      currentPage: +this.props.params.page,
       pageSize: +this.props.params.size,
     };
   }
 
-  changePage = async (event) => {
-    const { getBooks, currentCategory, params } = this.props;
+  render() {
+    const { books, totalCount, params, createURL } = this.props;
     const { pageSize } = this.state;
 
-    const page = +event.target.value;
-    console.log(params.page, 'PARAMS PAGE');
-    // const page = params.page;
-    this.setState({
-      currentPage: page
-    });
-
-    getBooks(+page, +pageSize, currentCategory);
-  }
-
-
-  render() {
-    const { books, totalCount, params, currentCategory, createURL } = this.props;
-    const { currentPage, pageSize } = this.state;
-
-    console.log(params.page);
     let pageCount = totalCount / pageSize;
     const pages = [];
 
@@ -70,12 +54,10 @@ class BookList extends Component {
       <BookListWrapper>
         {pages.map(page => <Link
             key={page}
-            to={() => createURL({ page, size: pageSize, category: params.category })}
+            to={() => createURL({ ...params, page, size: pageSize })}
           >
             <PageButton
-              value={page}
-              onClick={this.changePage}
-              className={currentPage === page && 'selected'}
+              className={+params.page === page && 'selected'}
             >
               {page}
             </PageButton>
@@ -89,14 +71,26 @@ class BookList extends Component {
 }
 const mapStateToProps = state => ({
   books: state.book_store.books,
-  currentPage: state.book_store.currentPage,
   totalCount: state.book_store.totalCount,
   pageSize: state.book_store.pageSize,
   currentCategory: state.book_store.currentCategory
 });
 
-const mapDispatchToProps = dispatch => ({
-  getBooks: (page, size, currentCategory) => dispatch(getAllBooks(page, size, currentCategory)),
-});
 
-export default connect(mapStateToProps, mapDispatchToProps)(BookList);
+export default connect(mapStateToProps, null)(BookList);
+
+BookList.propTypes = {
+  books: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      title: PropTypes.string,
+    })
+  ),
+  params: PropTypes.shape({
+    page: PropTypes.string,
+    size: PropTypes.string,
+    category: PropTypes.string
+  }),
+  createURL: PropTypes.func,
+  totalCount: PropTypes.number
+};

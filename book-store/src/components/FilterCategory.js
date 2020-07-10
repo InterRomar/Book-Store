@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { getAllBooks, setCurrentPage } from '../store/book_store/actions';
 
 export const FilterTitle = styled.h4`
   margin: 0 0 25px;
@@ -53,31 +52,9 @@ const CategoryButton = styled.button`
 `;
 
 class FilterCategory extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      currentCategory: this.props.params.category
-    };
-  }
-
-  changeCategory = async (event) => {
-    const { currentPage, pageSize, currentCategory, getFilteredBooks, resetCurrentPage, setURL } = this.props;
-
-    const category = +event.target.value;
-
-    this.setState({
-      currentCategory: category
-    });
-    await resetCurrentPage();
-    getFilteredBooks(1, pageSize, category);
-  }
-
-
   render() {
     const { categories, params, createURL } = this.props;
-    const { currentCategory } = this.state;
-    const { page, size } = params;
+    const { size } = params;
 
     return (
       <div>
@@ -86,11 +63,9 @@ class FilterCategory extends Component {
           {categories.map(category => <li
             key={category.id}
           >
-            <Link to={() => createURL({ page: 1, size, category: category.id })}>
+            <Link to={() => createURL({ ...params, page: 1, size, category: category.id })}>
               <CategoryButton
-                className={+currentCategory === category.id ? 'selected' : ''}
-                value={category.id}
-                onClick={this.changeCategory}
+                className={+params.category === category.id ? 'selected' : ''}
               >
                 {category.title}
               </CategoryButton>
@@ -104,19 +79,22 @@ class FilterCategory extends Component {
 
 const mapStateToProps = state => ({
   categories: state.categories_store.categories,
-  currentPage: state.book_store.currentPage,
-  totalCount: state.book_store.totalCount,
-  pageSize: state.book_store.pageSize,
-  currentCategory: state.book_store.currentCategory,
 });
 
-const mapDispatchToProps = dispatch => ({
-  getFilteredBooks: (page, size, category) => dispatch(getAllBooks(page, size, category)),
-  resetCurrentPage: () => dispatch(setCurrentPage(1))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(FilterCategory);
+export default connect(mapStateToProps, null)(FilterCategory);
 
 FilterCategory.propTypes = {
-  // categories: PropTypes.func
+  categories: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      title: PropTypes.string
+    })
+  ),
+  params: PropTypes.shape({
+    page: PropTypes.string,
+    size: PropTypes.string,
+    category: PropTypes.string
+  }),
+  createURL: PropTypes.func,
+
 };

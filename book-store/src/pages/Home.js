@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import styled, { ThemeConsumer } from 'styled-components';
+import styled from 'styled-components';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import QueryParser from 'query-string';
@@ -30,48 +30,67 @@ class Home extends Component {
 
     this.state = {
       params: {
-        page: 1,
-        size: 10,
+        page: '1',
+        size: '10',
         ...QueryParser.parse(props.location.search),
       },
-      url: ''
     };
   }
 
   componentDidMount = async () => {
-    const { getBooks } = this.props;
-    const { page, size, category } = this.state.params;
-    console.log(category);
+    const { getBooks, location } = this.props;
+    const url = location.search || '?page=1&size=10';
 
-    await getBooks(page, size, category);
+    await getBooks(url);
   }
 
-  componentDidUpdate = prevProps => {
-    if (this.props.location.search !== prevProps.location.search) {
-      this.setState({
+  componentDidUpdate = async prevProps => {
+    const { getBooks, location } = this.props;
+
+    if (location.search !== prevProps.location.search) {
+      await this.setState({
         params: {
-          ...QueryParser.parse(this.props.location.search)
+          ...QueryParser.parse(location.search)
         }
       });
+
+      await getBooks(location.search);
     }
   }
 
-  createURL = ({ page, size, category }) => {
+  createURL = ({ page, size, category, from, to }) => {
     const categoryURL = category ? `&category=${category}` : '';
+    const priceURL = from !== undefined && to !== undefined ? `&from=${from}&to=${to}` : '';
 
-    const url = `/?page=${page || 1}&size=${size || 10}${categoryURL}`;
+    const url = `/?page=${page || 1}&size=${size || 10}${categoryURL}${priceURL}`;
     return url;
   }
 
+  resetFilters = () => {
+    this.props.history.push({
+      search: ''
+    });
+  }
+
   render() {
-    const { params, url } = this.state;
-    const { location } = this.props;
+    const { params } = this.state;
+    const { history, location } = this.props;
+
 
     return (
       <Container>
         <MainPage>
-          <Sidebar params={params} url={url} createURL={this.createURL}/>
-          <BookList params={params} url={url} createURL={this.createURL}/>
+          <Sidebar
+            params={params}
+            history={history}
+            location={location}
+            createURL={this.createURL}
+            resetFilters={this.resetFilters}
+          />
+          <BookList
+            params={params}
+            createURL={this.createURL}
+          />
         </MainPage>
       </Container>
     );
@@ -79,7 +98,30 @@ class Home extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  getBooks: (page, size, category) => dispatch(getAllBooks(page, size, category)),
+  getBooks: (url) => dispatch(getAllBooks(url)),
 });
 
 export default connect(null, mapDispatchToProps)(Home);
+
+
+Home.propTypes = {
+  location: PropTypes.shape({
+    hash: PropTypes.string,
+    key: PropTypes.string,
+    pathname: PropTypes.string,
+    search: PropTypes.string,
+  }),
+  books: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      title: PropTypes.string,
+    })
+  ),
+  params: PropTypes.shape({
+    page: PropTypes.string,
+    size: PropTypes.string,
+    category: PropTypes.string
+  }),
+  getBooks: PropTypes.func,
+  totalCount: PropTypes.number
+};

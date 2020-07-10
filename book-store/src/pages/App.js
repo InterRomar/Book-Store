@@ -1,10 +1,10 @@
 import React from 'react';
-import { Switch, Route, Link } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { getProfileFetch, userLogOut } from '../store/current_user/actions';
-import Header, { Container } from '../components/Header';
+import Header from '../components/Header';
 import Reg from './Reg';
 import SignIn from './SignIn';
 import Home from './Home';
@@ -12,9 +12,7 @@ import PrivateRoute from '../components/PrivateRoute';
 import Profile from './Profile';
 import AddBook from './AddBook';
 import AddCategory from './AddCategory';
-import { getAllBooks } from '../store/book_store/actions';
 import { getAllCategories } from '../store/categories_store/actions';
-import BookList from '../components/BookList';
 
 
 class App extends React.Component {
@@ -27,7 +25,7 @@ class App extends React.Component {
   }
 
   componentDidMount = async () => {
-    const { getProfileFetch, getAllCategories, currentPage, pageSize } = this.props;
+    const { getProfileFetch, getAllCategories } = this.props;
     await getProfileFetch();
     await getAllCategories();
     this.setState({
@@ -35,10 +33,9 @@ class App extends React.Component {
     });
   }
 
-
   render() {
     const { loading } = this.state;
-    const { isAuth, user, logOut, getBooks } = this.props;
+    const { isAuth, user, logOut } = this.props;
 
     if (loading) {
       return (
@@ -53,29 +50,25 @@ class App extends React.Component {
       <div className="App">
         <Header isAuth={isAuth} user={user} logOut={logOut}/>
         <main className="page">
-            <Container>
-              <Link to="/?q=home">Test link</Link>
-            </Container>
-            <Switch>
+          <Switch>
+            <Route exact path='/' component={Home} />
 
-              <Route exact path='/' component={Home} />
-
-              <PrivateRoute path="/reg">
-                <Reg/>
-              </PrivateRoute>
-              <PrivateRoute path="/login">
-                <SignIn/>
-              </PrivateRoute>
-              <PrivateRoute path="/profile">
-                <Profile/>
-              </PrivateRoute>
-              <PrivateRoute path="/addBook">
-                <AddBook/>
-              </PrivateRoute>
-              <PrivateRoute path="/addCategory">
-                <AddCategory/>
-              </PrivateRoute>
-            </Switch>
+            <PrivateRoute path="/reg">
+              <Reg/>
+            </PrivateRoute>
+            <PrivateRoute path="/login">
+              <SignIn/>
+            </PrivateRoute>
+            <PrivateRoute path="/profile">
+              <Profile/>
+            </PrivateRoute>
+            <PrivateRoute path="/addBook">
+              <AddBook/>
+            </PrivateRoute>
+            <PrivateRoute path="/addCategory">
+              <AddCategory/>
+            </PrivateRoute>
+          </Switch>
         </main>
       </div>
     );
@@ -86,14 +79,11 @@ class App extends React.Component {
 const mapStateToProps = state => ({
   isAuth: !!Object.keys(state.current_user.user).length,
   user: state.current_user.user,
-  pageSize: state.book_store.pageSize,
-  currentPage: state.book_store.currentPage
 });
 
 const mapDispatchToProps = dispatch => ({
   getProfileFetch: () => dispatch(getProfileFetch()),
   logOut: () => dispatch(userLogOut()),
-  getBooks: (page, size) => dispatch(getAllBooks(page, size)),
   getAllCategories: () => dispatch(getAllCategories())
 });
 
@@ -104,7 +94,10 @@ App.propTypes = {
   getProfileFetch: PropTypes.func,
   isAuth: PropTypes.bool,
   logOut: PropTypes.func,
-  // user: PropTypes.func,
+  user: PropTypes.shape({
+    id: PropTypes.number,
+    email: PropTypes.string
+  }),
   getBooks: PropTypes.func,
   getAllCategories: PropTypes.func
 };
