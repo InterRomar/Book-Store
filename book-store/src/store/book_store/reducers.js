@@ -59,7 +59,6 @@ const book_store = (state = initialState, action) => {
       }
       );
     case SET_CURRENT_PAGE:
-      console.log('reducer SET_CURRENT_PAGE', action.payload);
       return ({
         ...state,
         currentPage: action.payload

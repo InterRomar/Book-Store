@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { getAllBooks, setCurrentPage } from '../store/book_store/actions';
 
 export const FilterTitle = styled.h4`
@@ -56,13 +57,13 @@ class FilterCategory extends Component {
     super(props);
 
     this.state = {
-      currentCategory: this.props.currentCategory
+      currentCategory: this.props.params.category
     };
   }
 
   changeCategory = async (event) => {
-    const { currentPage, pageSize, currentCategory, getFilteredBooks, resetCurrentPage } = this.props;
-    console.log(this.props);
+    const { currentPage, pageSize, currentCategory, getFilteredBooks, resetCurrentPage, setURL } = this.props;
+
     const category = +event.target.value;
 
     this.setState({
@@ -72,9 +73,12 @@ class FilterCategory extends Component {
     getFilteredBooks(1, pageSize, category);
   }
 
+
   render() {
-    const { categories } = this.props;
+    const { categories, params, createURL } = this.props;
     const { currentCategory } = this.state;
+    const { page, size } = params;
+
     return (
       <div>
         <FilterTitle>Категории</FilterTitle>
@@ -82,13 +86,15 @@ class FilterCategory extends Component {
           {categories.map(category => <li
             key={category.id}
           >
-            <CategoryButton
-              className={currentCategory === category.id ? 'selected' : ''}
-              value={category.id}
-              onClick={this.changeCategory}
-            >
-              {category.title}
-            </CategoryButton>
+            <Link to={() => createURL({ page: 1, size, category: category.id })}>
+              <CategoryButton
+                className={+currentCategory === category.id ? 'selected' : ''}
+                value={category.id}
+                onClick={this.changeCategory}
+              >
+                {category.title}
+              </CategoryButton>
+            </Link>
           </li>)}
         </CategoriesList>
       </div>

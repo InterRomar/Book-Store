@@ -14,6 +14,7 @@ import AddBook from './AddBook';
 import AddCategory from './AddCategory';
 import { getAllBooks } from '../store/book_store/actions';
 import { getAllCategories } from '../store/categories_store/actions';
+import BookList from '../components/BookList';
 
 
 class App extends React.Component {
@@ -26,9 +27,8 @@ class App extends React.Component {
   }
 
   componentDidMount = async () => {
-    const { getProfileFetch, getAllBooks, getAllCategories, currentPage, pageSize } = this.props;
+    const { getProfileFetch, getAllCategories, currentPage, pageSize } = this.props;
     await getProfileFetch();
-    await getAllBooks(currentPage, pageSize);
     await getAllCategories();
     this.setState({
       loading: false
@@ -38,7 +38,7 @@ class App extends React.Component {
 
   render() {
     const { loading } = this.state;
-    const { isAuth, user, logOut } = this.props;
+    const { isAuth, user, logOut, getBooks } = this.props;
 
     if (loading) {
       return (
@@ -54,10 +54,11 @@ class App extends React.Component {
         <Header isAuth={isAuth} user={user} logOut={logOut}/>
         <main className="page">
             <Container>
-              <Link to="/?q=test">Test link</Link>
+              <Link to="/?q=home">Test link</Link>
             </Container>
             <Switch>
-              <Route exact path='/' component={Home}/>
+
+              <Route exact path='/' component={Home} />
 
               <PrivateRoute path="/reg">
                 <Reg/>
@@ -92,7 +93,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   getProfileFetch: () => dispatch(getProfileFetch()),
   logOut: () => dispatch(userLogOut()),
-  getAllBooks: (page, size) => dispatch(getAllBooks(page, size)),
+  getBooks: (page, size) => dispatch(getAllBooks(page, size)),
   getAllCategories: () => dispatch(getAllCategories())
 });
 
@@ -104,6 +105,6 @@ App.propTypes = {
   isAuth: PropTypes.bool,
   logOut: PropTypes.func,
   // user: PropTypes.func,
-  getAllBooks: PropTypes.func,
+  getBooks: PropTypes.func,
   getAllCategories: PropTypes.func
 };

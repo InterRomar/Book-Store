@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import BookCard from './BookCard';
 import { getAllBooks } from '../store/book_store/actions';
 
@@ -26,30 +27,37 @@ const PageButton = styled.button`
   }
 `;
 
+
 class BookList extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      currentPage: this.props.currentPage
+      currentPage: +this.props.params.page,
+      pageSize: +this.props.params.size,
     };
   }
 
-  changePage = (event) => {
-    const { getBooks, pageSize, currentCategory } = this.props;
+  changePage = async (event) => {
+    const { getBooks, currentCategory, params } = this.props;
+    const { pageSize } = this.state;
+
     const page = +event.target.value;
+    console.log(params.page, 'PARAMS PAGE');
+    // const page = params.page;
     this.setState({
       currentPage: page
     });
-    console.log('CURRENT CATEGORY', currentCategory);
-    getBooks(page, pageSize, currentCategory);
+
+    getBooks(+page, +pageSize, currentCategory);
   }
 
-  render() {
-    const { books, totalCount, pageSize, currentPage } = this.props;
-    // const { currentPage } = this.state;
-    console.log(currentPage, 'CURRENT PAGE IN THE BOOK LIST');
 
+  render() {
+    const { books, totalCount, params, currentCategory, createURL } = this.props;
+    const { currentPage, pageSize } = this.state;
+
+    console.log(params.page);
     let pageCount = totalCount / pageSize;
     const pages = [];
 
@@ -60,14 +68,18 @@ class BookList extends Component {
 
     return (
       <BookListWrapper>
-      {pages.map(page => <PageButton
-        key={page}
-        value={page}
-        onClick={(event) => this.changePage(event)}
-        className={currentPage === page && 'selected'}
-      >
-        {page}
-      </PageButton>)}
+        {pages.map(page => <Link
+            key={page}
+            to={() => createURL({ page, size: pageSize, category: params.category })}
+          >
+            <PageButton
+              value={page}
+              onClick={this.changePage}
+              className={currentPage === page && 'selected'}
+            >
+              {page}
+            </PageButton>
+          </Link>)}
         <StyledBookList>
           {books.map(book => <BookCard key={book.id} book={book}/>)}
         </StyledBookList>

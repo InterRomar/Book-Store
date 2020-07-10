@@ -12,10 +12,10 @@ const StyledSidebar = styled.section`
   
 `;
 
-const Sidebar = () => {
+const Sidebar = (props) => {
   return (
     <StyledSidebar>
-      <FilterCategory />
+      <FilterCategory { ...props }/>
     </StyledSidebar>
   );
 };

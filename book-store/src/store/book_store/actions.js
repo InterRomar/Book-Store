@@ -33,7 +33,6 @@ export const addBookAxios = book => {
 export const getAllBooks = (page, size, category) => {
   return async dispatch => {
     dispatch(requestGetAllBooks());
-    console.log('CATEGORY', category);
     const categoryURL = category ? `&category=${category}` : '';
     const url = `books?page=${page}&size=${size}${categoryURL}`;
     const res = await axiosInstance.get(url);
