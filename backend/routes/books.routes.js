@@ -11,9 +11,36 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   try {
-    const { page, size, category, from, to, rating } = req.query
+    const { page, size, category, from, to, rating, sorting } = req.query
     const whereObject = {};
+    let orderTemplate = [];
     
+    switch (sorting) {
+      case 'minRating':
+        orderTemplate = [sequelize.fn('max', sequelize.col('rating')), 'ASC']  
+        break;
+      case 'maxRating':
+        orderTemplate = [sequelize.fn('max', sequelize.col('rating')), 'DESC']  
+        break;
+      case 'minPrice':
+        console.log(sorting)
+        orderTemplate = [sequelize.fn('max', sequelize.col('price')), 'ASC'];  
+        break;
+      case 'maxPrice':
+        orderTemplate = [sequelize.fn('max', sequelize.col('price')), 'DESC'];
+        break;
+      case 'title':
+        orderTemplate = ['title']    
+        break;
+      case 'author':
+        orderTemplate = ['author']    
+        break;
+
+      default:
+        orderTemplate = [];
+        break;
+    }
+    console.log('ORDER ARRAY', orderTemplate)
     category ? whereObject.category_id = category : null;
     rating ? whereObject.rating = {
       [Op.gte]: rating
@@ -32,8 +59,10 @@ router.get('/', async (req, res) => {
       where: {
         ...whereObject
       },
+      group: ['book.id'],
       offset: size * (page - 1),
-      limit: size
+      limit: size,
+      // order: orderTemplate ? [orderTemplate] : [],
     });
 
     res.status(200).json({success: true, books, totalCount })
