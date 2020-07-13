@@ -1,6 +1,6 @@
 import axiosInstance from '../../axios';
 
-import { registerActions, loginActions, LOGOUT_USER } from '../action_names/action_names';
+import { registerActions, loginActions, uploadAvatarActions, LOGOUT_USER } from '../action_names/action_names';
 
 
 const {
@@ -12,6 +12,11 @@ const {
   REGISTER_USER_REQUEST,
   REGISTER_USER_SUCCESS,
   REGISTER_USER_FAILURE } = registerActions;
+
+const {
+  UPLOAD_AVATAR_REQUEST,
+  UPLOAD_AVATAR_SUCCESS,
+  UPLOAD_AVATAR_FAILURE } = uploadAvatarActions;
 
 
 export const userPostLogin = user => {
@@ -48,6 +53,22 @@ export const userPostReg = user => {
       return res.data;
     } catch (error) {
       dispatch(failureReg(error.message));
+      return error;
+    }
+  };
+};
+export const userUploadAvatar = (avatar) => {
+  return async dispatch => {
+    dispatch(requestUploadAvatar());
+    try {
+      const res = await axiosInstance.post('/auth/upload-avatar', avatar);
+
+      if (!res.data.success) throw new Error(res.data.message);
+
+      dispatch(successUploadAvatar(res.data.avatar));
+      return res.data;
+    } catch (error) {
+      dispatch(failureUploadAvatar(error.message));
       return error;
     }
   };
@@ -117,5 +138,16 @@ const successLogin = userObj => ({
 });
 const failureLogin = (err) => ({
   type: LOGIN_USER_FAILURE,
+  message: err
+});
+const requestUploadAvatar = () => ({
+  type: UPLOAD_AVATAR_REQUEST,
+});
+const successUploadAvatar = avatar => ({
+  type: UPLOAD_AVATAR_SUCCESS,
+  payload: avatar
+});
+const failureUploadAvatar = (err) => ({
+  type: UPLOAD_AVATAR_FAILURE,
   message: err
 });

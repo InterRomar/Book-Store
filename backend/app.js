@@ -5,6 +5,7 @@ const db = require('./models/index');
 const { sequelize, Sequelize } = db;
 
 app.use(jsonParser);
+app.use(express.static('public'));
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");

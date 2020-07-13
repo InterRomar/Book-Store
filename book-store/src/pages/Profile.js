@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { Container } from '../components/Header';
 import { MainTitle } from './Home';
+import FormUploadAvatar from '../forms/FormUploadAvatar';
 
 
 const Profile = () => {
@@ -11,7 +12,11 @@ const Profile = () => {
       <MainTitle>Профиль</MainTitle>
       <Link to='/addBook'>Добавить книгу</Link>
       <Link to='/addCategory'>Добавить категорию</Link>
+      <hr/>
+      <br/>
+      <br/>
 
+      <FormUploadAvatar />
     </Container>
   );
 };

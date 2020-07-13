@@ -2,6 +2,8 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const config = require('config');
+const path = require("path");
+const multer = require("multer");
 
 const { sequelize, Sequelize } = require('../models/index');
 const User = require('../models/User')(sequelize, Sequelize);
@@ -58,7 +60,11 @@ router.get('/profile', attachCurrentUser, async (req, res) => {
     const user = await User.findByPk(Number(+req.currentUserId));
     if (!user) throw new Error('user not found');
     return res.json({
-      user,
+      user: {
+        id: user.id,
+        email: user.email,
+        avatar: user.avatar,
+      },
       success: true
     });
   } catch (error) {
@@ -92,10 +98,41 @@ router.post('/login', async (req, res) => {
       return res.status(200).json({
         success: true, 
         message: 'Успешно!', token: `Fusion ${token}`, 
-        currentUser: { id: candidate.id, email: candidate.email }
+        currentUser: { id: candidate.id, email: candidate.email, avatar: candidate.avatar }
       });
     } catch (error) { 
       return res.status(500).json({ success: false, message: `Что-то пошло не так, повторите попытку... ${error}`});
     }
 });
+
+
+const storage = multer.diskStorage({
+  destination: "./public/uploads/",
+  filename: function(req, file, cb){
+    cb(null,"IMAGE-" + Date.now() + path.extname(file.originalname));
+  }
+});
+
+const upload = multer({
+   storage: storage,
+   limits:{fileSize: 1000000},
+}).single("myImage");
+
+router.post('/upload-avatar', attachCurrentUser, upload, async (req, res) => {
+
+  try {
+    const filedata = req.file;
+  
+    const dbRes = await User.update({avatar: filedata.filename}, {
+      where: {
+        id: req.currentUserId
+      }
+    })
+
+    if (!filedata) throw new Error();
+    res.status(200).json({ success: true, message: 'Аватар успешно установлен!', avatar: filedata.filename})
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Что-то пошло не так, повторите попытку!' });
+  }
+})
 module.exports = router;

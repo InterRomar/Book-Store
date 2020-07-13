@@ -1,4 +1,4 @@
-import { registerActions, loginActions, LOGOUT_USER } from '../action_names/action_names';
+import { registerActions, loginActions, uploadAvatarActions, LOGOUT_USER } from '../action_names/action_names';
 
 
 const { REGISTER_USER_REQUEST,
@@ -8,6 +8,12 @@ const { REGISTER_USER_REQUEST,
 const { LOGIN_USER_REQUEST,
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAILURE } = loginActions;
+
+const {
+  UPLOAD_AVATAR_REQUEST,
+  UPLOAD_AVATAR_SUCCESS,
+  UPLOAD_AVATAR_FAILURE } = uploadAvatarActions;
+
 
 const initialState = {
   loading: false,
@@ -37,6 +43,27 @@ const current_user = (state = initialState, action) => {
         user: action.payload
       }
       );
+    case UPLOAD_AVATAR_REQUEST:
+      return ({
+        ...state,
+        loading: true
+      });
+    case UPLOAD_AVATAR_SUCCESS:
+      return ({
+        ...state,
+        loading: false,
+        error: '',
+        user: {
+          ...state.user,
+          avatar: action.payload
+        }
+      });
+    case UPLOAD_AVATAR_FAILURE:
+      return ({
+        ...state,
+        loading: false,
+        error: action.message
+      });
     case REGISTER_USER_REQUEST:
       return ({
         ...state,

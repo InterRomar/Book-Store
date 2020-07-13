@@ -65,6 +65,10 @@ const NavList = styled.ul`
 const NavItem = styled.li`
   display: flex;
   align-items: center;
+
+  & .avatar {
+
+  }
 `;
 
 const ProfileLink = styled(Link)`
@@ -79,7 +83,19 @@ const ProfileLink = styled(Link)`
   }
 `;
 
+const Avatar = styled.img`
+  display: block;
+  width: auto;
+  border-radius: 50%;
+  height: 70px;
+  background-color: #fff;
+  margin-left: 20px;
+`;
+
 const Header = ({ isAuth, user, logOut }) => {
+  const baseURL = 'http://localhost:5000/';
+  const avatar = user.avatar || 'userAvatarPlaceholder.png';
+
   return (
     <StyledHeader>
       <Container >
@@ -91,6 +107,9 @@ const Header = ({ isAuth, user, logOut }) => {
               <Fragment>
                 <NavItem >
                   <ProfileLink to="/profile">{user.email}</ProfileLink>
+                </NavItem>
+                <NavItem >
+                  <Avatar src={`${baseURL}uploads/${avatar}`} />
                 </NavItem>
                 <NavItem >
                   <NavLink to="/login" onClick={logOut}>Выйти</NavLink>
@@ -122,6 +141,7 @@ Header.propTypes = {
   logOut: PropTypes.func,
   user: PropTypes.shape({
     id: PropTypes.number,
-    email: PropTypes.string
+    email: PropTypes.string,
+    avatar: PropTypes.string
   }),
 };
