@@ -9,7 +9,7 @@ import BookCard from './BookCard';
 
 const BookListWrapper = styled.div`
   width: 75%;
-  margin-top: 70px;
+  margin-top: 20px;
 `;
 const StyledBookList = styled.ul`
   list-style: none;
@@ -20,11 +20,35 @@ const StyledBookList = styled.ul`
   justify-content: space-between;
   flex-wrap: wrap;  
 `;
+
+const PageButtonWrapper = styled.div`
+  margin-bottom: 30px;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    background: #333;
+    left: 0;
+    bottom: -10px;
+    width: 100%;
+    height: 1px;
+  }
+`;
 const PageButton = styled.button`
   cursor: pointer;
+  background: transparent;
+  color: #333;
+  border: none;
+  font-family: 'Roboto';
+  font-weight: 500;
+  font-size: 16px;
 
+  &:focus {
+    outline: none;
+  }
   &.selected {
-    color: red;
+    color: rgba(150, 68, 197, 0.7);
   }
 `;
 
@@ -52,7 +76,8 @@ class BookList extends Component {
 
     return (
       <BookListWrapper>
-        {pages.map(page => <Link
+        <PageButtonWrapper>
+          {pages.map(page => <Link
             key={page}
             to={() => createURL({ ...params, page, size: pageSize })}
           >
@@ -62,6 +87,7 @@ class BookList extends Component {
               {page}
             </PageButton>
           </Link>)}
+        </PageButtonWrapper>
         <StyledBookList>
           {books.map(book => <BookCard key={book.id} book={book}/>)}
         </StyledBookList>

@@ -20,12 +20,14 @@ class FilterRating extends Component {
   };
 
   render() {
+    const { params } = this.props;
     return (
       <div>
         <FilterTitle> Рейтинг </FilterTitle>
         <ReactStars
           count={5}
           onChange={this.ratingChanged}
+          value={+params.rating || 0}
           size={42}
           activeColor="#9644c5"
         />
@@ -60,8 +62,8 @@ FilterRating.propTypes = {
     page: PropTypes.string,
     size: PropTypes.string,
     category: PropTypes.string,
-    to: PropTypes.number,
-    from: PropTypes.number,
+    to: PropTypes.string,
+    from: PropTypes.string,
     rating: PropTypes.string
   }),
   createURL: PropTypes.func,

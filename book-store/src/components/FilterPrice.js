@@ -1,17 +1,23 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import InputRange from 'react-input-range';
 
 import { FilterTitle } from './FilterCategory';
+
+import 'react-input-range/lib/css/index.css';
 
 const PriceForm = styled.form`
   display: flex;
   justify-content: space-between;
+  padding-top: 20px;
 `;
 
-const PriceInput = styled.input`
-  display: block;
-  width: 30%;
+const StyledInputRange = styled(InputRange)`
+  & .input-range__label-container {
+    color: #333;
+  }
+  
 `;
 
 class FilterPrice extends Component {
@@ -19,65 +25,43 @@ class FilterPrice extends Component {
     super(props);
 
     this.state = {
-      fromPrice: this.props.params.from || '',
-      toPrice: this.props.params.to || ''
+      value: {
+        min: +this.props.params.from || 0,
+        max: +this.props.params.to || 350
+      }
     };
   }
 
-  handleFocus = (event) => {
-    event.target.value = '';
-  }
-
-  handleChange = async (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
+  handleChange = async (value) => {
+    const { history, params, createURL } = this.props;
+    const { min, max } = this.state.value;
 
     await this.setState({
-      [name]: value
+      value
     });
 
-    const { history, fromPrice, toPrice } = this.state;
-    const { params, createURL } = this.props;
+    const currentSearch = createURL({
+      ...params,
+      page: 1,
+      from: min,
+      to: max
+    }).slice(1);
 
-    if (fromPrice !== '' && toPrice !== '') {
-      const currentSearch = createURL({
-        ...params,
-        page: 1,
-        from: fromPrice,
-        to: toPrice
-      }).slice(1);
-
-      history.push({
-        search: currentSearch
-      });
-    }
+    history.push({
+      search: currentSearch
+    });
   }
 
   render() {
-    const { fromPrice, toPrice } = this.state;
-
     return (
       <div>
         <FilterTitle> Цена </FilterTitle>
         <PriceForm>
-          <label htmlFor="fromPrice">От:</label>
-          <PriceInput
-            placeholder='от'
-            type="number"
-            name='fromPrice'
-            value={fromPrice}
+          <StyledInputRange
+            maxValue={2500}
+            minValue={0}
+            value={this.state.value}
             onChange={this.handleChange}
-            onFocus={this.handleFocus}
-
-          />
-          <label htmlFor="toPrice">До:</label>
-          <PriceInput
-            placeholder='до'
-            type="number"
-            name='toPrice'
-            value={toPrice}
-            onChange={this.handleChange}
-            onFocus={this.handleFocus}
           />
         </PriceForm>
 
@@ -112,8 +96,8 @@ FilterPrice.propTypes = {
     page: PropTypes.string,
     size: PropTypes.string,
     category: PropTypes.string,
-    to: PropTypes.number,
-    from: PropTypes.number,
+    to: PropTypes.string,
+    from: PropTypes.string,
     rating: PropTypes.string
   }),
   createURL: PropTypes.func,

@@ -5,7 +5,7 @@ const { sequelize, Sequelize } = require('../models/index');
 const User = require('../models/User')(sequelize, Sequelize);
 const Book = require('../models/Book')(sequelize, Sequelize);
 const attachCurrentUser = require('../middlewares/attachCurrentUser')
-
+const upload = require('../middlewares/upload');
 
 const router = express.Router();
 
@@ -57,9 +57,10 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.post('/', attachCurrentUser, async (req, res) => {
+router.post('/', attachCurrentUser, upload, async (req, res) => {
   try {
     const { title } = req.body;
+    console.log(req.file)
     const potentialBook = await Book.findOne({ where: { title }});
 
     if (potentialBook) {
@@ -81,5 +82,23 @@ router.post('/', attachCurrentUser, async (req, res) => {
   }
 });
 
+router.post('/upload-cover/:id', upload, async (req, res) => {  
+  try {
+    const filedata = req.file;
+  
+    const dbRes = await Book.update({img: filedata.filename}, {
+      where: {
+        id: req.params.id
+      }
+    })
+    console.log(dbRes)
+
+    if (!filedata) throw new Error();
+    res.status(200).json({ success: true, message: 'Обложка успешно добавлена!', img: filedata.filename})
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ success: false, message: 'Что-то пошло не так, повторите попытку!' });
+  }
+});
 
 module.exports = router;

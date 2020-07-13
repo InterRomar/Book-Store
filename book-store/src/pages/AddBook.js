@@ -78,6 +78,13 @@ class AddBook extends Component {
     const name = event.target.name;
     const value = event.target.value;
 
+    if (name === 'myImage') {
+      await this.setState({
+        file: event.target.files[0]
+      });
+      return;
+    }
+
     await this.setState({
       [name]: value
     }, () => {
@@ -96,6 +103,9 @@ class AddBook extends Component {
       user_id,
       category_id } = this.state;
 
+    const formData = new FormData();
+    formData.append('myImage', this.state.file);
+
     const res = await this.props.addBookAxios({ title,
       author,
       description,
@@ -103,8 +113,9 @@ class AddBook extends Component {
       img,
       demo_fragment,
       user_id,
-      category_id: +category_id
-    });
+      category_id: +category_id,
+      file: formData
+    }, formData);
     if (res.success) {
       this.setState({
         title: '',
@@ -286,6 +297,14 @@ class AddBook extends Component {
               onChange={this.handleChange}
             />
           </FormCol>
+          <FormCol>
+            <label>Выберите обложку для книги </label>
+            <Input
+              type='file'
+              name='myImage'
+              onChange={this.handleChange}
+            />
+          </FormCol>
 
 
           <SubmitBtn type='submit' disabled={!formValid} value="Добавить книгу"/>
@@ -301,7 +320,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  addBookAxios: book => dispatch(addBookAxios(book)),
+  addBookAxios: (book, formData) => dispatch(addBookAxios(book, formData)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddBook);

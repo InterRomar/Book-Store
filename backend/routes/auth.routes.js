@@ -2,12 +2,11 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const config = require('config');
-const path = require("path");
-const multer = require("multer");
 
 const { sequelize, Sequelize } = require('../models/index');
 const User = require('../models/User')(sequelize, Sequelize);
 const attachCurrentUser = require('../middlewares/attachCurrentUser')
+const upload = require('../middlewares/upload');
 
 const router = express.Router();
 const salt = bcrypt.genSaltSync(10);
@@ -106,17 +105,7 @@ router.post('/login', async (req, res) => {
 });
 
 
-const storage = multer.diskStorage({
-  destination: "./public/uploads/",
-  filename: function(req, file, cb){
-    cb(null,"IMAGE-" + Date.now() + path.extname(file.originalname));
-  }
-});
 
-const upload = multer({
-   storage: storage,
-   limits:{fileSize: 1000000},
-}).single("myImage");
 
 router.post('/upload-avatar', attachCurrentUser, upload, async (req, res) => {
 

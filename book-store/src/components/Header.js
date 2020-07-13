@@ -83,18 +83,23 @@ const ProfileLink = styled(Link)`
   }
 `;
 
-const Avatar = styled.img`
+const Avatar = styled.div`
   display: block;
-  width: auto;
+  width: 60px;
   border-radius: 50%;
-  height: 70px;
+  height: 60px;
   background-color: #fff;
   margin-left: 20px;
+
+  background-image: ${props => `url(${props.src})`};
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 `;
 
 const Header = ({ isAuth, user, logOut }) => {
   const baseURL = 'http://localhost:5000/';
-  const avatar = user.avatar || 'userAvatarPlaceholder.png';
+  const avatar = user.avatar || 'userAvatarPlaceholder.jpeg';
 
   return (
     <StyledHeader>

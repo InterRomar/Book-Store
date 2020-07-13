@@ -14,7 +14,7 @@ const {
   GET_BOOKS_FAILURE } = getBooksActions;
 
 
-export const addBookAxios = book => {
+export const addBookAxios = (book, img) => {
   return async dispatch => {
     dispatch(requestAddBook());
     try {
@@ -22,7 +22,10 @@ export const addBookAxios = book => {
 
       if (!res.data.success) throw new Error(res.data.message);
 
-      dispatch(successAddBook(res.data.book));
+      console.log(book, img);
+      const coverRes = await axiosInstance.post(`books/upload-cover/${res.data.book.id}`, img);
+
+      dispatch(successAddBook(coverRes.data.book));
 
       return res.data;
     } catch (error) {

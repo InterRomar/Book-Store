@@ -47,6 +47,11 @@ module.exports = {
       createdAt: new Date(),
       updatedAt: new Date()
     },
+    {
+      title: 'Иностранная литература',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },
   ])
   },
 

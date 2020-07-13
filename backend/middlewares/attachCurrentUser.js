@@ -27,17 +27,7 @@ const attachCurrentUser = async (req, res, next) => {
         message: error.message
       })
     }
-  }
-
-  // const tokenLifetime = new Date().getTime() - decodedToken.data.createdAt;
-  
-  // if (tokenLifetime >= decodedToken.exp) {
-  //   return res.status(401).json({
-  //     success: false,
-  //     message: "token is expired"
-  //   })
-  // }
- 
+  } 
 }
 
 module.exports = attachCurrentUser

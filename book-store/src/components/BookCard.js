@@ -65,11 +65,12 @@ const BookAuthor = styled.span`
 `;
 
 const BookCard = ({ book }) => {
-  const img = book.img || 'https://images.penguinrandomhouse.com/cover/9781101003831';
+  const baseURL = 'http://localhost:5000/';
+  const img = book.img || 'bookCoverPlaceholder.png';
   return (
     <Card>
       <ImgWrapper>
-        <BookImg src={img} />
+        <BookImg src={`${baseURL}uploads/${img}`}/>
       </ImgWrapper>
       <BookTitle> {book.title} </BookTitle>
       <BookAuthor> {book.author} </BookAuthor>
@@ -82,6 +83,7 @@ export default BookCard;
 
 BookCard.propTypes = {
   book: PropTypes.shape({
+    id: PropTypes.number,
     title: PropTypes.string,
     author: PropTypes.string,
     price: PropTypes.string,
