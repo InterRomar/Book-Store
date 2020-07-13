@@ -84,7 +84,7 @@ BookCard.propTypes = {
   book: PropTypes.shape({
     title: PropTypes.string,
     author: PropTypes.string,
-    price: PropTypes.number,
+    price: PropTypes.string,
     img: PropTypes.string
   })
 };

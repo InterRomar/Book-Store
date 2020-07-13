@@ -11,12 +11,13 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   try {
-    
-    const { page, size, category, from, to } = req.query
-    
+    const { page, size, category, from, to, rating } = req.query
     const whereObject = {};
     
     category ? whereObject.category_id = category : null;
+    rating ? whereObject.rating = {
+      [Op.gte]: rating
+    } : null;
     from !== undefined && to !== undefined ? whereObject.price = {
       [Op.between]: [from, to]
     } : null;
@@ -27,11 +28,7 @@ router.get('/', async (req, res) => {
       }
     });
     const totalCount = allBooks.length;
-
-    console.log(whereObject)
-
-    let books = await Book.findAll({
-      // where: category ? {category_id: category} : null,
+    const books = await Book.findAll({
       where: {
         ...whereObject
       },
@@ -39,14 +36,6 @@ router.get('/', async (req, res) => {
       limit: size
     });
 
-    
-
-    // ==========temp============
-    books = books.map(b => {
-      b.price = Number(b.price);
-      return b;
-    })
-    // ==========================
     res.status(200).json({success: true, books, totalCount })
 
   } catch (error) {

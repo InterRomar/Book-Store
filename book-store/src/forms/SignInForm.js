@@ -126,7 +126,6 @@ class SignInForm extends Component {
     const { email, password } = this.state;
     const res = await this.props.onSubmit(email, password);
     if (!res.success) {
-      console.log(res);
       this.setState({
         formErrors: {
           ...this.state.formErrors,

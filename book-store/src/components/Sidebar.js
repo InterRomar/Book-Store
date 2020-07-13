@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import FilterCategory from './FilterCategory';
 import FilterPrice from './FilterPrice';
+import FilterRating from './FilterRating';
 
 
 const StyledSidebar = styled.section`
@@ -9,6 +11,10 @@ const StyledSidebar = styled.section`
   margin-top: 20px;
   border: 1px solid #ccc;
   padding: 15px 15px 15px 25px;
+
+  & .react-stars:focus {
+    outline: none;
+  }
 `;
 
 const FilterBox = styled.div`
@@ -16,7 +22,6 @@ const FilterBox = styled.div`
 `;
 
 const Sidebar = (props) => {
-  const { resetFilters } = props;
   return (
     <StyledSidebar>
       <FilterBox>
@@ -25,11 +30,10 @@ const Sidebar = (props) => {
       <FilterBox>
         <FilterPrice { ...props } />
       </FilterBox>
-    <button onClick={resetFilters}>
-      Reset filters
-    </button>
+      <FilterBox>
+        <FilterRating { ...props } />
+      </FilterBox>
     </StyledSidebar>
-
   );
 };
 

@@ -58,24 +58,18 @@ class Home extends Component {
     }
   }
 
-  createURL = ({ page, size, category, from, to }) => {
+  createURL = ({ page, size, category, from, to, rating }) => {
     const categoryURL = category ? `&category=${category}` : '';
+    const ratingURL = rating ? `&rating=${rating}` : '';
     const priceURL = from !== undefined && to !== undefined ? `&from=${from}&to=${to}` : '';
 
-    const url = `/?page=${page || 1}&size=${size || 10}${categoryURL}${priceURL}`;
+    const url = `/?page=${page || 1}&size=${size || 10}${categoryURL}${priceURL}${ratingURL}`;
     return url;
-  }
-
-  resetFilters = () => {
-    this.props.history.push({
-      search: ''
-    });
   }
 
   render() {
     const { params } = this.state;
     const { history, location } = this.props;
-
 
     return (
       <Container>
@@ -85,7 +79,6 @@ class Home extends Component {
             history={history}
             location={location}
             createURL={this.createURL}
-            resetFilters={this.resetFilters}
           />
           <BookList
             params={params}
@@ -110,6 +103,24 @@ Home.propTypes = {
     key: PropTypes.string,
     pathname: PropTypes.string,
     search: PropTypes.string,
+  }),
+  history: PropTypes.shape({
+    action: PropTypes.string,
+    block: PropTypes.func,
+    createHref: PropTypes.func,
+    go: PropTypes.func,
+    goBack: PropTypes.func,
+    goForward: PropTypes.func,
+    length: PropTypes.number,
+    listen: PropTypes.func,
+    location: PropTypes.shape({
+      hash: PropTypes.string,
+      key: PropTypes.string,
+      pathname: PropTypes.string,
+      search: PropTypes.string,
+    }),
+    push: PropTypes.func,
+    replace: PropTypes.func,
   }),
   books: PropTypes.arrayOf(
     PropTypes.shape({

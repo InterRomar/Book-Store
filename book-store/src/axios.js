@@ -24,8 +24,6 @@ axiosInstance.interceptors.request.use(config => {
 axiosInstance.interceptors.response.use(response => {
   return response;
 }, error => {
-  console.log(error.message);
-  console.log(error.response);
   if (error.response.statusText && error.response.statusText === 'Unauthorized') {
     store.dispatch(userLogOut());
     return error.response;
