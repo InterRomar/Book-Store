@@ -58,12 +58,13 @@ class Home extends Component {
     }
   }
 
-  createURL = ({ page, size, category, from, to, rating }) => {
+  createURL = ({ page, size, category, from, to, rating, sorting }) => {
     const categoryURL = category ? `&category=${category}` : '';
     const ratingURL = rating ? `&rating=${rating}` : '';
+    const sortingURL = sorting ? `&sorting=${sorting}` : '';
     const priceURL = from !== undefined && to !== undefined ? `&from=${from}&to=${to}` : '';
 
-    const url = `/?page=${page || 1}&size=${size || 10}${categoryURL}${priceURL}${ratingURL}`;
+    const url = `/?page=${page || 1}&size=${size || 10}${categoryURL}${priceURL}${ratingURL}${sortingURL}`;
     return url;
   }
 

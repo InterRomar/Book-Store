@@ -23,7 +23,6 @@ router.get('/', async (req, res) => {
         orderTemplate = [sequelize.fn('max', sequelize.col('rating')), 'DESC']  
         break;
       case 'minPrice':
-        console.log(sorting)
         orderTemplate = [sequelize.fn('max', sequelize.col('price')), 'ASC'];  
         break;
       case 'maxPrice':
@@ -40,7 +39,6 @@ router.get('/', async (req, res) => {
         orderTemplate = [];
         break;
     }
-    console.log('ORDER ARRAY', orderTemplate)
     category ? whereObject.category_id = category : null;
     rating ? whereObject.rating = {
       [Op.gte]: rating
@@ -62,7 +60,7 @@ router.get('/', async (req, res) => {
       group: ['book.id'],
       offset: size * (page - 1),
       limit: size,
-      // order: orderTemplate ? [orderTemplate] : [],
+      order: orderTemplate.length ? [orderTemplate] : [['createdAt']],
     });
 
     res.status(200).json({success: true, books, totalCount })
@@ -89,7 +87,6 @@ router.get('/:id', async (req, res) => {
 router.post('/', attachCurrentUser, upload, async (req, res) => {
   try {
     const { title } = req.body;
-    console.log(req.file)
     const potentialBook = await Book.findOne({ where: { title }});
 
     if (potentialBook) {
@@ -119,8 +116,7 @@ router.post('/upload-cover/:id', upload, async (req, res) => {
       where: {
         id: req.params.id
       }
-    })
-    console.log(dbRes)
+    });
 
     if (!filedata) throw new Error();
     res.status(200).json({ success: true, message: 'Обложка успешно добавлена!', img: filedata.filename})

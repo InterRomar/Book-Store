@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import BookCard from './BookCard';
+import PageSorting from './PageSorting';
 
 
 const BookListWrapper = styled.div`
@@ -51,7 +52,11 @@ const PageButton = styled.button`
     color: rgba(150, 68, 197, 0.7);
   }
 `;
-
+const BookListHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+`;
 
 class BookList extends Component {
   constructor(props) {
@@ -76,18 +81,21 @@ class BookList extends Component {
 
     return (
       <BookListWrapper>
-        <PageButtonWrapper>
-          {pages.map(page => <Link
-            key={page}
-            to={() => createURL({ ...params, page, size: pageSize })}
-          >
-            <PageButton
-              className={+params.page === page && 'selected'}
+        <BookListHeader>
+          <PageButtonWrapper>
+            {pages.map(page => <Link
+              key={page}
+              to={() => createURL({ ...params, page, size: pageSize })}
             >
-              {page}
-            </PageButton>
-          </Link>)}
-        </PageButtonWrapper>
+              <PageButton
+                className={+params.page === page && 'selected'}
+              >
+                {page}
+              </PageButton>
+            </Link>)}
+          </PageButtonWrapper>
+          <PageSorting createURL={createURL} params={params}/>
+        </BookListHeader>
         <StyledBookList>
           {books.map(book => <BookCard key={book.id} book={book}/>)}
         </StyledBookList>
