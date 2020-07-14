@@ -33,6 +33,23 @@ const BookBody = styled.div`
     & .react-stars:focus {
     outline: none;
     }
+
+    & .appreciated-notice {
+      font-family: 'Roboto';
+      color: red;
+      position: relative;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        width: 60%;
+        height: 1px;
+        background-color: red;
+        top: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
   }
 `;
 const BookTitle = styled.h1`
@@ -100,15 +117,25 @@ const FavoriteBtn = styled.button`
     outline: none;
   }
 `;
+const BookRatingTitle = styled.h3`
+  font-family: 'Roboto';
+  font-weight: 400;
 
+  & span {
+    font-weight: 500;
+    font-size: 25px;
+    margin-left: 10px;
+  }
+`;
 class BookPage extends Component {
   async componentDidMount() {
     await this.props.getBookById(this.props.match.params.id);
   }
 
   render() {
-    const { match, book } = this.props;
+    const { match, book, currentUser } = this.props;
     const id = match.params.id;
+
 
     if (!id) {
       return (
@@ -123,7 +150,14 @@ class BookPage extends Component {
       price,
       rating,
       img,
-      demo_fragment } = book;
+      demo_fragment,
+      appreciated } = book;
+
+    let isAppreciated;
+
+    if (currentUser && appreciated) {
+      isAppreciated = appreciated.includes(Number(currentUser.id));
+    }
 
     const baseURL = 'http://localhost:5000/';
     const bookImg = img || 'bookCoverPlaceholder.png';
@@ -157,13 +191,22 @@ class BookPage extends Component {
               </FavoriteBtn>
             </div>
             <div>
-              <ReactStars
-                count={5}
-                // onChange={this.ratingChanged}
-                value={0}
-                size={60}
-                activeColor="#9644c5"
-              />
+              <BookRatingTitle>
+                Рейтинг:
+                <span> {rating} </span>
+              </BookRatingTitle>
+              {!isAppreciated &&
+                <ReactStars
+                  count={5}
+                  // onChange={this.ratingChanged}
+                  value={0}
+                  size={60}
+                  activeColor="#9644c5"
+                />
+              }
+              {isAppreciated &&
+                <span className='appreciated-notice'>Вы оценили данную книгу!</span>
+              }
             </div>
           </div>
         </BookBody>
@@ -174,6 +217,7 @@ class BookPage extends Component {
 
 const mapStateToProps = state => ({
   book: state.book_store.currentBook,
+  currentUser: state.current_user.user
 });
 const mapDispatchToProps = dispatch => ({
   getBookById: id => dispatch(getBookById(id)),

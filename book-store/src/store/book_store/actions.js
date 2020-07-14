@@ -75,7 +75,7 @@ export const getBookById = (id) => {
       dispatch(failureGetBookById(res.data.message));
       return;
     }
-    dispatch(successGetBookById(res.data.book));
+    dispatch(successGetBookById({ ...res.data.book, appreciated: res.data.appreciated }));
   };
 };
 

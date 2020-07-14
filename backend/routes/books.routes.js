@@ -7,14 +7,21 @@ const Book = require('../models/Book')(sequelize, Sequelize);
 const Rating = require('../models/Rating')(sequelize, Sequelize);
 const attachCurrentUser = require('../middlewares/attachCurrentUser')
 const upload = require('../middlewares/upload');
-const Category = require('../models/Category')(sequelize, Sequelize);;
 
 const router = express.Router();
 
-router.get('/test/:id', async (req, res) => {
-  const rating = await Rating.update({user_id: [ ...user_id, ]});
+router.get('/test/:id', attachCurrentUser, async (req, res) => {
+  // const rating = await Rating.update({user_id: [ ...user_id, ]});
+  const rating = await Rating.findOne({
+    where: {
+      book_id: req.params.id
+    }
+  });
   
-  console.log(rating)
+  // const isAppreciated = rating.user_id.includes(req.)
+  
+  // console.log(rating)
+
   res.json({rating})
 })
 
@@ -87,12 +94,16 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   try {
-    const book = await Book.findByPk(req.params.id);
+    const id = req.params.id;
+    const book = await Book.findByPk(id);
     if (!book) {
       return res.status(400).json({ success: false, message: 'Книга не найдена.'})
     }
 
-    res.status(200).json({success: true, book})   
+    const rating = await Rating.findByPk(id);
+    console.log({ ...book, appreciated: rating.user_id})
+   
+    res.status(200).json({success: true, book, appreciated: rating.user_id});   
   } catch (error) {
       console.log(error)
       res.status(500).json({success: false, message: "Что-то пошло не так, повторите попытку" })
@@ -112,6 +123,10 @@ router.post('/', attachCurrentUser, upload, async (req, res) => {
     const newBook = await Book.create({
       ...req.body,
     });
+    const newRating = await Rating.create({
+      book_id: newBook.id,
+      user_id: []
+    })
     
     res.status(200).json({
       success: true,
