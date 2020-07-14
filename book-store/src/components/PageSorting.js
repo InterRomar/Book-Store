@@ -21,10 +21,43 @@ const PageSortingList = styled.ul`
   display: flex;
   flex-direction: column;
   position: absolute;
+  top: 30px;
   right: 0;
+  border: ${props => (props.isHide ? 'none' : '1px solid #ccc')};
+`;
+const PageSortingButton = styled.button`
+  background: transparent;
+  border: none;
+  font-family: 'Roboto';
+  color: ${props => {
+    return props.active ? 'rgb(150, 68, 197)' : '#333';
+  }};
+  font-size: 16px;
+  cursor: pointer;
+  position: relative;
+  padding: 0 25px 0 0;
+  font-weight: 500;
+  transition: 0.05s ease-in;
+
+  &:focus {
+    outline: none;  
+  }
+  &:hover {
+    color: rgb(150, 68, 197);
+  }
+
+  .arrow {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+  }
+
+
 `;
 const PageSortingItem = styled.li`
   background: #fff;
+  border-bottom: 1px solid #ccc;
 `;
 const PageSortingLink = styled(Link)`
   display: block;
@@ -32,9 +65,12 @@ const PageSortingLink = styled(Link)`
   font-family: 'Roboto';
   color: #333;
   text-decoration: none;
+  transition: 0.05s ease-in;
 
   
-  & a {
+  &:hover {
+    background-color: #333;
+    color: #fff;
   }
 `;
 export default class PageSorting extends Component {
@@ -42,7 +78,6 @@ export default class PageSorting extends Component {
     super(props);
 
     this.state = {
-      selectedSortingValue: 'По умолчанию',
       isHide: true
     };
   }
@@ -61,17 +96,25 @@ export default class PageSorting extends Component {
   }
 
   render() {
-    const { selectedSortingValue, isHide } = this.state;
+    const { isHide } = this.state;
     const { createURL, params } = this.props;
+    const activeSortingValue = params.sorting ? sortingValues[params.sorting] : sortingValues.default;
+    const arrowDirection = isHide ? 'fa fa-arrow-down' : 'fa fa-arrow-up';
 
     return (
       <div>
-        <button
+        <PageSortingButton
           onClick={this.toggleList}
+          active={!isHide}
         >
-          {selectedSortingValue}
-        </button>
-        <PageSortingList>
+          {activeSortingValue}
+          <div className='arrow'>
+            <i className={arrowDirection} aria-hidden="true"></i>
+          </div>
+        </PageSortingButton>
+        <PageSortingList
+          isHide={isHide}
+        >
           {Object.keys(sortingValues).map(sortValue => <PageSortingItem
             key={sortValue}
             hidden={isHide}

@@ -5,7 +5,7 @@ module.exports = {
     await queryInterface.bulkInsert('books', [{
       title: 'War and Peace1',
       author: 'Антон Чехов',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 450,
       rating: 3.5,
       img: 'IMAGE-1594648400814.jpg',
@@ -18,7 +18,7 @@ module.exports = {
     {
       title: 'War and Peace2',
       author: 'Харуки Мураками',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 450,
       rating: 3.5,
       img: 'IMAGE-1594648379539.jpg',
@@ -31,7 +31,7 @@ module.exports = {
     {
       title: 'War and Peace3',
       author: 'Чарльз Диккенс',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 450,
       rating: 3.5,
       img: 'IMAGE-1594648412271.jpg',
@@ -44,7 +44,7 @@ module.exports = {
     {
       title: 'War and Peace4',
       author: 'Эрих Мария Ремарк',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 450,
       rating: 4.0,
       img: 'IMAGE-1594648431981.jpeg',
@@ -57,7 +57,7 @@ module.exports = {
     {
       title: 'War and Peace5',
       author: 'Харуки Мураками',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 450,
       rating: 5.0,
       img: 'IMAGE-1594648446204.jpg',
@@ -70,7 +70,7 @@ module.exports = {
     {
       title: 'War and Peace6',
       author: 'Чарльз Буковски',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 450,
       rating: 2.7,
       img: 'IMAGE-1594648461296.jpg',
@@ -83,7 +83,7 @@ module.exports = {
     {
       title: 'War and Peace7',
       author: 'Макс Фрай',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 450,
       rating: 3.7,
       img: 'IMAGE-1594648475747.jpg',
@@ -96,7 +96,7 @@ module.exports = {
     {
       title: 'War and Peace8',
       author: 'Чарльз Диккенс',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 450,
       rating: 3.7,
       img: 'IMAGE-1594648498393.jpg',
@@ -109,7 +109,7 @@ module.exports = {
     {
       title: 'War and Peace9',
       author: 'Харуки Мураками',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 450,
       rating: 3.7,
       img: 'IMAGE-1594648653348.jpg',
@@ -122,7 +122,7 @@ module.exports = {
     {
       title: 'War and Peace10',
       author: 'Сергей Довлатов',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 182,
       rating: 3.7,
       img: 'IMAGE-1594648697814.jpg',
@@ -135,7 +135,7 @@ module.exports = {
     {
       title: 'War and Peace11',
       author: 'Чарльз Буковски',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 182,
       rating: 3.7,
       img: 'IMAGE-1594648400814.jpg',
@@ -148,7 +148,7 @@ module.exports = {
     {
       title: 'War and Peace12',
       author: 'Антон Чехов',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 182,
       rating: 3.7,
       img: 'IMAGE-1594648379539.jpg',
@@ -161,7 +161,7 @@ module.exports = {
     {
       title: 'War and Peace13',
       author: 'Макс Фрай',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 182,
       rating: 3.7,
       img: 'IMAGE-1594648412271.jpg',
@@ -174,7 +174,7 @@ module.exports = {
     {
       title: 'War and Peace14',
       author: 'Харуки Мураками',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 182,
       rating: 4.8,
       img: 'IMAGE-1594648431981.jpeg',
@@ -187,7 +187,7 @@ module.exports = {
     {
       title: 'War and Peace15',
       author: 'Харуки Мураками',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 182,
       rating: 4.8,
       img: 'IMAGE-1594648446204.jpg',
@@ -200,7 +200,7 @@ module.exports = {
     {
       title: 'War and Peace16',
       author: 'Чарльз Диккенс',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 182,
       rating: 4.8,
       img: 'IMAGE-1594648461296.jpg',
@@ -213,7 +213,7 @@ module.exports = {
     {
       title: 'War and Peace17',
       author: 'Эрих Мария Ремарк',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 182,
       rating: 4.8,
       img: 'IMAGE-1594648475747.jpg',
@@ -226,7 +226,7 @@ module.exports = {
     {
       title: 'War and Peace18',
       author: 'Чарльз Буковски',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 182,
       rating: 4.8,
       img: 'IMAGE-1594648498393.jpg',
@@ -239,7 +239,7 @@ module.exports = {
     {
       title: 'War and Peace19',
       author: 'Макс Фрай',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 182,
       rating: 4.8,
       img: 'IMAGE-1594648653348.jpg',
@@ -252,7 +252,7 @@ module.exports = {
     {
       title: 'War and Peace20',
       author: 'Сергей Довлатов',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 182,
       rating: 2.9,
       img: 'IMAGE-1594648697814.jpg',
@@ -265,7 +265,7 @@ module.exports = {
     {
       title: 'War and Peace21',
       author: 'Антон Чехов',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 182,
       rating: 2.9,
       img: 'IMAGE-1594648400814.jpg',
@@ -278,7 +278,7 @@ module.exports = {
     {
       title: 'War and Peace22',
       author: 'Антон Чехов',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 182,
       rating: 2.9,
       img: 'IMAGE-1594648379539.jpg',
@@ -291,7 +291,7 @@ module.exports = {
     {
       title: 'War and Peace23',
       author: 'Чарльз Диккенс',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 182,
       rating: 2.9,
       img: 'IMAGE-1594648412271.jpg',
@@ -304,7 +304,7 @@ module.exports = {
     {
       title: 'War and Peace24',
       author: 'Теодор Драйзер',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 182,
       rating: 2.9,
       img: 'IMAGE-1594648431981.jpeg',
@@ -317,7 +317,7 @@ module.exports = {
     {
       title: 'War and Peace25',
       author: 'Бернард Шоу',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 182,
       rating: 2.9,
       img: 'IMAGE-1594648446204.jpg',
@@ -330,7 +330,7 @@ module.exports = {
     {
       title: 'War and Peace26',
       author: 'Олдос Хаксли',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 990,
       rating: 2.9,
       img: 'IMAGE-1594648461296.jpg',
@@ -343,7 +343,7 @@ module.exports = {
     {
       title: 'War and Peace27',
       author: 'Чарльз Диккенс',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 990,
       rating: 2.9,
       img: 'IMAGE-1594648475747.jpg',
@@ -356,7 +356,7 @@ module.exports = {
     {
       title: 'War and Peace28',
       author: 'Чарльз Буковски',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 990,
       rating: 5.0,
       img: 'IMAGE-1594648498393.jpg',
@@ -369,7 +369,7 @@ module.exports = {
     {
       title: 'War and Peace29',
       author: 'Сергей Довлатов',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 990,
       rating: 5.0,
       img: 'IMAGE-1594648653348.jpg',
@@ -382,7 +382,7 @@ module.exports = {
     {
       title: 'War and Peace30',
       author: 'Теодор Драйзер',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 990,
       rating: 5.0,
       img: 'IMAGE-1594648697814.jpg',
@@ -395,7 +395,7 @@ module.exports = {
     {
       title: 'War and Peace31',
       author: 'Чарльз Буковски',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 990,
       rating: 5.0,
       img: 'IMAGE-1594648400814.jpg',
@@ -408,7 +408,7 @@ module.exports = {
     {
       title: 'War and Peace32',
       author: 'Макс Фрай',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 990,
       rating: 5.0,
       img: 'IMAGE-1594648379539.jpg',
@@ -421,7 +421,7 @@ module.exports = {
     {
       title: 'War and Peace33',
       author: 'Бернард Шоу',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 990,
       rating: 5.0,
       img: 'IMAGE-1594648412271.jpg',
@@ -434,7 +434,7 @@ module.exports = {
     {
       title: 'War and Peace34',
       author: 'Сергей Довлатов',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 990,
       rating: 5.0,
       img: 'IMAGE-1594648431981.jpeg',
@@ -447,7 +447,7 @@ module.exports = {
     {
       title: 'War and Peace35',
       author: 'Эрих Мария Ремарк',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 990,
       rating: 4.0,
       img: 'IMAGE-1594648446204.jpg',
@@ -460,7 +460,7 @@ module.exports = {
     {
       title: 'War and Peace36',
       author: 'Харуки Мураками',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 990,
       rating: 4.0,
       img: 'IMAGE-1594648461296.jpg',
@@ -473,7 +473,7 @@ module.exports = {
     {
       title: 'War and Peace37',
       author: 'Иосиф Бродский',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 155,
       rating: 4.0,
       img: 'IMAGE-1594648475747.jpg',
@@ -486,7 +486,7 @@ module.exports = {
     {
       title: 'War and Peace38',
       author: 'Иосиф Бродский',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 155,
       rating: 3.2,
       img: 'IMAGE-1594648498393.jpg',
@@ -500,7 +500,7 @@ module.exports = {
     {
       title: 'War and Peace39',
       author: 'Бернард Шоу',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 155,
       rating: 3.2,
       img: 'IMAGE-1594648653348.jpg',
@@ -513,7 +513,7 @@ module.exports = {
     {
       title: 'War and Peace40',
       author: 'Олдос Хаксли',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 155,
       rating: 3.2,
       img: 'IMAGE-1594648697814.jpg',
@@ -526,7 +526,7 @@ module.exports = {
     {
       title: 'War and Peace41',
       author: 'Эрих Мария Ремарк',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 155,
       rating: 3.2,
       img: 'IMAGE-1594648400814.jpg',
@@ -539,7 +539,7 @@ module.exports = {
     {
       title: 'War and Peace42',
       author: 'Чарльз Диккенс',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 155,
       rating: 3.2,
       img: 'IMAGE-1594648379539.jpg',
@@ -552,7 +552,7 @@ module.exports = {
     {
       title: 'War and Peace43',
       author: 'Иосиф Бродский',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 155,
       rating: 3.2,
       img: 'IMAGE-1594648412271.jpg',
@@ -565,7 +565,7 @@ module.exports = {
     {
       title: 'War and Peace44',
       author: 'Бернард Шоу',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 155,
       rating: 3.2,
       img: 'IMAGE-1594648431981.jpeg',
@@ -578,7 +578,7 @@ module.exports = {
     {
       title: 'War and Peace45',
       author: 'Бернард Шоу',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 155,
       rating: 3.2,
       img: 'IMAGE-1594648446204.jpg',
@@ -591,7 +591,7 @@ module.exports = {
     {
       title: 'War and Peace46',
       author: 'Теодор Драйзер',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 155,
       rating: 2.2,
       img: 'IMAGE-1594648461296.jpg',
@@ -604,7 +604,7 @@ module.exports = {
     {
       title: 'War and Peace47',
       author: 'Олдос Хаксли',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 375,
       rating: 2.2,
       img: 'IMAGE-1594648475747.jpg',
@@ -617,7 +617,7 @@ module.exports = {
     {
       title: 'War and Peace48',
       author: 'Иосиф Бродский',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 375,
       rating: 2.2,
       img: 'IMAGE-1594648498393.jpg',
@@ -631,7 +631,7 @@ module.exports = {
     {
       title: 'War and Peace49',
       author: 'Сергей Довлатов',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 375,
       rating: 2.2,
       img: 'IMAGE-1594648653348.jpg',
@@ -644,7 +644,7 @@ module.exports = {
     {
       title: 'War and Peace50',
       author: 'Чарльз Буковски',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 375,
       rating: 2.2,
       img: 'IMAGE-1594648697814.jpg',
@@ -657,7 +657,7 @@ module.exports = {
     {
       title: 'War and Peace51',
       author: 'Олдос Хаксли',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 375,
       rating: 2.2,
       img: 'IMAGE-1594648400814.jpg',
@@ -670,7 +670,7 @@ module.exports = {
     {
       title: 'War and Peace52',
       author: 'Антон Чехов',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 375,
       rating: 2.2,
       img: 'IMAGE-1594648379539.jpg',
@@ -683,7 +683,7 @@ module.exports = {
     {
       title: 'War and Peace53',
       author: 'Бернард Шоу',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 375,
       rating: 2.2,
       img: 'IMAGE-1594648412271.jpg',
@@ -696,7 +696,7 @@ module.exports = {
     {
       title: 'War and Peace54',
       author: 'Чарльз Диккенс',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 375,
       rating: 1.8,
       img: 'IMAGE-1594648431981.jpeg',
@@ -709,7 +709,7 @@ module.exports = {
     {
       title: 'War and Peace55',
       author: 'Иосиф Бродский',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 375,
       rating: 1.8,
       img: 'IMAGE-1594648446204.jpg',
@@ -722,7 +722,7 @@ module.exports = {
     {
       title: 'War and Peace56',
       author: 'Бернард Шоу',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 375,
       rating: 1.8,
       img: 'IMAGE-1594648461296.jpg',
@@ -735,7 +735,7 @@ module.exports = {
     {
       title: 'War and Peace57',
       author: 'Эрих Мария Ремарк',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 375,
       rating: 1.8,
       img: 'IMAGE-1594648475747.jpg',
@@ -748,7 +748,7 @@ module.exports = {
     {
       title: 'War and Peace58',
       author: 'Харуки Мураками',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 112,
       rating: 1.8,
       img: 'IMAGE-1594648498393.jpg',
@@ -762,7 +762,7 @@ module.exports = {
     {
       title: 'War and Peace59',
       author: 'Макс Фрай',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 112,
       rating: 1.8,
       img: 'IMAGE-1594648653348.jpg',
@@ -775,7 +775,7 @@ module.exports = {
     {
       title: 'War and Peace60',
       author: 'Иосиф Бродский',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 112,
       rating: 1.8,
       img: 'IMAGE-1594648697814.jpg',
@@ -788,7 +788,7 @@ module.exports = {
     {
       title: 'War and Peace61',
       author: 'Теодор Драйзер',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 112,
       rating: 4.6,
       img: 'IMAGE-1594648400814.jpg',
@@ -801,7 +801,7 @@ module.exports = {
     {
       title: 'War and Peace62',
       author: 'Макс Фрай',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 112,
       rating: 4.6,
       img: 'IMAGE-1594648379539.jpg',
@@ -814,7 +814,7 @@ module.exports = {
     {
       title: 'War and Peace63',
       author: 'Чарльз Буковски',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 112,
       rating: 4.6,
       img: 'IMAGE-1594648412271.jpg',
@@ -827,7 +827,7 @@ module.exports = {
     {
       title: 'War and Peace64',
       author: 'Сергей Довлатов',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 112,
       rating: 4.6,
       img: 'IMAGE-1594648431981.jpeg',
@@ -840,7 +840,7 @@ module.exports = {
     {
       title: 'War and Peace65',
       author: 'Бернард Шоу',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 112,
       rating: 4.6,
       img: 'IMAGE-1594648446204.jpg',
@@ -853,7 +853,7 @@ module.exports = {
     {
       title: 'War and Peace66',
       author: 'Антон Чехов',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 112,
       rating: 4.6,
       img: 'IMAGE-1594648461296.jpg',
@@ -866,7 +866,7 @@ module.exports = {
     {
       title: 'War and Peace67',
       author: 'Макс Фрай',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 112,
       rating: 4.6,
       img: 'IMAGE-1594648475747.jpg',
@@ -879,7 +879,7 @@ module.exports = {
     {
       title: 'War and Peace68',
       author: 'Чарльз Диккенс',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 280,
       rating: 4.6,
       img: 'IMAGE-1594648498393.jpg',
@@ -893,7 +893,7 @@ module.exports = {
     {
       title: 'War and Peace69',
       author: 'Эрих Мария Ремарк',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 280,
       rating: 1.4,
       img: 'IMAGE-1594648653348.jpg',
@@ -906,7 +906,7 @@ module.exports = {
     {
       title: 'War and Peace70',
       author: 'Сергей Довлатов',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 280,
       rating: 1.4,
       img: 'IMAGE-1594648697814.jpg',
@@ -919,7 +919,7 @@ module.exports = {
     {
       title: 'War and Peace71',
       author: 'Бернард Шоу',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 280,
       rating: 1.4,
       img: 'IMAGE-1594648400814.jpg',
@@ -932,7 +932,7 @@ module.exports = {
     {
       title: 'War and Peace72',
       author: 'Олдос Хаксли',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 280,
       rating: 1.4,
       img: 'IMAGE-1594648379539.jpg',
@@ -945,7 +945,7 @@ module.exports = {
     {
       title: 'War and Peace73',
       author: 'Харуки Мураками',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 280,
       rating: 1.4,
       img: 'IMAGE-1594648412271.jpg',
@@ -958,7 +958,7 @@ module.exports = {
     {
       title: 'War and Peace74',
       author: 'Олдос Хаксли',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 280,
       rating: 1.4,
       img: 'IMAGE-1594648431981.jpeg',
@@ -971,7 +971,7 @@ module.exports = {
     {
       title: 'War and Peace75',
       author: 'Чарльз Буковски',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 280,
       rating: 1.4,
       img: 'IMAGE-1594648446204.jpg',
@@ -984,7 +984,7 @@ module.exports = {
     {
       title: 'War and Peace76',
       author: 'Эрих Мария Ремарк',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 280,
       rating: 1.4,
       img: 'IMAGE-1594648461296.jpg',
@@ -997,7 +997,7 @@ module.exports = {
     {
       title: 'War and Peace77',
       author: 'Чарльз Диккенс',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 280,
       rating: 1.4,
       img: 'IMAGE-1594648475747.jpg',
@@ -1010,7 +1010,7 @@ module.exports = {
     {
       title: 'War and Peace78',
       author: 'Макс Фрай',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 280,
       rating: 1.4,
       img: 'IMAGE-1594648498393.jpg',
@@ -1024,7 +1024,7 @@ module.exports = {
     {
       title: 'War and Peace79',
       author: 'Олдос Хаксли',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 74,
       rating: 3.9,
       img: 'IMAGE-1594648653348.jpg',
@@ -1037,7 +1037,7 @@ module.exports = {
     {
       title: 'War and Peace80',
       author: 'Эрих Мария Ремарк',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 74,
       rating: 3.9,
       img: 'IMAGE-1594648697814.jpg',
@@ -1050,7 +1050,7 @@ module.exports = {
     {
       title: 'War and Peace81',
       author: 'Харуки Мураками',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 74,
       rating: 3.9,
       img: 'IMAGE-1594648400814.jpg',
@@ -1063,7 +1063,7 @@ module.exports = {
     {
       title: 'War and Peace82',
       author: 'Чарльз Диккенс',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 74,
       rating: 3.9,
       img: 'IMAGE-1594648379539.jpg',
@@ -1076,7 +1076,7 @@ module.exports = {
     {
       title: 'War and Peace83',
       author: 'Харуки Мураками',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 74,
       rating: 3.9,
       img: 'IMAGE-1594648412271.jpg',
@@ -1089,7 +1089,7 @@ module.exports = {
     {
       title: 'War and Peace84',
       author: 'Макс Фрай',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 74,
       rating: 3.9,
       img: 'IMAGE-1594648431981.jpeg',
@@ -1102,7 +1102,7 @@ module.exports = {
     {
       title: 'War and Peace85',
       author: 'Сергей Довлатов',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 74,
       rating: 3.9,
       img: 'IMAGE-1594648446204.jpg',
@@ -1115,7 +1115,7 @@ module.exports = {
     {
       title: 'War and Peace86',
       author: 'Теодор Драйзер',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 74,
       rating: 3.9,
       img: 'IMAGE-1594648461296.jpg',
@@ -1128,7 +1128,7 @@ module.exports = {
     {
       title: 'War and Peace87',
       author: 'Теодор Драйзер',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 74,
       rating: 3.9,
       img: 'IMAGE-1594648475747.jpg',
@@ -1141,7 +1141,7 @@ module.exports = {
     {
       title: 'War and Peace88',
       author: 'Олдос Хаксли',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 560,
       rating: 4.0,
       img: 'IMAGE-1594648498393.jpg',
@@ -1155,7 +1155,7 @@ module.exports = {
     {
       title: 'War and Peace89',
       author: 'Антон Чехов',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 560,
       rating: 4.0,
       img: 'IMAGE-1594648653348.jpg',
@@ -1168,7 +1168,7 @@ module.exports = {
     {
       title: 'War and Peace90',
       author: 'Бернард Шоу',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 560,
       rating: 4.0,
       img: 'IMAGE-1594648697814.jpg',
@@ -1181,7 +1181,7 @@ module.exports = {
     {
       title: 'War and Peace91',
       author: 'Сергей Довлатов',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 560,
       rating: 4.0,
       img: 'IMAGE-1594648400814.jpg',
@@ -1194,7 +1194,7 @@ module.exports = {
     {
       title: 'War and Peace92',
       author: 'Эрих Мария Ремарк',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 560,
       rating: 5,
       img: 'IMAGE-1594648379539.jpg',
@@ -1207,7 +1207,7 @@ module.exports = {
     {
       title: 'War and Peace93',
       author: 'Макс Фрай',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 560,
       rating: 5,
       img: 'IMAGE-1594648412271.jpg',
@@ -1220,7 +1220,7 @@ module.exports = {
     {
       title: 'War and Peace94',
       author: 'Иосиф Бродский',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 560,
       rating: 5,
       img: 'IMAGE-1594648431981.jpeg',
@@ -1233,7 +1233,7 @@ module.exports = {
     {
       title: 'War and Peace95',
       author: 'Теодор Драйзер',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 560,
       rating: 5,
       img: 'IMAGE-1594648446204.jpg',
@@ -1246,7 +1246,7 @@ module.exports = {
     {
       title: 'War and Peace96',
       author: 'Сергей Довлатов',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 560,
       rating: 5,
       img: 'IMAGE-1594648461296.jpg',
@@ -1259,7 +1259,7 @@ module.exports = {
     {
       title: 'War and Peace97',
       author: 'Чарльз Диккенс',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 560,
       rating: 5,
       img: 'IMAGE-1594648475747.jpg',
@@ -1272,7 +1272,7 @@ module.exports = {
     {
       title: 'War and Peace98',
       author: 'Чарльз Буковски',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 560,
       rating: 5,
       img: 'IMAGE-1594648498393.jpg',
@@ -1286,7 +1286,7 @@ module.exports = {
     {
       title: 'War and Peace99',
       author: 'Макс Фрай',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 1150,
       rating: 5,
       img: 'IMAGE-1594648653348.jpg',
@@ -1299,7 +1299,7 @@ module.exports = {
     {
       title: 'War and Peace100',
       author: 'Антон Чехов',
-      description: 'Bla bla bla bla bla bla',
+      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero nemo dolorem at eius autem fugiat veniam deserunt ipsum in praesentium odio iure aspernatur veritatis, rerum quae? Harum modi expedita, ea suscipit dolor deleniti ut veritatis nemo id corporis dignissimos magni nam corrupti illo libero facilis eaque exercitationem consequuntur officiis ratione quam porro iusto quod. Cupiditate voluptas voluptatum placeat velit eaque, odio nobis provident natus! Tenetur qui sequi quasi quod quos fugit numquam totam eos iste aliquam? Itaque quis aperiam nisi ducimus dicta unde ratione minus veritatis maiores aliquam amet provident a veniam dignissimos voluptatem, error tenetur laboriosam nesciunt dolores et.',
       price: 1150,
       rating: 5,
       img: 'IMAGE-1594648697814.jpg',

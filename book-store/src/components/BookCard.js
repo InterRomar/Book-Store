@@ -1,7 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
+const BookLink = styled(Link)`
+  text-decoration: none;
+  color: #333;
+`;
 const Card = styled.li`
   border-radius: 5px;
   background-color: #ffe;
@@ -13,6 +18,12 @@ const Card = styled.li`
   font-family: 'Arial';
   box-shadow: 3px 3px 10px rgba(0,0,0,0.5);
   text-align: center;
+  transition: 0.1s ease-in;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 5px 12px 20px rgba(0,0,0,0.5);
+  }
 `;
 
 const BookTitle = styled.h3`
@@ -21,7 +32,7 @@ const BookTitle = styled.h3`
   margin-bottom: 15px;
   text-align: center;
 `;
-const ImgWrapper = styled.a`
+const ImgWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -29,6 +40,8 @@ const ImgWrapper = styled.a`
   margin: -10px -20px 0;
   padding-top: 10px;
   background-color: rgb(218, 216, 216);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 
 
 `;
@@ -68,14 +81,18 @@ const BookCard = ({ book }) => {
   const baseURL = 'http://localhost:5000/';
   const img = book.img || 'bookCoverPlaceholder.png';
   return (
-    <Card>
-      <ImgWrapper>
-        <BookImg src={`${baseURL}uploads/${img}`}/>
-      </ImgWrapper>
-      <BookTitle> {book.title} </BookTitle>
-      <BookAuthor> {book.author} </BookAuthor>
-      <BookPrice> {book.price}₽</BookPrice>
-    </Card>
+    <BookLink
+      to={`/books/${book.id}`}
+    >
+      <Card>
+        <ImgWrapper>
+          <BookImg src={`${baseURL}uploads/${img}`}/>
+        </ImgWrapper>
+        <BookTitle> {book.title} </BookTitle>
+        <BookAuthor> {book.author} </BookAuthor>
+        <BookPrice> {book.price}₽</BookPrice>
+      </Card>
+    </BookLink>
   );
 };
 

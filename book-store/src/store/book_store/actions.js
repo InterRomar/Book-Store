@@ -1,7 +1,12 @@
 import QueryParser from 'query-string';
 import axiosInstance from '../../axios';
 
-import { addBookActions, getBooksActions, SET_CURRENT_PAGE, SET_TOTAL_COUNT, SET_CURRENT_CATEGORY } from '../action_names/action_names';
+import { addBookActions,
+  getBooksActions,
+  getBookByIdActions,
+  SET_CURRENT_PAGE,
+  SET_TOTAL_COUNT,
+  SET_CURRENT_CATEGORY } from '../action_names/action_names';
 
 
 const {
@@ -12,6 +17,11 @@ const {
   GET_BOOKS_REQUEST,
   GET_BOOKS_SUCCESS,
   GET_BOOKS_FAILURE } = getBooksActions;
+
+const {
+  GET_BOOK_BY_ID_REQUEST,
+  GET_BOOK_BY_ID_SUCCESS,
+  GET_BOOK_BY_ID_FAILURE } = getBookByIdActions;
 
 
 export const addBookAxios = (book, img) => {
@@ -56,6 +66,18 @@ export const getAllBooks = (url) => {
     dispatch(successGetAllBooks(res.data.books));
   };
 };
+export const getBookById = (id) => {
+  return async dispatch => {
+    dispatch(requestGetBookById());
+
+    const res = await axiosInstance.get(`books/${id}`);
+    if (!res.data.success) {
+      dispatch(failureGetBookById(res.data.message));
+      return;
+    }
+    dispatch(successGetBookById(res.data.book));
+  };
+};
 
 
 const requestAddBook = () => ({
@@ -79,6 +101,18 @@ const successGetAllBooks = books => ({
 });
 const failureGetAllBooks = (err) => ({
   type: GET_BOOKS_FAILURE,
+  message: err
+});
+
+const requestGetBookById = () => ({
+  type: GET_BOOK_BY_ID_REQUEST,
+});
+const successGetBookById = book => ({
+  type: GET_BOOK_BY_ID_SUCCESS,
+  payload: book
+});
+const failureGetBookById = (err) => ({
+  type: GET_BOOK_BY_ID_FAILURE,
   message: err
 });
 

@@ -1,4 +1,9 @@
-import { addBookActions, getBooksActions, SET_CURRENT_PAGE, SET_TOTAL_COUNT, SET_CURRENT_CATEGORY } from '../action_names/action_names';
+import { addBookActions,
+  getBooksActions,
+  getBookByIdActions,
+  SET_CURRENT_PAGE,
+  SET_TOTAL_COUNT,
+  SET_CURRENT_CATEGORY } from '../action_names/action_names';
 
 
 const { ADD_BOOK_REQUEST,
@@ -9,6 +14,11 @@ const { GET_BOOKS_REQUEST,
   GET_BOOKS_SUCCESS,
   GET_BOOKS_FAILURE } = getBooksActions;
 
+const {
+  GET_BOOK_BY_ID_REQUEST,
+  GET_BOOK_BY_ID_SUCCESS,
+  GET_BOOK_BY_ID_FAILURE } = getBookByIdActions;
+
 const initialState = {
   loading: false,
   error: '',
@@ -17,6 +27,7 @@ const initialState = {
   pageSize: 10,
   totalCount: 0,
   currentCategory: 0,
+  currentBook: {}
 };
 
 const book_store = (state = initialState, action) => {
@@ -44,12 +55,6 @@ const book_store = (state = initialState, action) => {
         ...state,
         loading: true
       });
-    case GET_BOOKS_FAILURE:
-      return ({
-        ...state,
-        loading: false,
-        error: action.message
-      });
     case GET_BOOKS_SUCCESS:
       return ({
         ...state,
@@ -58,6 +63,31 @@ const book_store = (state = initialState, action) => {
         books: [...action.payload]
       }
       );
+    case GET_BOOKS_FAILURE:
+      return ({
+        ...state,
+        loading: false,
+        error: action.message
+      });
+    case GET_BOOK_BY_ID_REQUEST:
+      return ({
+        ...state,
+        loading: true
+      });
+    case GET_BOOK_BY_ID_SUCCESS:
+      return ({
+        ...state,
+        loading: false,
+        error: '',
+        currentBook: action.payload
+      }
+      );
+    case GET_BOOK_BY_ID_FAILURE:
+      return ({
+        ...state,
+        loading: false,
+        error: action.message
+      });
     case SET_CURRENT_PAGE:
       return ({
         ...state,

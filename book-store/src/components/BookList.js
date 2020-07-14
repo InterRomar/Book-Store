@@ -23,18 +23,7 @@ const StyledBookList = styled.ul`
 `;
 
 const PageButtonWrapper = styled.div`
-  margin-bottom: 30px;
-  position: relative;
 
-  &::after {
-    content: '';
-    position: absolute;
-    background: #333;
-    left: 0;
-    bottom: -10px;
-    width: 100%;
-    height: 1px;
-  }
 `;
 const PageButton = styled.button`
   cursor: pointer;
@@ -56,6 +45,18 @@ const BookListHeader = styled.div`
   display: flex;
   justify-content: space-between;
   position: relative;
+  margin-bottom: 30px;
+
+
+  &::after {
+    content: '';
+    position: absolute;
+    background: #333;
+    left: 0;
+    bottom: -10px;
+    width: 100%;
+    height: 1px;
+  }
 `;
 
 class BookList extends Component {

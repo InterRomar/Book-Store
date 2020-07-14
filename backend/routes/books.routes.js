@@ -4,14 +4,27 @@ const { Op } = require('sequelize');
 const { sequelize, Sequelize } = require('../models/index');
 const User = require('../models/User')(sequelize, Sequelize);
 const Book = require('../models/Book')(sequelize, Sequelize);
+const Rating = require('../models/Rating')(sequelize, Sequelize);
 const attachCurrentUser = require('../middlewares/attachCurrentUser')
 const upload = require('../middlewares/upload');
+const Category = require('../models/Category')(sequelize, Sequelize);;
 
 const router = express.Router();
 
+router.get('/test/:id', async (req, res) => {
+  const rating = await Rating.update({user_id: [ ...user_id, ]});
+  
+  console.log(rating)
+  res.json({rating})
+})
+
 router.get('/', async (req, res) => {
   try {
-    const { page, size, category, from, to, rating, sorting } = req.query
+    let { page, size, category, from, to, rating, sorting } = req.query;
+    if (Object.keys(req.query).length === 0) {
+      page = 1;
+      size = 10;
+    }
     const whereObject = {};
     let orderTemplate = [];
     
@@ -60,7 +73,7 @@ router.get('/', async (req, res) => {
       group: ['book.id'],
       offset: size * (page - 1),
       limit: size,
-      order: orderTemplate.length ? [orderTemplate] : [['createdAt']],
+      order: orderTemplate.length ? [orderTemplate] : [],
     });
 
     res.status(200).json({success: true, books, totalCount })
@@ -71,13 +84,15 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Здесь должно искать по id книги, а ищет по user id (исправить)
+
 router.get('/:id', async (req, res) => {
   try {
-    const user = await User.findByPk(req.params.id);
-    const books = await user.getBooks();
-    
-    res.status(200).json({success: true, books})   
+    const book = await Book.findByPk(req.params.id);
+    if (!book) {
+      return res.status(400).json({ success: false, message: 'Книга не найдена.'})
+    }
+
+    res.status(200).json({success: true, book})   
   } catch (error) {
       console.log(error)
       res.status(500).json({success: false, message: "Что-то пошло не так, повторите попытку" })
@@ -87,6 +102,7 @@ router.get('/:id', async (req, res) => {
 router.post('/', attachCurrentUser, upload, async (req, res) => {
   try {
     const { title } = req.body;
+    console.log(req.file)
     const potentialBook = await Book.findOne({ where: { title }});
 
     if (potentialBook) {
@@ -108,7 +124,7 @@ router.post('/', attachCurrentUser, upload, async (req, res) => {
   }
 });
 
-router.post('/upload-cover/:id', upload, async (req, res) => {  
+router.post('/upload-cover/:id', attachCurrentUser, upload, async (req, res) => {  
   try {
     const filedata = req.file;
   
@@ -116,7 +132,8 @@ router.post('/upload-cover/:id', upload, async (req, res) => {
       where: {
         id: req.params.id
       }
-    });
+    })
+    console.log(dbRes)
 
     if (!filedata) throw new Error();
     res.status(200).json({ success: true, message: 'Обложка успешно добавлена!', img: filedata.filename})

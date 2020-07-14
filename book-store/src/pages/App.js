@@ -13,6 +13,7 @@ import Profile from './Profile';
 import AddBook from './AddBook';
 import AddCategory from './AddCategory';
 import { getAllCategories } from '../store/categories_store/actions';
+import BookPage from './BookPage';
 
 
 class App extends React.Component {
@@ -52,7 +53,7 @@ class App extends React.Component {
         <main className="page">
           <Switch>
             <Route exact path='/' component={Home} />
-
+            <Route path='/books/:id' component={BookPage}/>
             <PrivateRoute path="/reg">
               <Reg/>
             </PrivateRoute>
