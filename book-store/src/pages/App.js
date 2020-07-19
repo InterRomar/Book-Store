@@ -14,6 +14,7 @@ import AddBook from './AddBook';
 import AddCategory from './AddCategory';
 import { getAllCategories } from '../store/categories_store/actions';
 import BookPage from './BookPage';
+import Favorite from '../components/Favorite';
 
 
 class App extends React.Component {
@@ -62,6 +63,9 @@ class App extends React.Component {
             </PrivateRoute>
             <PrivateRoute path="/profile">
               <Profile/>
+            </PrivateRoute>
+            <PrivateRoute path="/favorite">
+              <Favorite />
             </PrivateRoute>
             <PrivateRoute path="/addBook">
               <AddBook/>

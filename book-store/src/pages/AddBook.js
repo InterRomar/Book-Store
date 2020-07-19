@@ -14,6 +14,8 @@ export const Textarea = styled.textarea`
   font-size: 16px;
   border: 1px solid #333333;
   border-radius: 4px;
+  resize: none;
+  box-sizing: border-box;
   padding: 5px 10px;
 `;
 

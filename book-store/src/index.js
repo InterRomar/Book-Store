@@ -12,7 +12,7 @@ import { store } from './store/index';
 ReactDOM.render((
   <Provider store={store}>
     <BrowserRouter>
-      <App store={store}/>
+      <App />
     </BrowserRouter>
   </Provider>
 ),

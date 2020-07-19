@@ -30,6 +30,10 @@ module.exports = {
       demo_fragment: {
         type: Sequelize.STRING
       },
+      comments: {
+        type: Sequelize.ARRAY(Sequelize.INTEGER),
+        default: []
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

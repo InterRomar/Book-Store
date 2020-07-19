@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import memoize from 'memoize-one';
 
 import BookCard from './BookCard';
 import PageSorting from './PageSorting';
@@ -21,7 +22,6 @@ const StyledBookList = styled.ul`
   justify-content: space-between;
   flex-wrap: wrap;  
 `;
-
 const PageButtonWrapper = styled.div`
 
 `;
@@ -68,10 +68,7 @@ class BookList extends Component {
     };
   }
 
-  render() {
-    const { books, totalCount, params, createURL } = this.props;
-    const { pageSize } = this.state;
-
+  getPageAmount = memoize((totalCount, pageSize) => {
     let pageCount = totalCount / pageSize;
     const pages = [];
 
@@ -79,6 +76,15 @@ class BookList extends Component {
     for (let i = 1; i <= pageCount; i++) {
       pages.push(i);
     }
+
+    return pages;
+  });
+
+  render() {
+    const { books, totalCount, params, createURL } = this.props;
+    const { pageSize } = this.state;
+
+    const pages = this.getPageAmount(totalCount, pageSize);
 
     return (
       <BookListWrapper>

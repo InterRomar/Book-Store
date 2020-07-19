@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import InputRange from 'react-input-range';
+import { debounce } from 'lodash';
 
 import { FilterTitle } from './FilterCategory';
 
@@ -32,13 +33,9 @@ class FilterPrice extends Component {
     };
   }
 
-  handleChange = async (value) => {
+  debouncedRequest = debounce(value => {
     const { history, params, createURL } = this.props;
-    const { min, max } = this.state.value;
-
-    await this.setState({
-      value
-    });
+    const { min, max } = value;
 
     const currentSearch = createURL({
       ...params,
@@ -50,7 +47,15 @@ class FilterPrice extends Component {
     history.push({
       search: currentSearch
     });
+  }, 300)
+
+  handleChange = (value) => {
+    this.setState({
+      value
+    });
+    this.debouncedRequest(value);
   }
+
 
   render() {
     return (

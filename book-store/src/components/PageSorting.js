@@ -73,6 +73,7 @@ const PageSortingLink = styled(Link)`
     color: #fff;
   }
 `;
+
 export default class PageSorting extends Component {
   constructor(props) {
     super(props);
@@ -82,14 +83,31 @@ export default class PageSorting extends Component {
     };
   }
 
-  toggleList = () => {
+  componentDidMount() {
+    document.addEventListener('click', this.toggleList, false);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('click', this.toggleList, false);
+  }
+
+  toggleList = (e) => {
+    if (this.node.contains(e.target)) {
+      if (e.target.id === 'toggleButton') {
+        this.setState({
+          isHide: !this.state.isHide
+        });
+      }
+      return;
+    }
+
     this.setState({
-      isHide: !this.state.isHide
+      isHide: true
     });
   }
 
-  handleClick = async (event) => {
-    await this.setState({
+  handleClick = (event) => {
+    this.setState({
       selectedSortingValue: event.target.name,
       isHide: true
     });
@@ -98,14 +116,16 @@ export default class PageSorting extends Component {
   render() {
     const { isHide } = this.state;
     const { createURL, params } = this.props;
-    const activeSortingValue = params.sorting ? sortingValues[params.sorting] : sortingValues.default;
+    const activeSortingValue = params.sorting ?
+      sortingValues[params.sorting] :
+      sortingValues.default;
     const arrowDirection = isHide ? 'fa fa-arrow-down' : 'fa fa-arrow-up';
 
     return (
-      <div>
+      <div ref={node => this.node = node}>
         <PageSortingButton
-          onClick={this.toggleList}
           active={!isHide}
+          id='toggleButton'
         >
           {activeSortingValue}
           <div className='arrow'>

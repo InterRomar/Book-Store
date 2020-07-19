@@ -1,11 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ReactStars from 'react-rating-stars-component';
 
 import styled from 'styled-components';
-import { Container } from '../components/Header';
-import { getBookById } from '../store/book_store/actions';
+import { Container, Avatar } from '../components/Header';
+import { getBookById, setBookRating, setComment } from '../store/book_store/actions';
+import { addBookToFavorite } from '../store/current_user/actions';
+import { Form, FormCol, SubmitBtn } from '../forms/SignInForm';
+import { Textarea } from './AddBook';
+
 
 const BookHeader = styled.div`
   margin-top: 20px;
@@ -87,7 +91,13 @@ const BookDescription = styled.div`
   font-size: 15px;
   line-height: 22px;
 `;
+const BookComments = styled.div`
+  border-top: 1px solid #ccc;
 
+  font-family: 'Roboto';
+  font-size: 15px;
+  line-height: 22px;
+`;
 const BookPrice = styled.span`
   display: block;
   font-weight: bold;
@@ -127,15 +137,113 @@ const BookRatingTitle = styled.h3`
     margin-left: 10px;
   }
 `;
+const CommentAvatar = styled(Avatar)`
+  margin-left: 0;
+  margin-right: 20px;
+`;
+const Comment = styled.div`
+  padding: 15px;
+  border: 1px dotted #ccc;
+  margin-bottom: 15px;
+
+  & .comment__header {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    
+  }
+
+  & .comment__author {
+    font-style: italic;
+    font-weight: bold;
+  }
+`;
+const CommentForm = styled(Form)`
+  margin: 0 auto;
+  max-width: 100%;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+
+`;
+
+
 class BookPage extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      loading: this.props.loading,
+      commentText: ''
+    };
+  }
+
   async componentDidMount() {
     await this.props.getBookById(this.props.match.params.id);
   }
 
+  ratingChanged = async (value) => {
+    const { book, currentUser, setBookRating } = this.props;
+    const data = {
+      bookID: book.id,
+      userID: currentUser.id,
+      newRating: value
+    };
+
+    await setBookRating(data);
+  }
+
+  addToFavorite = async () => {
+    const { book, currentUser, addBookToFavorite, getBookById, history, isAuth } = this.props;
+    if (!isAuth) {
+      history.push('/login');
+    }
+    const data = {
+      book_id: book.id,
+      user_id: currentUser.id
+    };
+
+    await addBookToFavorite(data);
+    await getBookById(this.props.match.params.id);
+  }
+
+  addComment = async (event) => {
+    event.preventDefault();
+
+    const { setComment, book } = this.props;
+    const { commentText } = this.state;
+
+    const comment = {
+      book_id: book.id,
+      text: commentText
+    };
+
+    await setComment(comment);
+
+    this.setState({
+      commentText: ''
+    });
+  }
+
+  handleChange = event => {
+    const name = event.target.name;
+    const value = event.target.value;
+    this.setState({
+      [name]: value
+    });
+  }
+
   render() {
-    const { match, book, currentUser } = this.props;
+    const { loading, commentText } = this.state;
+    const { match, book, isAuth } = this.props;
     const id = match.params.id;
 
+    if (loading) {
+      return (
+        <h1>loading..</h1>
+      );
+    }
 
     if (!id) {
       return (
@@ -151,16 +259,15 @@ class BookPage extends Component {
       rating,
       img,
       demo_fragment,
-      appreciated } = book;
+      isAppreciated,
+      isFavorite } = book;
 
-    let isAppreciated;
-
-    if (currentUser && appreciated) {
-      isAppreciated = appreciated.includes(Number(currentUser.id));
+    const bookImg = img || 'bookCoverPlaceholder.png';
+    let fixedRating;
+    if (rating) {
+      fixedRating = Number(rating).toFixed(2);
     }
 
-    const baseURL = 'http://localhost:5000/';
-    const bookImg = img || 'bookCoverPlaceholder.png';
 
     return (
       <Container>
@@ -171,7 +278,7 @@ class BookPage extends Component {
         <BookBody>
           <div className="col-l">
             <BookImgWrapper>
-              <BookImg src={`${baseURL}uploads/${bookImg}`}/>
+              <BookImg src={`${process.env.REACT_APP_BASE_URL}uploads/${bookImg}`}/>
             </BookImgWrapper>
             <BookDescription>
               <h3>Описание</h3>
@@ -180,32 +287,76 @@ class BookPage extends Component {
 
               </p>
             </BookDescription>
+            <BookComments>
+              <h3>Отзывы</h3>
+
+              <CommentForm onSubmit={this.addComment}>
+                <FormCol>
+                  <Textarea
+                    name="commentText"
+                    placeholder='Напишите ваш отзыв..'
+                    value={commentText}
+                    onChange={this.handleChange}
+                  />
+                </FormCol>
+                <SubmitBtn type='submit' disabled={commentText === ''} value='Отправить' />
+              </CommentForm>
+
+              {book.comments &&
+                book.comments.map(comment => <Comment key={comment.id}>
+                  <div className="comment__header">
+                    <CommentAvatar src={`${process.env.REACT_APP_BASE_URL}uploads/${
+                      comment.user_id.avatar || 'userAvatarPlaceholder.jpeg'
+                    }`} />
+                    <span className="comment__author">
+                      {comment.user_id.email}
+                    </span>
+                  </div>
+                  <div className="comment__body">
+                    {comment.text}
+                  </div>
+                </Comment>)
+              }
+            </BookComments>
           </div>
           <div className="col-s">
             <div>
               <BookPrice>
                 {price}₽
               </BookPrice>
-              <FavoriteBtn>
-                Добавить в избранное
-              </FavoriteBtn>
+              {!isFavorite &&
+                <FavoriteBtn
+                  onClick={this.addToFavorite}
+                >
+                  Добавить в избранное
+                </FavoriteBtn>
+              }
+              {isFavorite &&
+                <p>
+                  Книга добавлена в избранное!
+                </p>
+              }
             </div>
             <div>
               <BookRatingTitle>
                 Рейтинг:
-                <span> {rating} </span>
+                <span> {fixedRating} </span>
               </BookRatingTitle>
-              {!isAppreciated &&
-                <ReactStars
-                  count={5}
-                  // onChange={this.ratingChanged}
-                  value={0}
-                  size={60}
-                  activeColor="#9644c5"
-                />
-              }
-              {isAppreciated &&
-                <span className='appreciated-notice'>Вы оценили данную книгу!</span>
+              {isAuth &&
+                <Fragment>
+                  {!isAppreciated &&
+                    <ReactStars
+                      count={5}
+                      onChange={this.ratingChanged}
+                      value={0}
+                      size={60}
+                      activeColor="#9644c5"
+                    />
+                  }
+                  {isAppreciated &&
+                    <span className='appreciated-notice'>Вы оценили данную книгу!</span>
+                  }
+                </Fragment>
               }
             </div>
           </div>
@@ -216,18 +367,34 @@ class BookPage extends Component {
 }
 
 const mapStateToProps = state => ({
+  loading: state.book_store.loading,
   book: state.book_store.currentBook,
-  currentUser: state.current_user.user
+  currentUser: state.current_user.user,
+  isAuth: !!Object.keys(state.current_user.user).length,
+
 });
 const mapDispatchToProps = dispatch => ({
   getBookById: id => dispatch(getBookById(id)),
+  setBookRating: data => dispatch(setBookRating(data)),
+  addBookToFavorite: data => dispatch(addBookToFavorite(data)),
+  setComment: comment => dispatch(setComment(comment))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(BookPage);
 
 
 BookPage.propTypes = {
+  currentUser: PropTypes.shape({
+    email: PropTypes.string,
+    id: PropTypes.number,
+    avatar: PropTypes.string
+  }),
+  loading: PropTypes.bool,
+  setComment: PropTypes.func,
+  isAuth: PropTypes.bool,
   getBookById: PropTypes.func,
+  addBookToFavorite: PropTypes.func,
+  setBookRating: PropTypes.func,
   book: PropTypes.shape({
     id: PropTypes.number,
     title: PropTypes.string,
@@ -236,7 +403,9 @@ BookPage.propTypes = {
     price: PropTypes.string,
     rating: PropTypes.string,
     img: PropTypes.string,
-    demo_fragment: PropTypes.string
+    demo_fragment: PropTypes.string,
+    isAppreciated: PropTypes.bool,
+    isFavorite: PropTypes.bool,
   }),
   match: PropTypes.shape({
     path: PropTypes.string,
@@ -246,4 +415,7 @@ BookPage.propTypes = {
     }),
     isExact: PropTypes.bool,
   }),
+  history: PropTypes.shape({
+    push: PropTypes.func
+  })
 };

@@ -50,6 +50,7 @@ export const SubmitBtn = styled.input`
   padding: 8px 15px;
   border-radius: 5px;
   cursor: pointer;
+  text-align: center;
   transition: 0.15s ease-in;
 
   &:hover {

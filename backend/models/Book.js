@@ -48,6 +48,7 @@ module.exports = (sequelize, DataTypes) => {
           key: "category_id"
       }
     },
+    comments: DataTypes.ARRAY(DataTypes.INTEGER)
   }, {
     sequelize,
     timestamps: true,

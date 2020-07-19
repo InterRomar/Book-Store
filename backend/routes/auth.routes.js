@@ -7,6 +7,7 @@ const { sequelize, Sequelize } = require('../models/index');
 const User = require('../models/User')(sequelize, Sequelize);
 const attachCurrentUser = require('../middlewares/attachCurrentUser')
 const upload = require('../middlewares/upload');
+const Book = require('../models/Book')(sequelize, Sequelize);
 
 const router = express.Router();
 const salt = bcrypt.genSaltSync(10);
@@ -24,6 +25,36 @@ function generateToken(user) {
   return jwt.sign({ data }, config.get("secretKey"), { expiresIn: expiration });
   
 }
+
+router.post('/add-favorite', async (req, res) => {
+  const { user_id, book_id } = req.body;
+  const user = await User.findByPk(user_id)
+  
+  await User.update({
+    favorite: user.favorite ? [ ...user.favorite, book_id ] : [book_id]
+  }, {
+    where: {
+      id: user_id
+    }
+  });
+
+  res.json({success: true})
+});
+router.post('/remove-favorite', attachCurrentUser, async (req, res) => {
+  const book_id = req.body.id;
+  const user = await User.findByPk(req.currentUserId);
+  
+  
+  await User.update({
+    favorite: user.favorite.filter(id => id !== book_id)
+  }, {
+    where: {
+      id: req.currentUserId
+    }
+  })
+
+  res.json({success: true, id: book_id})
+});
 
 router.post('/reg', async (req, res) => {
   try {
@@ -104,7 +135,20 @@ router.post('/login', async (req, res) => {
     }
 });
 
+router.get('/favorite', attachCurrentUser, async (req, res) => {
+  const user = await User.findByPk(req.currentUserId);
+  
+  const favoriteBooks = []; 
+  for (const id of user.favorite) {
+    const book = await Book.findByPk(id);    
+    favoriteBooks.push(book);
 
+  }  
+  res.json({success: true, books: favoriteBooks})
+  
+  
+  
+})
 
 
 router.post('/upload-avatar', attachCurrentUser, upload, async (req, res) => {

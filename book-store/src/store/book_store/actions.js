@@ -4,9 +4,11 @@ import axiosInstance from '../../axios';
 import { addBookActions,
   getBooksActions,
   getBookByIdActions,
+  setBookRatingActions,
   SET_CURRENT_PAGE,
   SET_TOTAL_COUNT,
-  SET_CURRENT_CATEGORY } from '../action_names/action_names';
+  SET_CURRENT_CATEGORY,
+  setCommentActions } from '../action_names/action_names';
 
 
 const {
@@ -22,6 +24,14 @@ const {
   GET_BOOK_BY_ID_REQUEST,
   GET_BOOK_BY_ID_SUCCESS,
   GET_BOOK_BY_ID_FAILURE } = getBookByIdActions;
+const {
+  SET_BOOK_RATING_REQUEST,
+  SET_BOOK_RATING_SUCCESS,
+  SET_BOOK_RATING_FAILURE } = setBookRatingActions;
+const {
+  SET_COMMENT_REQUEST,
+  SET_COMMENT_SUCCESS,
+  SET_COMMENT_FAILURE } = setCommentActions;
 
 
 export const addBookAxios = (book, img) => {
@@ -32,7 +42,6 @@ export const addBookAxios = (book, img) => {
 
       if (!res.data.success) throw new Error(res.data.message);
 
-      console.log(book, img);
       const coverRes = await axiosInstance.post(`books/upload-cover/${res.data.book.id}`, img);
 
       dispatch(successAddBook(coverRes.data.book));
@@ -45,6 +54,42 @@ export const addBookAxios = (book, img) => {
     }
   };
 };
+
+export const setBookRating = (data) => {
+  return async dispatch => {
+    dispatch(requestSetBookRating());
+
+    try {
+      const res = await axiosInstance.post('books/set-rating', data);
+
+      if (!res.data.success) throw new Error(res.data.message);
+
+      return dispatch(successSetBookRating(res.data.data));
+    } catch (error) {
+      console.log(error.response.data.message);
+      dispatch(failureSetBookRating(error.response.data.message));
+      return { success: false, message: error.response.data.message };
+    }
+  };
+};
+export const setComment = (comment) => {
+  return async dispatch => {
+    dispatch(requestSetComment());
+
+    try {
+      const res = await axiosInstance.post('books/set-comment', comment);
+
+      if (!res.data.success) throw new Error(res.data.message);
+
+      return dispatch(successSetComment(res.data.comment));
+    } catch (error) {
+      console.log(error.response.data.message);
+      dispatch(failureSetComment(error.response.data.message));
+      return { success: false, message: error.response.data.message };
+    }
+  };
+};
+
 export const getAllBooks = (url) => {
   return async dispatch => {
     dispatch(requestGetAllBooks());
@@ -75,7 +120,12 @@ export const getBookById = (id) => {
       dispatch(failureGetBookById(res.data.message));
       return;
     }
-    dispatch(successGetBookById({ ...res.data.book, appreciated: res.data.appreciated }));
+    dispatch(successGetBookById({
+      ...res.data.book,
+      isAppreciated: res.data.isAppreciated,
+      isFavorite: res.data.isFavorite,
+      comments: res.data.comments
+    }));
   };
 };
 
@@ -115,6 +165,30 @@ const failureGetBookById = (err) => ({
   type: GET_BOOK_BY_ID_FAILURE,
   message: err
 });
+
+const requestSetBookRating = () => ({
+  type: SET_BOOK_RATING_REQUEST,
+});
+const successSetBookRating = data => ({
+  type: SET_BOOK_RATING_SUCCESS,
+  payload: data
+});
+const failureSetBookRating = (err) => ({
+  type: SET_BOOK_RATING_FAILURE,
+  message: err
+});
+const requestSetComment = () => ({
+  type: SET_COMMENT_REQUEST,
+});
+const successSetComment = comment => ({
+  type: SET_COMMENT_SUCCESS,
+  payload: comment
+});
+const failureSetComment = (err) => ({
+  type: SET_COMMENT_FAILURE,
+  message: err
+});
+
 
 export const setCurrentPage = (page) => ({
   type: SET_CURRENT_PAGE,

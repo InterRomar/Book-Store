@@ -5,6 +5,7 @@ const { sequelize, Sequelize } = require("../models");
 const User = require("../models/User")(sequelize, Sequelize);
 
 
+
 const attachCurrentUser = async (req, res, next) => {
   const getTokenFromHeader = (req) => {
       if (req.headers.authorization) {

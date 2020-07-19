@@ -1,9 +1,11 @@
 import { addBookActions,
   getBooksActions,
   getBookByIdActions,
+  setBookRatingActions,
   SET_CURRENT_PAGE,
   SET_TOTAL_COUNT,
-  SET_CURRENT_CATEGORY } from '../action_names/action_names';
+  SET_CURRENT_CATEGORY,
+  setCommentActions } from '../action_names/action_names';
 
 
 const { ADD_BOOK_REQUEST,
@@ -15,9 +17,18 @@ const { GET_BOOKS_REQUEST,
   GET_BOOKS_FAILURE } = getBooksActions;
 
 const {
+  SET_BOOK_RATING_REQUEST,
+  SET_BOOK_RATING_SUCCESS,
+  SET_BOOK_RATING_FAILURE } = setBookRatingActions;
+
+const {
   GET_BOOK_BY_ID_REQUEST,
   GET_BOOK_BY_ID_SUCCESS,
   GET_BOOK_BY_ID_FAILURE } = getBookByIdActions;
+const {
+  SET_COMMENT_REQUEST,
+  SET_COMMENT_SUCCESS,
+  SET_COMMENT_FAILURE } = setCommentActions;
 
 const initialState = {
   loading: false,
@@ -83,6 +94,47 @@ const book_store = (state = initialState, action) => {
       }
       );
     case GET_BOOK_BY_ID_FAILURE:
+      return ({
+        ...state,
+        loading: false,
+        error: action.message
+      });
+    case SET_BOOK_RATING_REQUEST:
+      return ({
+        ...state,
+        loading: true
+      });
+    case SET_BOOK_RATING_SUCCESS:
+      return ({
+        ...state,
+        loading: false,
+        error: '',
+        currentBook: { ...state.currentBook, ...action.payload }
+      }
+      );
+    case SET_BOOK_RATING_FAILURE:
+      return ({
+        ...state,
+        loading: false,
+        error: action.message
+      });
+    case SET_COMMENT_REQUEST:
+      return ({
+        ...state,
+        loading: true
+      });
+    case SET_COMMENT_SUCCESS:
+      return ({
+        ...state,
+        loading: false,
+        error: '',
+        currentBook: {
+          ...state.currentBook,
+          comments: [action.payload, ...state.currentBook.comments]
+        }
+      }
+      );
+    case SET_COMMENT_FAILURE:
       return ({
         ...state,
         loading: false,

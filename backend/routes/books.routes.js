@@ -4,26 +4,13 @@ const { Op } = require('sequelize');
 const { sequelize, Sequelize } = require('../models/index');
 const User = require('../models/User')(sequelize, Sequelize);
 const Book = require('../models/Book')(sequelize, Sequelize);
+const Comment = require('../models/Comment')(sequelize, Sequelize);
 const Rating = require('../models/Rating')(sequelize, Sequelize);
 const attachCurrentUser = require('../middlewares/attachCurrentUser')
 const upload = require('../middlewares/upload');
+const userFromToken = require('../middlewares/userFromToken');
 
 const router = express.Router();
-
-router.get('/test/:id', attachCurrentUser, async (req, res) => {
-  // const rating = await Rating.update({user_id: [ ...user_id, ]});
-  const rating = await Rating.findOne({
-    where: {
-      book_id: req.params.id
-    }
-  });
-  
-  // const isAppreciated = rating.user_id.includes(req.)
-  
-  // console.log(rating)
-
-  res.json({rating})
-})
 
 router.get('/', async (req, res) => {
   try {
@@ -91,19 +78,95 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.post('/set-rating', async (req, res) => {
+  const { bookID, userID, newRating } = req.body;
+  
+  const book = await Book.findByPk(bookID);
+  const rating = await Rating.findOne({where: {book_id: bookID}});
 
-router.get('/:id', async (req, res) => {
+  const overallRating = ((book.rating * rating.user_id.length) + newRating) / (rating.user_id.length + 1);
+  
+  await Book.update({rating: overallRating}, {
+    where: {
+      id: bookID
+    }
+  })
+  await Rating.update({user_id: [ ...rating.user_id, userID]}, {
+    where: {
+      book_id: bookID
+    }
+  })
+
+  res.json({
+    success: true, 
+    data: {
+      rating: String(overallRating),
+      isAppreciated: true
+    }
+  });
+
+});
+
+router.post('/set-comment', attachCurrentUser, async (req, res) => {
+  const { book_id, text } = req.body;  
+  const newComment = await Comment.create({
+    book_id,
+    text,
+    user_id: req.currentUserId
+  });
+  const user = await User.findByPk(req.currentUserId);
+  newComment.user_id = user;
+  
+  const book = await Book.findByPk(book_id);
+  await Book.update({
+    comments: book.comments ? [ ...book.comments, newComment.id ] : [newComment.id]
+  }, {
+    where: {
+      id: book_id
+    }
+  })
+
+  res.json({success: true, comment: newComment})
+});
+
+router.get('/:id', userFromToken, async (req, res) => {
   try {
     const id = req.params.id;
     const book = await Book.findByPk(id);
     if (!book) {
       return res.status(400).json({ success: false, message: 'Книга не найдена.'})
     }
+    const comments = await Comment.findAll({
+      where: {
+        book_id: id
+      },
+      group: ['comment.id'],
+      order: [[sequelize.fn('max', sequelize.col('createdAt')), 'DESC']]
+    })
+  
+    for (const comment of comments) {
+      const user = await User.findByPk(comment.user_id);
+      comment.user_id = {
+        email: user.email,
+        avatar: user.avatar,
+        id: user.id
+      };
+    }  
 
-    const rating = await Rating.findByPk(id);
-    console.log({ ...book, appreciated: rating.user_id})
+    let isAppreciated = true;
+    let isFavorite = false;
+    
+    if (req.currentUser) {
+      const userID = req.currentUser.id;
+      const rating = await Rating.findByPk(id);
+      isAppreciated = rating.user_id.includes(userID);          
+      
+      if (req.currentUser.favorite) {
+        isFavorite = req.currentUser.favorite.includes(Number(id))
+      }
+    }   
    
-    res.status(200).json({success: true, book, appreciated: rating.user_id});   
+    res.status(200).json({success: true, book, isAppreciated, isFavorite, comments});   
   } catch (error) {
       console.log(error)
       res.status(500).json({success: false, message: "Что-то пошло не так, повторите попытку" })
@@ -112,16 +175,27 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', attachCurrentUser, upload, async (req, res) => {
   try {
-    const { title } = req.body;
-    console.log(req.file)
+    const { title,
+      author,
+      description,
+      price,
+      demo_fragment,
+      user_id,
+      category_id } = req.body;
     const potentialBook = await Book.findOne({ where: { title }});
 
     if (potentialBook) {
       return res.status(400).json({ success: false, message: "Книга с таким названием уже существует."})
     }
-
+    
     const newBook = await Book.create({
-      ...req.body,
+      title,
+      author,
+      description,
+      price,
+      demo_fragment,
+      user_id,
+      category_id
     });
     const newRating = await Rating.create({
       book_id: newBook.id,
@@ -148,7 +222,6 @@ router.post('/upload-cover/:id', attachCurrentUser, upload, async (req, res) => 
         id: req.params.id
       }
     })
-    console.log(dbRes)
 
     if (!filedata) throw new Error();
     res.status(200).json({ success: true, message: 'Обложка успешно добавлена!', img: filedata.filename})

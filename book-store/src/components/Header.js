@@ -83,7 +83,7 @@ const ProfileLink = styled(Link)`
   }
 `;
 
-const Avatar = styled.div`
+export const Avatar = styled.div`
   display: block;
   width: 60px;
   border-radius: 50%;
@@ -98,7 +98,6 @@ const Avatar = styled.div`
 `;
 
 const Header = ({ isAuth, user, logOut }) => {
-  const baseURL = 'http://localhost:5000/';
   const avatar = user.avatar || 'userAvatarPlaceholder.jpeg';
 
   return (
@@ -114,7 +113,7 @@ const Header = ({ isAuth, user, logOut }) => {
                   <ProfileLink to="/profile">{user.email}</ProfileLink>
                 </NavItem>
                 <NavItem >
-                  <Avatar src={`${baseURL}uploads/${avatar}`} />
+                  <Avatar src={`${process.env.REACT_APP_BASE_URL}uploads/${avatar}`} />
                 </NavItem>
                 <NavItem >
                   <NavLink to="/login" onClick={logOut}>Выйти</NavLink>

@@ -1,13 +1,22 @@
 import axiosInstance from '../../axios';
 
-import { registerActions, loginActions, uploadAvatarActions, LOGOUT_USER } from '../action_names/action_names';
+import { registerActions,
+  loginActions,
+  uploadAvatarActions,
+  addBookToFavoriteActions,
+  getFavoriteBooksActions,
+  removeBookFromFavoriteActions,
+  LOGOUT_USER } from '../action_names/action_names';
 
 
 const {
   LOGIN_USER_REQUEST,
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAILURE } = loginActions;
-
+const {
+  GET_FAVORITE_BOOKS_REQUEST,
+  GET_FAVORITE_BOOKS_SUCCESS,
+  GET_FAVORITE_BOOKS_FAILURE } = getFavoriteBooksActions;
 const {
   REGISTER_USER_REQUEST,
   REGISTER_USER_SUCCESS,
@@ -17,8 +26,69 @@ const {
   UPLOAD_AVATAR_REQUEST,
   UPLOAD_AVATAR_SUCCESS,
   UPLOAD_AVATAR_FAILURE } = uploadAvatarActions;
+const {
+  ADD_BOOK_TO_FAVORITE_REQUEST,
+  ADD_BOOK_TO_FAVORITE_SUCCESS,
+  ADD_BOOK_TO_FAVORITE_FAILURE } = addBookToFavoriteActions;
+const {
+  REMOVE_BOOK_FROM_FAVORITE_REQUEST,
+  REMOVE_BOOK_FROM_FAVORITE_SUCCESS,
+  REMOVE_BOOK_FROM_FAVORITE_FAILURE } = removeBookFromFavoriteActions;
 
+export const getFavoriteBooks = () => {
+  return async dispatch => {
+    dispatch(requestGetFavoriteBooks());
+    try {
+      const res = await axiosInstance.get('auth/favorite');
 
+      if (!res.data.success) throw new Error(res.data.message);
+
+      dispatch(successGetFavoriteBooks(res.data.books));
+
+      return res.data;
+    } catch (error) {
+      console.log(error.message);
+      dispatch(failureGetFavoriteBooks(error.message));
+      return error;
+    }
+  };
+};
+export const addBookToFavorite = data => {
+  return async dispatch => {
+    dispatch(requestAddBookToFavorite());
+    try {
+      const res = await axiosInstance.post('auth/add-favorite', data);
+
+      if (!res.data.success) throw new Error(res.data.message);
+
+      dispatch(successAddBookToFavorite(res.data.book));
+
+      return res.data;
+    } catch (error) {
+      console.log(error.message);
+      dispatch(failureAddBookToFavorite(error.message));
+      return error;
+    }
+  };
+};
+export const removeBookFromFavorite = data => {
+  return async dispatch => {
+    dispatch(requestRemoveBookFromFavorite());
+    try {
+      const res = await axiosInstance.post('auth/remove-favorite', { id: data });
+
+      if (!res.data.success) throw new Error(res.data.message);
+
+      dispatch(successRemoveBookFromFavorite(res.data.id));
+
+      return res.data;
+    } catch (error) {
+      console.log(error.message);
+      dispatch(failureRemoveBookFromFavorite(error.message));
+      return error;
+    }
+  };
+};
 export const userPostLogin = user => {
   return async dispatch => {
     dispatch(requestLogin());
@@ -127,6 +197,18 @@ const failureReg = (err) => ({
   type: REGISTER_USER_FAILURE,
   message: err
 });
+const requestGetFavoriteBooks = () => ({
+  type: GET_FAVORITE_BOOKS_REQUEST,
+});
+const successGetFavoriteBooks = books => ({
+  type: GET_FAVORITE_BOOKS_SUCCESS,
+  payload: books
+});
+
+const failureGetFavoriteBooks = (err) => ({
+  type: GET_FAVORITE_BOOKS_FAILURE,
+  message: err
+});
 
 
 const requestLogin = () => ({
@@ -140,6 +222,29 @@ const failureLogin = (err) => ({
   type: LOGIN_USER_FAILURE,
   message: err
 });
+const requestAddBookToFavorite = () => ({
+  type: ADD_BOOK_TO_FAVORITE_REQUEST,
+});
+const successAddBookToFavorite = book => ({
+  type: ADD_BOOK_TO_FAVORITE_SUCCESS,
+  payload: book
+});
+const failureAddBookToFavorite = (err) => ({
+  type: ADD_BOOK_TO_FAVORITE_FAILURE,
+  message: err
+});
+const requestRemoveBookFromFavorite = () => ({
+  type: REMOVE_BOOK_FROM_FAVORITE_REQUEST,
+});
+const successRemoveBookFromFavorite = id => ({
+  type: REMOVE_BOOK_FROM_FAVORITE_SUCCESS,
+  payload: id
+});
+const failureRemoveBookFromFavorite = (err) => ({
+  type: REMOVE_BOOK_FROM_FAVORITE_FAILURE,
+  message: err
+});
+
 const requestUploadAvatar = () => ({
   type: UPLOAD_AVATAR_REQUEST,
 });

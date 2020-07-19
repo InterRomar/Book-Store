@@ -78,7 +78,6 @@ const BookAuthor = styled.span`
 `;
 
 const BookCard = ({ book }) => {
-  const baseURL = 'http://localhost:5000/';
   const img = book.img || 'bookCoverPlaceholder.png';
   return (
     <BookLink
@@ -86,7 +85,7 @@ const BookCard = ({ book }) => {
     >
       <Card>
         <ImgWrapper>
-          <BookImg src={`${baseURL}uploads/${img}`}/>
+          <BookImg src={`${process.env.REACT_APP_BASE_URL}uploads/${img}`}/>
         </ImgWrapper>
         <BookTitle> {book.title} </BookTitle>
         <BookAuthor> {book.author} </BookAuthor>
