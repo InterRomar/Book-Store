@@ -1,8 +1,17 @@
 const express = require('express');
 const jsonParser = express.json();
+const http = require('http');
+const socketIO = require("socket.io");
+
 const app = express();
 const db = require('./models/index');
+const { response } = require('express');
 const { sequelize, Sequelize } = db;
+const User = require('./models/User')(sequelize, Sequelize);
+
+const server = http.createServer(app);
+
+const io = socketIO(server);
 
 app.use(jsonParser);
 app.use(express.static('public'));
@@ -23,13 +32,29 @@ app.use(function (err, req, res, next) {
   }
 });
 
+io.on('connection', socket => {
+  const browser = socket.handshake.headers['user-agent'].split(' ').slice(-1).join('');
+  // console.log(browser)
 
-const User = require('./models/User')(sequelize, Sequelize);
+  socket.on('addBook',(addData)=>{
+		var todoItem = new todoModel({
+			itemId:addData.id,
+			item:addData.item,
+			completed: addData.completed
+		})
+
+    io.emit('bookAdded',addData)
+
+	})
+
+
+
+})
 
 
 async function start() {
   try {  
-    app.listen(5000, () => {
+    server.listen(5000, () => {
         console.log('server has been started..')
     });
   } catch (error) {

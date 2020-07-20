@@ -153,6 +153,7 @@ router.get('/:id', userFromToken, async (req, res) => {
       };
     }  
 
+
     let isAppreciated = true;
     let isFavorite = false;
     

@@ -137,14 +137,16 @@ router.post('/login', async (req, res) => {
 
 router.get('/favorite', attachCurrentUser, async (req, res) => {
   const user = await User.findByPk(req.currentUserId);
-  
+  if (!user.favorite) {
+    return res.json({success: true, books: []})
+  }
   const favoriteBooks = []; 
   for (const id of user.favorite) {
     const book = await Book.findByPk(id);    
     favoriteBooks.push(book);
 
   }  
-  res.json({success: true, books: favoriteBooks})
+  return res.json({success: true, books: favoriteBooks})
   
   
   

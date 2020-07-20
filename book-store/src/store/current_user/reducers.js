@@ -39,6 +39,7 @@ const initialState = {
   loading: false,
   error: '',
   user: {},
+  notifications: []
 };
 
 const current_user = (state = initialState, action) => {
@@ -171,6 +172,8 @@ const current_user = (state = initialState, action) => {
         error: '',
         user: {}
       });
+
+
     default:
       return state;
   }
