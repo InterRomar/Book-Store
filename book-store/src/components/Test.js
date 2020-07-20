@@ -21,23 +21,6 @@ class Test extends Component {
 
   }
 
-  socketClick = (event) => {
-    const value = event.target.value;
-
-    socket.emit('click', value);
-
-    this.setState({
-      value
-    });
-
-    socket.on('response', (res) => {
-      console.log(res);
-      this.setState({
-        push: [...this.state.push, res]
-      });
-    });
-  }
-
 
   render() {
     const { push } = this.state;

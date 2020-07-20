@@ -34,9 +34,10 @@ const {
   SET_COMMENT_FAILURE } = setCommentActions;
 
 
-export const addBookAxios = (book, img) => {
+export const addBookAxios = (socket, book, img) => {
   return async dispatch => {
     dispatch(requestAddBook());
+
     try {
       const res = await axiosInstance.post('books', book);
 
@@ -45,7 +46,7 @@ export const addBookAxios = (book, img) => {
       const coverRes = await axiosInstance.post(`books/upload-cover/${res.data.book.id}`, img);
 
       dispatch(successAddBook(coverRes.data.book));
-
+      socket.emit('addBook', res.data.book);
       return res.data;
     } catch (error) {
       console.log(error.response.data.message);

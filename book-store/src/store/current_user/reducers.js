@@ -5,7 +5,8 @@ import {
   addBookToFavoriteActions,
   LOGOUT_USER,
   getFavoriteBooksActions,
-  removeBookFromFavoriteActions } from '../action_names/action_names';
+  removeBookFromFavoriteActions,
+  ADD_NOTIFICATION } from '../action_names/action_names';
 
 
 const {
@@ -44,6 +45,11 @@ const initialState = {
 
 const current_user = (state = initialState, action) => {
   switch (action.type) {
+    case ADD_NOTIFICATION:
+      return ({
+        ...state,
+        notifications: [...state.notifications, action.payload]
+      });
     case LOGIN_USER_REQUEST:
       return ({
         ...state,

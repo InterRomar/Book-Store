@@ -6,7 +6,8 @@ import { registerActions,
   addBookToFavoriteActions,
   getFavoriteBooksActions,
   removeBookFromFavoriteActions,
-  LOGOUT_USER } from '../action_names/action_names';
+  LOGOUT_USER,
+  ADD_NOTIFICATION } from '../action_names/action_names';
 
 
 const {
@@ -210,6 +211,10 @@ const failureGetFavoriteBooks = (err) => ({
   message: err
 });
 
+export const addNotification = (data) => ({
+  type: ADD_NOTIFICATION,
+  payload: data
+});
 
 const requestLogin = () => ({
   type: LOGIN_USER_REQUEST,

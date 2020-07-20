@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import io from "socket.io-client"
+
 
 import { Container } from '../components/Header';
 import { Title, Form, FormCol, Input, SubmitBtn } from '../forms/SignInForm';
@@ -27,9 +29,14 @@ const Select = styled.select`
   padding: 5px 10px;
 `;
 
+const socket = io.connect("http://localhost:5000")
+
+
 class AddBook extends Component {
   constructor(props) {
     super(props);
+
+    const { dispatch } = this.props;
 
     this.state = {
       title: '',
@@ -108,7 +115,7 @@ class AddBook extends Component {
     const formData = new FormData();
     formData.append('myImage', this.state.file);
 
-    const res = await this.props.addBookAxios({ title,
+    const res = await this.props.addBookAxios(socket, { title,
       author,
       description,
       price,
@@ -322,7 +329,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  addBookAxios: (book, formData) => dispatch(addBookAxios(book, formData)),
+  addBookAxios: (socket, book, formData) => dispatch(addBookAxios(socket, book, formData)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddBook);

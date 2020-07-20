@@ -2,8 +2,9 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import io from 'socket.io-client';
 
-import { getProfileFetch, userLogOut } from '../store/current_user/actions';
+import { getProfileFetch, userLogOut, addNotification } from '../store/current_user/actions';
 import Header from '../components/Header';
 import Reg from './Reg';
 import SignIn from './SignIn';
@@ -16,6 +17,9 @@ import { getAllCategories } from '../store/categories_store/actions';
 import BookPage from './BookPage';
 import Favorite from '../components/Favorite';
 import Test from '../components/Test';
+
+
+const socket = io.connect('http://localhost:5000');
 
 
 class App extends React.Component {
@@ -33,6 +37,12 @@ class App extends React.Component {
     await getAllCategories();
     this.setState({
       loading: false
+    });
+    socket.on('bookAdded', data => {
+      // здесь нужно делать dispatch нотификации
+      console.log(data);
+
+      this.props.addNotification(data);
     });
   }
 
@@ -86,12 +96,14 @@ class App extends React.Component {
 const mapStateToProps = state => ({
   isAuth: !!Object.keys(state.current_user.user).length,
   user: state.current_user.user,
+  storeSt: state
 });
 
 const mapDispatchToProps = dispatch => ({
   getProfileFetch: () => dispatch(getProfileFetch()),
   logOut: () => dispatch(userLogOut()),
-  getAllCategories: () => dispatch(getAllCategories())
+  getAllCategories: () => dispatch(getAllCategories()),
+  addNotification: data => dispatch(addNotification(data))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
@@ -106,5 +118,6 @@ App.propTypes = {
     email: PropTypes.string
   }),
   getBooks: PropTypes.func,
-  getAllCategories: PropTypes.func
+  getAllCategories: PropTypes.func,
+  addNotification: PropTypes.func
 };

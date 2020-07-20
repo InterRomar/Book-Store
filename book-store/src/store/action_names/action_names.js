@@ -64,7 +64,9 @@ export const getCategoriesActions = {
   GET_CATEGORIES_FAILURE: 'GET_CATEGORIES_FAILURE',
 };
 
+
 export const LOGOUT_USER = 'LOGOUT_USER';
+export const ADD_NOTIFICATION = 'ADD_NOTIFICATION';
 export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 export const SET_TOTAL_COUNT = 'SET_TOTAL_COUNT';
 export const SET_CURRENT_CATEGORY = 'SET_CURRENT_CATEGORY';
