@@ -15,6 +15,7 @@ import AddBook from './AddBook';
 import AddCategory from './AddCategory';
 import { getAllCategories } from '../store/categories_store/actions';
 import BookPage from './BookPage';
+import PasswordReset from './PasswordReset';
 import Favorite from '../components/Favorite';
 
 const socket = io.connect('http://localhost:5000');
@@ -68,6 +69,7 @@ class App extends React.Component {
           <Switch>
             <Route exact path='/' component={Home} />
             <Route path='/books/:id' component={BookPage}/>
+            <Route path='/password-reset' component={PasswordReset} />
             <PrivateRoute path="/reg">
               <Reg/>
             </PrivateRoute>

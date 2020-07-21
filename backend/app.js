@@ -5,7 +5,6 @@ const socketIO = require("socket.io");
 
 const app = express();
 const db = require('./models/index');
-const { response } = require('express');
 const { sequelize, Sequelize } = db;
 const Category = require('./models/Category')(sequelize, Sequelize);
 const User = require('./models/User')(sequelize, Sequelize);
@@ -28,6 +27,7 @@ app.use('/auth', require('./routes/auth.routes'));
 app.use('/books', require('./routes/books.routes'));
 app.use('/category', require('./routes/category.routes'));
 app.use('/notifications', require('./routes/notifications.routes'));
+app.use('/password-reset', require('./routes/password-reset.routes'));
 
 app.use(function (err, req, res, next) {
   if (err.name === 'UnauthorizedError') {
@@ -36,8 +36,8 @@ app.use(function (err, req, res, next) {
 });
 
 io.on('connection', socket => {
-  const browser = socket.handshake.headers['user-agent'].split(' ').slice(-1).join('');
-  console.log(browser)
+  // const browser = socket.handshake.headers['user-agent'].split(' ').slice(-1).join('');
+  // console.log(browser)
 
   socket.on('addBook', async (book)=>{
     const { id, user_id, category_id } = book;
@@ -52,8 +52,6 @@ io.on('connection', socket => {
 
     const user = await User.findByPk(user_id);
     const category = await Category.findByPk(category_id);
-    console.log(user.subscriptions)
-    console.log(book.category_id)
     const newNotification = {
       id: notification.id,
       isViewed: false,
