@@ -16,11 +16,8 @@ import AddCategory from './AddCategory';
 import { getAllCategories } from '../store/categories_store/actions';
 import BookPage from './BookPage';
 import Favorite from '../components/Favorite';
-import Test from '../components/Test';
-
 
 const socket = io.connect('http://localhost:5000');
-
 
 class App extends React.Component {
   constructor(props) {
@@ -38,12 +35,17 @@ class App extends React.Component {
     this.setState({
       loading: false
     });
-    socket.on('bookAdded', data => {
-      // здесь нужно делать dispatch нотификации
-      console.log(data);
 
-      this.props.addNotification(data);
+    // С сервера приходит уведомление, что книга была создана
+    socket.on('bookAdded', data => {
+      // проверяется, есть ли категория новой книги в списке подписок данного сокета
+      if (this.props.user.subscriptions.includes(data.category.id)) {
+        this.props.addNotification(data);
+      }
     });
+
+    // Если да, то диспатчим
+    // Если нет, то ничего не делаем
   }
 
   render() {
@@ -64,7 +66,6 @@ class App extends React.Component {
         <Header isAuth={isAuth} user={user} logOut={logOut}/>
         <main className="page">
           <Switch>
-            <Route path='/test' component={Test} />
             <Route exact path='/' component={Home} />
             <Route path='/books/:id' component={BookPage}/>
             <PrivateRoute path="/reg">
@@ -96,6 +97,7 @@ class App extends React.Component {
 const mapStateToProps = state => ({
   isAuth: !!Object.keys(state.current_user.user).length,
   user: state.current_user.user,
+  user_store: state.current_user,
   storeSt: state
 });
 
@@ -115,7 +117,8 @@ App.propTypes = {
   logOut: PropTypes.func,
   user: PropTypes.shape({
     id: PropTypes.number,
-    email: PropTypes.string
+    email: PropTypes.string,
+    subscriptions: PropTypes.arrayOf(PropTypes.number)
   }),
   getBooks: PropTypes.func,
   getAllCategories: PropTypes.func,

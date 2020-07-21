@@ -11,7 +11,9 @@ module.exports = (sequelize, DataTypes) => {
   };
   Notification.init({
     user_id: DataTypes.INTEGER,
-    book_id: DataTypes.INTEGER
+    book_id: DataTypes.INTEGER,
+    category_id: DataTypes.INTEGER,
+    isViewed: DataTypes.BOOLEAN
   }, {
     sequelize,
     timestamps: true,

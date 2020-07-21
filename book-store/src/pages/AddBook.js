@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import io from "socket.io-client"
+import io from 'socket.io-client';
 
 
 import { Container } from '../components/Header';
@@ -29,14 +29,12 @@ const Select = styled.select`
   padding: 5px 10px;
 `;
 
-const socket = io.connect("http://localhost:5000")
+const socket = io.connect('http://localhost:5000');
 
 
 class AddBook extends Component {
   constructor(props) {
     super(props);
-
-    const { dispatch } = this.props;
 
     this.state = {
       title: '',

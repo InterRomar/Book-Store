@@ -406,6 +406,18 @@ BookPage.propTypes = {
     demo_fragment: PropTypes.string,
     isAppreciated: PropTypes.bool,
     isFavorite: PropTypes.bool,
+    comments: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number,
+        book_id: PropTypes.number,
+        user_id: PropTypes.shape({
+          id: PropTypes.number,
+          email: PropTypes.string,
+          avatar: PropTypes.string
+        }),
+        text: PropTypes.string
+      })
+    )
   }),
   match: PropTypes.shape({
     path: PropTypes.string,

@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import NotificationPanel from './NotificationPanel';
 
 
 export const Container = styled.div`
@@ -97,6 +98,7 @@ export const Avatar = styled.div`
   background-repeat: no-repeat;
 `;
 
+
 const Header = ({ isAuth, user, logOut }) => {
   const avatar = user.avatar || 'userAvatarPlaceholder.jpeg';
 
@@ -109,6 +111,9 @@ const Header = ({ isAuth, user, logOut }) => {
           <NavList className="nav__list">
             {isAuth &&
               <Fragment>
+                <NavItem>
+                  <NotificationPanel />
+                </NavItem>
                 <NavItem >
                   <ProfileLink to="/profile">{user.email}</ProfileLink>
                 </NavItem>

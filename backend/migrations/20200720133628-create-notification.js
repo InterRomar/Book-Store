@@ -14,6 +14,12 @@ module.exports = {
       book_id: {
         type: Sequelize.INTEGER
       },
+      category_id: {
+        type: Sequelize.INTEGER
+      },
+      isViewed: {
+        type: Sequelize.BOOLEAN
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

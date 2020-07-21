@@ -7,6 +7,7 @@ const app = express();
 const db = require('./models/index');
 const { response } = require('express');
 const { sequelize, Sequelize } = db;
+const Category = require('./models/Category')(sequelize, Sequelize);
 const User = require('./models/User')(sequelize, Sequelize);
 const Notification = require('./models/Notification')(sequelize, Sequelize);
 
@@ -39,17 +40,23 @@ io.on('connection', socket => {
   console.log(browser)
 
   socket.on('addBook', async (book)=>{
-    const { id, user_id } = book;
+    const { id, user_id, category_id } = book;
     
     //Здесь создаю новое уведомление в БД
     const notification = await Notification.create({
       book_id: id,
-      user_id
+      user_id,
+      category_id,
+      isViewed: false
     });
 
     const user = await User.findByPk(user_id);
+    const category = await Category.findByPk(category_id);
+    console.log(user.subscriptions)
+    console.log(book.category_id)
     const newNotification = {
       id: notification.id,
+      isViewed: false,
       user: {
         id: user.id,
         email: user.email,
@@ -61,6 +68,10 @@ io.on('connection', socket => {
         author: book.author,
         category: book.category_id,
         price: book.price
+      },
+      category: {
+        id: category.id,
+        title: category.title
       }
     }
 

@@ -1,3 +1,4 @@
+import { filter } from 'lodash';
 import {
   registerActions,
   loginActions,
@@ -6,8 +7,13 @@ import {
   LOGOUT_USER,
   getFavoriteBooksActions,
   removeBookFromFavoriteActions,
-  ADD_NOTIFICATION } from '../action_names/action_names';
+  ADD_NOTIFICATION,
+  removeNotificationActions } from '../action_names/action_names';
 
+const {
+  REMOVE_NOTIFICATION_REQUEST,
+  REMOVE_NOTIFICATION_SUCCESS,
+  REMOVE_NOTIFICATION_FAILURE } = removeNotificationActions;
 
 const {
   REGISTER_USER_REQUEST,
@@ -67,7 +73,8 @@ const current_user = (state = initialState, action) => {
         ...state,
         loading: false,
         error: '',
-        user: action.payload
+        user: action.payload,
+        notifications: action.notifications
       }
       );
     case UPLOAD_AVATAR_REQUEST:
@@ -127,6 +134,26 @@ const current_user = (state = initialState, action) => {
         }
       });
     case ADD_BOOK_TO_FAVORITE_FAILURE:
+      return ({
+        ...state,
+        loading: false,
+        error: action.message
+      });
+    case REMOVE_NOTIFICATION_REQUEST:
+      return ({
+        ...state,
+        loading: true
+      });
+    case REMOVE_NOTIFICATION_SUCCESS:
+      return ({
+        ...state,
+        notifications: [
+          ...state.notifications.filter(n => {
+            return n.id !== action.payload;
+          })
+        ]
+      });
+    case REMOVE_NOTIFICATION_FAILURE:
       return ({
         ...state,
         loading: false,

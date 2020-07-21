@@ -94,6 +94,7 @@ router.get('/profile', attachCurrentUser, async (req, res) => {
         id: user.id,
         email: user.email,
         avatar: user.avatar,
+        subscriptions: user.subscriptions
       },
       success: true
     });
@@ -128,7 +129,7 @@ router.post('/login', async (req, res) => {
       return res.status(200).json({
         success: true, 
         message: 'Успешно!', token: `Fusion ${token}`, 
-        currentUser: { id: candidate.id, email: candidate.email, avatar: candidate.avatar }
+        currentUser: { id: candidate.id, email: candidate.email, avatar: candidate.avatar, subscriptions: candidate.subscriptions }
       });
     } catch (error) { 
       return res.status(500).json({ success: false, message: `Что-то пошло не так, повторите попытку... ${error}`});

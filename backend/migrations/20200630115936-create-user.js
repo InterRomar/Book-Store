@@ -20,6 +20,10 @@ module.exports = {
       favorite: {
         type: Sequelize.ARRAY(Sequelize.INTEGER)
       },
+      subscriptions: {
+        type:  Sequelize.ARRAY(Sequelize.INTEGER) 
+      },
+
 
       createdAt: {
         allowNull: false,
