@@ -111,9 +111,11 @@ const NotificationPanel = (props) => {
         </span>
       </NotificationButton>
       <NotificationList opened={opened}>
-        {notifications.map(notification => <NotificationItem key={notification.id}>
-          <BookNotification notification={notification} removeNotification={removeNotification}/>
-        </NotificationItem>)}
+        {notifications &&
+          notifications.map(notification => <NotificationItem key={notification.id}>
+            <BookNotification notification={notification} removeNotification={removeNotification}/>
+          </NotificationItem>)
+        }
       </NotificationList>
     </NotificationBody>
   );

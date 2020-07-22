@@ -1,4 +1,3 @@
-import { filter } from 'lodash';
 import {
   registerActions,
   loginActions,
@@ -8,12 +7,17 @@ import {
   getFavoriteBooksActions,
   removeBookFromFavoriteActions,
   ADD_NOTIFICATION,
-  removeNotificationActions } from '../action_names/action_names';
+  removeNotificationActions,
+  getNotificationsActions } from '../action_names/action_names';
 
 const {
   REMOVE_NOTIFICATION_REQUEST,
   REMOVE_NOTIFICATION_SUCCESS,
   REMOVE_NOTIFICATION_FAILURE } = removeNotificationActions;
+const {
+  GET_NOTIFICATIONS_REQUEST,
+  GET_NOTIFICATIONS_SUCCESS,
+  GET_NOTIFICATIONS_FAILURE } = getNotificationsActions;
 
 const {
   REGISTER_USER_REQUEST,
@@ -74,7 +78,7 @@ const current_user = (state = initialState, action) => {
         loading: false,
         error: '',
         user: action.payload,
-        notifications: action.notifications
+        notifications: action.notifications ? action.notifications : []
       }
       );
     case UPLOAD_AVATAR_REQUEST:
@@ -154,6 +158,25 @@ const current_user = (state = initialState, action) => {
         ]
       });
     case REMOVE_NOTIFICATION_FAILURE:
+      return ({
+        ...state,
+        loading: false,
+        error: action.message
+      });
+    case GET_NOTIFICATIONS_REQUEST:
+      return ({
+        ...state,
+        loading: true
+      });
+    case GET_NOTIFICATIONS_SUCCESS:
+      return ({
+        ...state,
+        notifications: [
+          ...state.notifications,
+          ...action.payload
+        ]
+      });
+    case GET_NOTIFICATIONS_FAILURE:
       return ({
         ...state,
         loading: false,

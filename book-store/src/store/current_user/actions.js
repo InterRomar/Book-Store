@@ -8,6 +8,7 @@ import { registerActions,
   removeBookFromFavoriteActions,
   removeNotificationActions,
   LOGOUT_USER,
+  getNotificationsActions,
   ADD_NOTIFICATION } from '../action_names/action_names';
 
 
@@ -15,6 +16,10 @@ const {
   LOGIN_USER_REQUEST,
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAILURE } = loginActions;
+const {
+  GET_NOTIFICATIONS_REQUEST,
+  GET_NOTIFICATIONS_SUCCESS,
+  GET_NOTIFICATIONS_FAILURE } = getNotificationsActions;
 const {
   REMOVE_NOTIFICATION_REQUEST,
   REMOVE_NOTIFICATION_SUCCESS,
@@ -175,6 +180,23 @@ export const userLogOut = () => {
   };
 };
 
+export const getNotifications = () => {
+  return async dispatch => {
+    dispatch(requestGetNotifications());
+    try {
+      const res = await axiosInstance.get('notifications/');
+
+      if (!res.data.success) throw new Error(res.data.message);
+
+      dispatch(successGetNotifications(res.data.notifications));
+      return res.data;
+    } catch (error) {
+      dispatch(failureGetNotifications(error.message));
+      return error;
+    }
+  };
+};
+
 export const getProfileFetch = () => {
   return async dispatch => {
     dispatch(requestLogin());
@@ -215,7 +237,6 @@ export const getProfileFetch = () => {
 const logout = () => ({
   type: LOGOUT_USER
 });
-
 const requestReg = () => ({
   type: REGISTER_USER_REQUEST,
 });
@@ -224,7 +245,6 @@ const successReg = (userObj) => ({
   payload: userObj,
 
 });
-
 const failureReg = (err) => ({
   type: REGISTER_USER_FAILURE,
   message: err
@@ -236,7 +256,6 @@ const successGetFavoriteBooks = books => ({
   type: GET_FAVORITE_BOOKS_SUCCESS,
   payload: books
 });
-
 const failureGetFavoriteBooks = (err) => ({
   type: GET_FAVORITE_BOOKS_FAILURE,
   message: err
@@ -302,5 +321,16 @@ const successUploadAvatar = avatar => ({
 });
 const failureUploadAvatar = (err) => ({
   type: UPLOAD_AVATAR_FAILURE,
+  message: err
+});
+const requestGetNotifications = () => ({
+  type: GET_NOTIFICATIONS_REQUEST,
+});
+const successGetNotifications = (notifications) => ({
+  type: GET_NOTIFICATIONS_SUCCESS,
+  payload: notifications
+});
+const failureGetNotifications = (err) => ({
+  type: GET_NOTIFICATIONS_FAILURE,
   message: err
 });

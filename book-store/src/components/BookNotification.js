@@ -70,7 +70,6 @@ const StyledBookNotification = styled.div`
 `;
 const BookNotification = (props) => {
   const { book, category, user, id } = props.notification;
-
   const handleClick = () => {
     props.removeNotification(id);
   };

@@ -4,13 +4,14 @@ import PropTypes from 'prop-types';
 
 import { Container } from '../components/Header';
 import SignInForm from '../forms/SignInForm';
-import { userPostLogin } from '../store/current_user/actions';
+import { userPostLogin, getNotifications } from '../store/current_user/actions';
 
 
 const SignIn = (props) => {
-  const { userPostLogin } = props;
+  const { userPostLogin, getNotifications } = props;
   const handleSubmit = async (email, password) => {
     const res = await userPostLogin({ email, password });
+    await getNotifications();
     return res;
   };
 
@@ -22,7 +23,8 @@ const SignIn = (props) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  userPostLogin: userInfo => dispatch(userPostLogin(userInfo))
+  userPostLogin: userInfo => dispatch(userPostLogin(userInfo)),
+  getNotifications: () => dispatch(getNotifications())
 });
 
 export default connect(null, mapDispatchToProps)(SignIn);
@@ -30,4 +32,5 @@ export default connect(null, mapDispatchToProps)(SignIn);
 
 SignIn.propTypes = {
   userPostLogin: PropTypes.func,
+  getNotifications: PropTypes.func,
 };
