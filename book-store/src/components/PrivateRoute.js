@@ -3,13 +3,14 @@ import { Redirect, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-function PrivateRoute({ children, isAuth, path, ...rest }) {
-  if (path === '/reg' || path === '/login') {
+function PrivateRoute(props) {
+  const { component: Component, isAuth, path, userPostLogin, ...rest } = props;
+  if (path === '/reg' || path === '/login' || path === '/password-reset' || path === '/password-reset-link-request') {
     return (
       <Route
       {...rest}
-      render={() => (!isAuth ? (
-        children
+      render={(props) => (!isAuth ? (
+        <Component {...props} userPostLogin={userPostLogin}/>
       ) : (
           <Redirect
             to={{
@@ -25,7 +26,7 @@ function PrivateRoute({ children, isAuth, path, ...rest }) {
     <Route
       {...rest}
       render={() => (isAuth ? (
-        children
+        <Component />
       ) : (
           <Redirect
             to={{
@@ -46,6 +47,7 @@ export default connect(mapStateToProps, null)(PrivateRoute);
 
 PrivateRoute.propTypes = {
   isAuth: PropTypes.bool,
+  userPostLogin: PropTypes.func,
   path: PropTypes.string,
-  children: PropTypes.element
+  component: PropTypes.element
 };

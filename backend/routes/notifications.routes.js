@@ -13,7 +13,9 @@ router.get('/', attachCurrentUser, async (req, res) => {
   if (!req.currentUserId) return;
 
   const currentUser = await User.findByPk(req.currentUserId);
-  
+  if (!currentUser.subscriptions) {
+    return res.json({success: false, message: "У данного пользователя пока нет подписок"})
+  };
 
   let notifications = await Notification.findAll()
 

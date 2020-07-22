@@ -7,7 +7,8 @@ import SignInForm from '../forms/SignInForm';
 import { userPostLogin } from '../store/current_user/actions';
 
 
-const SignIn = ({ userPostLogin }) => {
+const SignIn = (props) => {
+  const { userPostLogin } = props;
   const handleSubmit = async (email, password) => {
     const res = await userPostLogin({ email, password });
     return res;

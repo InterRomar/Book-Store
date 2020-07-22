@@ -88,7 +88,7 @@ const NotificationPanel = (props) => {
     }
     setOpened(false);
   };
-  if (notifications.length === 0) {
+  if (!notifications) {
     return (
       <NotificationBody ref={node}>
         <NotificationButton onClick={togglePanel} id='togglePanelButton'>

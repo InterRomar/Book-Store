@@ -7,10 +7,10 @@ const { sequelize, Sequelize } = require('../models/index');
 const User = require('../models/User')(sequelize, Sequelize);
 const attachCurrentUser = require('../middlewares/attachCurrentUser')
 const upload = require('../middlewares/upload');
+const salt = require('../middlewares/getSalt');
 const Book = require('../models/Book')(sequelize, Sequelize);
 
 const router = express.Router();
-const salt = bcrypt.genSaltSync(10);
 
 function generateToken(user) {
 
@@ -171,4 +171,5 @@ router.post('/upload-avatar', attachCurrentUser, upload, async (req, res) => {
     res.status(500).json({ success: false, message: 'Что-то пошло не так, повторите попытку!' });
   }
 })
+
 module.exports = router;

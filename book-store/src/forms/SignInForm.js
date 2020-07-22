@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import FormErrors from './FormErrors';
 
 export const Title = styled.h1`
@@ -38,6 +39,23 @@ export const Input = styled.input`
   border: 1px solid #333333;
   border-radius: 4px;
   padding: 5px 10px;
+`;
+
+const LinkWrapper = styled.div`
+  text-align: center;
+  margin-bottom: 20px;
+  margin-top: -10px;
+
+  & a {
+    color: #333;
+    transition: 0.08s;
+    font-size: 20px;
+    font-family: 'Roboto';
+
+    &:hover {
+      color: rgb(150, 68, 197);
+    }
+  }
 `;
 
 export const SubmitBtn = styled.input`
@@ -162,7 +180,11 @@ class SignInForm extends Component {
             onChange={this.handleChange}
           />
         </FormCol>
-
+        <LinkWrapper>
+          <Link to='/password-reset-link-request'>
+            Забыли пароль?
+          </Link>
+        </LinkWrapper>
         <FormCol>
           <SubmitBtn type='submit' disabled={!this.state.formValid} value='Войти'/>
         </FormCol>

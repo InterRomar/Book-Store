@@ -59,7 +59,6 @@ const book_store = (state = initialState, action) => {
         ...state,
         loading: false,
         error: '',
-        books: [...state.books, action.payload]
       });
     case GET_BOOKS_REQUEST:
       return ({

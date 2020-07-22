@@ -36,9 +36,6 @@ app.use(function (err, req, res, next) {
 });
 
 io.on('connection', socket => {
-  // const browser = socket.handshake.headers['user-agent'].split(' ').slice(-1).join('');
-  // console.log(browser)
-
   socket.on('addBook', async (book)=>{
     const { id, user_id, category_id } = book;
     
