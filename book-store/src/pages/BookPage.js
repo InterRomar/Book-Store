@@ -217,11 +217,6 @@ const CommentForm = styled(Form)`
 
 `;
 
-const AnswerTo = styled.span`
-  color: blue;
-  font-family: 'Roboto';
-`;
-
 class BookPage extends Component {
   constructor(props) {
     super(props);
@@ -280,15 +275,20 @@ class BookPage extends Component {
     const { setComment, book } = this.props;
     const { commentText, answerTo } = this.state;
 
-    const answerTarget = book.comments.find(c => c.id === answerTo).user_id.email;
+    let answerTarget;
+    if (answerTo) {
+      answerTarget = book.comments.find(c => c.id === answerTo).user_id;
+    }
 
     const comment = {
       book_id: book.id,
       text: commentText,
     };
-    if (commentText.split(' ').includes(answerTarget)) {
+    if (commentText.split(' ').includes(answerTarget.email)) {
       comment.answerTo = answerTo;
+      comment.target_user_id = answerTarget.id;
     }
+    console.log(comment.target_user_id, ' BookPage TUI');
 
     await setComment(socket, comment);
 

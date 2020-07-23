@@ -108,13 +108,15 @@ router.post('/set-rating', async (req, res) => {
 });
 
 router.post('/set-comment', attachCurrentUser, async (req, res) => {
-  const { book_id, text, answerTo } = req.body;  
+  const { book_id, text, answerTo, target_user_id } = req.body;  
   const newComment = await Comment.create({
     book_id,
     text,
     answerTo,
+    target_user_id,
     user_id: req.currentUserId
   });
+  console.log(target_user_id, ' book.routes TUI');
   const user = await User.findByPk(req.currentUserId);
   newComment.user_id = user;
   
@@ -127,6 +129,7 @@ router.post('/set-comment', attachCurrentUser, async (req, res) => {
     }
   })
 
+  console.log(newComment)
   res.json({success: true, comment: newComment})
 });
 

@@ -17,6 +17,9 @@ module.exports = {
       target_id: {
         type: Sequelize.INTEGER
       },
+      target_user_id: {
+        type: Sequelize.INTEGER
+      },
       book_id: {
         type: Sequelize.INTEGER
       },

@@ -88,13 +88,15 @@ io.on('connection', socket => {
 	})
 
   socket.on('addMention', async (mention)=>{
-    const { id, user_id, answerTo } = mention;
+    const { id, user_id, answerTo, target_user_id } = mention;
+    console.log(target_user_id)
     
     //Здесь создаю новое уведомление в БД
     const notification = await Notification.create({
       type: 'MENTION',
       user_id: user_id.id,
       target_id: answerTo,
+      target_user_id,
       isViewed: false
     });
 
