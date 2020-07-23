@@ -12,7 +12,8 @@ module.exports = (sequelize, DataTypes) => {
   Comment.init({
     book_id: DataTypes.INTEGER,
     user_id: DataTypes.INTEGER,
-    text: DataTypes.TEXT
+    text: DataTypes.TEXT,
+    answerTo: DataTypes.INTEGER
   }, {
     sequelize,
     timestamps: true,

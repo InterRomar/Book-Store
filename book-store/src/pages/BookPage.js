@@ -10,7 +10,20 @@ import { addBookToFavorite } from '../store/current_user/actions';
 import { Form, FormCol, SubmitBtn } from '../forms/SignInForm';
 import { Textarea } from './AddBook';
 
+function prepareCommentText(comment) {
+  if (!comment.answerTo) {
+    return { __html: comment.text };
+  }
 
+  const reg = /\S+@\S+\.\S+/;
+  const result = comment.text.split(' ').map(word => {
+    if (reg.test(word)) {
+      return `<address> ${word} </address>`;
+    }
+    return word;
+  }).join(' ');
+  return { __html: result };
+}
 const BookHeader = styled.div`
   margin-top: 20px;
   border-bottom: 1px solid #ccc;
@@ -141,23 +154,55 @@ const CommentAvatar = styled(Avatar)`
   margin-left: 0;
   margin-right: 20px;
 `;
-const Comment = styled.div`
+const Comment = styled.a`
+  display: block;
   padding: 15px;
   border: 1px dotted #ccc;
   margin-bottom: 15px;
+  transition: 0.08s ease-in;
+  position: relative;
+  color: #333;
+  text-decoration: none;
 
+  &:hover {
+    cursor: ${props => (props.answerTo ? 'pointer' : 'default')};
+    transform: ${props => (props.answerTo ? 'translateY(-5px)' : 'none')}
+  }
   & .comment__header {
     border-bottom: 1px solid #ccc;
     padding-bottom: 10px;
     margin-bottom: 10px;
     display: flex;
-    align-items: center;
-    
+    justify-content: space-between;
+    align-items: center; 
+  }
+
+  & .comment__author {
+    display: flex;
+    align-items: center; 
+  }
+
+  & .set-mention {
+    font-size: 16px;
+    background: transparent;
+    border: 1px solid #333;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.07s ease-in;
+
+    &:hover {
+      background: #333;
+      color: #fff;
+    }
   }
 
   & .comment__author {
     font-style: italic;
     font-weight: bold;
+  }
+  & address {
+    color: red;
   }
 `;
 const CommentForm = styled(Form)`
@@ -168,6 +213,10 @@ const CommentForm = styled(Form)`
 
 `;
 
+const AnswerTo = styled.span`
+  color: blue;
+  font-family: 'Roboto';
+`;
 
 class BookPage extends Component {
   constructor(props) {
@@ -175,7 +224,8 @@ class BookPage extends Component {
 
     this.state = {
       loading: this.props.loading,
-      commentText: ''
+      commentText: '',
+      answerTo: null
     };
   }
 
@@ -208,21 +258,40 @@ class BookPage extends Component {
     await getBookById(this.props.match.params.id);
   }
 
+  setMention = (id) => {
+    const { book } = this.props;
+
+    const comment = book.comments.find(comment => comment.id === id);
+    console.log(comment);
+
+    this.setState({
+      answerTo: comment.id,
+      commentText: `${comment.user_id.email} \n`
+    });
+    this.nameTextArea.focus();
+  }
+
   addComment = async (event) => {
     event.preventDefault();
 
     const { setComment, book } = this.props;
-    const { commentText } = this.state;
+    const { commentText, answerTo } = this.state;
+
+    const answerTarget = book.comments.find(c => c.id === answerTo).user_id.email;
 
     const comment = {
       book_id: book.id,
-      text: commentText
+      text: commentText,
     };
+    if (commentText.split(' ').includes(answerTarget)) {
+      comment.answerTo = answerTo;
+    }
 
     await setComment(comment);
 
     this.setState({
-      commentText: ''
+      commentText: '',
+      answerTo: null
     });
   }
 
@@ -232,6 +301,12 @@ class BookPage extends Component {
     this.setState({
       [name]: value
     });
+  }
+
+  commentClick = (event, answerTo) => {
+    if (!answerTo) {
+      event.preventDefault();
+    }
   }
 
   render() {
@@ -297,23 +372,41 @@ class BookPage extends Component {
                     placeholder='Напишите ваш отзыв..'
                     value={commentText}
                     onChange={this.handleChange}
+                    ref={(textArea) => { this.nameTextArea = textArea; }}
                   />
                 </FormCol>
                 <SubmitBtn type='submit' disabled={commentText === ''} value='Отправить' />
               </CommentForm>
 
               {book.comments &&
-                book.comments.map(comment => <Comment key={comment.id}>
+                book.comments.map(comment => <Comment
+                  key={comment.id}
+                  answerTo={comment.answerTo}
+                  id={comment.id}
+                  onClick={(event) => this.commentClick(event, comment.answerTo)}
+                  href={comment.answerTo ? `#${comment.answerTo}` : '#'}
+                >
                   <div className="comment__header">
-                    <CommentAvatar src={`${process.env.REACT_APP_BASE_URL}uploads/${
-                      comment.user_id.avatar || 'userAvatarPlaceholder.jpeg'
-                    }`} />
-                    <span className="comment__author">
-                      {comment.user_id.email}
-                    </span>
+                    <div className="comment__author">
+                      <CommentAvatar src={`${process.env.REACT_APP_BASE_URL}uploads/${
+                        comment.user_id.avatar || 'userAvatarPlaceholder.jpeg'
+                      }`} />
+                      <span className="comment__author">
+                        {comment.user_id.email}
+                      </span>
+                    </div>
+                    <button
+                      className="set-mention"
+                      onClick={() => this.setMention(comment.id)}
+                    >
+                      Ответить
+                    </button>
                   </div>
-                  <div className="comment__body">
-                    {comment.text}
+                  <div
+                    className="comment__body"
+                    dangerouslySetInnerHTML={prepareCommentText(comment)}
+                  >
+
                   </div>
                 </Comment>)
               }

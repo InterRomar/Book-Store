@@ -108,10 +108,11 @@ router.post('/set-rating', async (req, res) => {
 });
 
 router.post('/set-comment', attachCurrentUser, async (req, res) => {
-  const { book_id, text } = req.body;  
+  const { book_id, text, answerTo } = req.body;  
   const newComment = await Comment.create({
     book_id,
     text,
+    answerTo,
     user_id: req.currentUserId
   });
   const user = await User.findByPk(req.currentUserId);
