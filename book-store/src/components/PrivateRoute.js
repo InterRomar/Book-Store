@@ -49,5 +49,5 @@ PrivateRoute.propTypes = {
   isAuth: PropTypes.bool,
   userPostLogin: PropTypes.func,
   path: PropTypes.string,
-  component: PropTypes.element
+
 };

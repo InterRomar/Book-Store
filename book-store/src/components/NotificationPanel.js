@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import BookNotification from './BookNotification';
 import { removeNotification } from '../store/current_user/actions';
+import MentionNotification from './MentionNotification';
 
 const NotificationBody = styled.div`
   position: relative;
@@ -112,9 +113,27 @@ const NotificationPanel = (props) => {
       </NotificationButton>
       <NotificationList opened={opened}>
         {notifications &&
-          notifications.map(notification => <NotificationItem key={notification.id}>
-            <BookNotification notification={notification} removeNotification={removeNotification}/>
-          </NotificationItem>)
+          notifications.map(notification => {
+            if (notification.type === 'NEW_BOOK') {
+              return (
+                <NotificationItem key={notification.id}>
+                  <BookNotification
+                    notification={notification}
+                    removeNotification={removeNotification}
+                  />
+                </NotificationItem>
+              );
+            } if (notification.type === 'MENTION') {
+              return (
+                <NotificationItem key={notification.id}>
+                  <MentionNotification
+                    notification={notification}
+                    removeNotification={removeNotification}
+                  />
+                </NotificationItem>
+              );
+            }
+          })
         }
       </NotificationList>
     </NotificationBody>

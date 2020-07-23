@@ -55,7 +55,6 @@ router.post('/remove-favorite', attachCurrentUser, async (req, res) => {
 
   res.json({success: true, id: book_id})
 });
-
 router.post('/reg', async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -84,7 +83,6 @@ router.post('/reg', async (req, res) => {
     return res.status(500).json({ success: false, message: `Что-то пошло не так, повторите попытку... ${error}`});
   }
 });
-
 router.get('/profile', attachCurrentUser, async (req, res) => {
   try {
     const user = await User.findByPk(Number(+req.currentUserId));
@@ -103,7 +101,6 @@ router.get('/profile', attachCurrentUser, async (req, res) => {
     return res.json({ success: false, message: error.message })
   }
 });
-
 router.post('/login', async (req, res) => {
     try {
       const { email, password } = req.body;
@@ -135,7 +132,6 @@ router.post('/login', async (req, res) => {
       return res.status(500).json({ success: false, message: `Что-то пошло не так, повторите попытку... ${error}`});
     }
 });
-
 router.get('/favorite', attachCurrentUser, async (req, res) => {
   const user = await User.findByPk(req.currentUserId);
   if (!user.favorite) {
@@ -152,8 +148,6 @@ router.get('/favorite', attachCurrentUser, async (req, res) => {
   
   
 })
-
-
 router.post('/upload-avatar', attachCurrentUser, upload, async (req, res) => {
 
   try {

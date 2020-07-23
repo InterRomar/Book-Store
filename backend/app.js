@@ -35,12 +35,23 @@ app.use(function (err, req, res, next) {
   }
 });
 
+
+
+
+const sockets_id = [];
 io.on('connection', socket => {
+
+  sockets_id.push({
+    id: socket.id,
+    user_id: socket.handshake.query.user_id
+  });
+
   socket.on('addBook', async (book)=>{
     const { id, user_id, category_id } = book;
     
     //Здесь создаю новое уведомление в БД
     const notification = await Notification.create({
+      type: 'NEW_BOOK',
       book_id: id,
       user_id,
       category_id,
@@ -51,10 +62,12 @@ io.on('connection', socket => {
     const category = await Category.findByPk(category_id);
     const newNotification = {
       id: notification.id,
+      type: notification.type,
       isViewed: false,
       user: {
         id: user.id,
         email: user.email,
+        subscriptions: user.subscriptions,
         avatar: user.avatar
       },
       book: {
@@ -72,9 +85,40 @@ io.on('connection', socket => {
 
     // Дальше отправляю его клиентам
     io.emit('bookAdded', newNotification)
-
 	})
 
+  socket.on('addMention', async (mention)=>{
+    const { id, user_id, answerTo } = mention;
+    
+    //Здесь создаю новое уведомление в БД
+    const notification = await Notification.create({
+      type: 'MENTION',
+      user_id: user_id.id,
+      target_id: answerTo,
+      isViewed: false
+    });
+
+    // const user = await User.findByPk(user_id.id);
+    const newNotification = {
+      id: notification.id,
+      type: notification.type,
+      isViewed: false,
+      user: {
+        id: user_id.id,
+        email: user_id.email,
+      },
+    }
+    
+    // const target = sockets_id.find(s => +s.user_id === answerTo);
+    const target = sockets_id.find(s => +s.user_id === answerTo);
+    
+    console.log(target)
+    io.to(target.id).emit('mentionAdded', newNotification)
+
+    
+
+    
+	})
 
 
 })

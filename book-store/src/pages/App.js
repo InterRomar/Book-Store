@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import io from 'socket.io-client';
 
-import { ThemeConsumer } from 'styled-components';
 import { getProfileFetch, userLogOut, addNotification, userPostLogin } from '../store/current_user/actions';
 import Header from '../components/Header';
 import Reg from './Reg';
@@ -20,7 +19,6 @@ import PasswordReset from './PasswordReset';
 import Favorite from '../components/Favorite';
 import PasswordResetLinkRequest from './PasswordResetLinkRequest';
 
-const socket = io.connect('http://localhost:5000');
 
 class App extends React.Component {
   constructor(props) {
@@ -32,15 +30,22 @@ class App extends React.Component {
   }
 
   componentDidMount = async () => {
-    const { getProfileFetch, getAllCategories, user } = this.props;
+    const { getProfileFetch, getAllCategories } = this.props;
     await getProfileFetch();
     await getAllCategories();
     this.setState({
       loading: false
     });
 
+    const socket = io('http://localhost:5000/', {
+      query: {
+        user_id: this.props.user.id
+      }
+    });
+
     // С сервера приходит уведомление, что книга была создана
     socket.on('bookAdded', data => {
+      const user = data.user;
       // проверяется, есть ли категория новой книги в списке подписок данного сокета
       if (user.subscriptions) {
         if (this.props.user.subscriptions.includes(data.category.id)) {
@@ -49,6 +54,9 @@ class App extends React.Component {
       }
     });
 
+    socket.on('mentionAdded', data => {
+      this.props.addNotification(data);
+    });
     // Если да, то диспатчим
     // Если нет, то ничего не делаем
   }

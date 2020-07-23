@@ -73,7 +73,7 @@ export const setBookRating = (data) => {
     }
   };
 };
-export const setComment = (comment) => {
+export const setComment = (socket, comment) => {
   return async dispatch => {
     dispatch(requestSetComment());
 
@@ -82,6 +82,7 @@ export const setComment = (comment) => {
 
       if (!res.data.success) throw new Error(res.data.message);
 
+      socket.emit('addMention', res.data.comment);
       return dispatch(successSetComment(res.data.comment));
     } catch (error) {
       console.log(error.response.data.message);

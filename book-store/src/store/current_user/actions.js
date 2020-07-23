@@ -137,8 +137,6 @@ export const userPostLogin = user => {
     }
   };
 };
-
-
 export const userPostReg = user => {
   return async dispatch => {
     dispatch(requestReg());
@@ -218,11 +216,14 @@ export const getProfileFetch = () => {
 
       const res = await axiosInstance.get('auth/profile');
       let notifications = [];
+      const bookNotificationsRes = await axiosInstance.get('notifications/new-books');
+      if (bookNotificationsRes.data.success) {
+        notifications = [...notifications, ...bookNotificationsRes.data.notifications];
+      }
 
-      const notificationsRes = await axiosInstance.get('notifications/');
-
-      if (notificationsRes.data.success) {
-        notifications = notificationsRes.data.notifications;
+      const mentionNotificationsRes = await axiosInstance.get('notifications/mentions');
+      if (mentionNotificationsRes.data.success) {
+        notifications = [...notifications, ...mentionNotificationsRes.data.notifications];
       }
       if (res.data.success) {
         return dispatch(successLogin(res.data.user, notifications));
