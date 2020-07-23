@@ -82,9 +82,8 @@ export const setComment = (socket, comment) => {
 
       if (!res.data.success) throw new Error(res.data.message);
 
-      socket.emit('addMention', res.data.comment);
+      socket.emit('addMention', { ...res.data.comment, target_user_id: res.data.target_user_id });
 
-      console.log(res.data.target_user_id, ' action TUI');
       return dispatch(successSetComment(res.data.comment));
     } catch (error) {
       console.log(error.response.data.message);
