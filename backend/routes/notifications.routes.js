@@ -64,11 +64,7 @@ router.get('/:type', attachCurrentUser, async (req, res) => {
   }
   
   if (req.params.type === 'mentions') {
-    const comments = await Comment.findAll({
-      where: {
-        
-      }
-    })
+    
     let notifications = await Notification.findAll({
       where: {
         type: 'MENTION',

@@ -115,6 +115,9 @@ router.post('/set-comment', attachCurrentUser, async (req, res) => {
     answerTo,
     user_id: req.currentUserId
   });
+
+  const target_comment = await Comment.findByPk(answerTo); 
+  
   const user = await User.findByPk(req.currentUserId);
   newComment.user_id = user;
   
@@ -126,8 +129,8 @@ router.post('/set-comment', attachCurrentUser, async (req, res) => {
       id: book_id
     }
   })
-
-  res.json({success: true, comment: newComment})
+  
+  res.json({success: true, comment: newComment, target_user_id: target_comment.user_id})
 });
 
 router.get('/:id', userFromToken, async (req, res) => {

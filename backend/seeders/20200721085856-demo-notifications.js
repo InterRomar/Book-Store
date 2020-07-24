@@ -79,6 +79,7 @@ module.exports = {
         type: 'MENTION',
         user_id: 4,
         target_id: 1,
+        target_user_id: 1,
         isViewed: false, 
         createdAt: new Date(),
         updatedAt: new Date()
@@ -87,6 +88,7 @@ module.exports = {
         type: 'MENTION',
         user_id: 6,
         target_id: 1,
+        target_user_id: 1,
         isViewed: false, 
         createdAt: new Date(),
         updatedAt: new Date()

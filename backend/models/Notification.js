@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     user_id: DataTypes.INTEGER,
     book_id: DataTypes.INTEGER,
     target_id: DataTypes.INTEGER,
+    target_user_id: DataTypes.INTEGER,
     category_id: DataTypes.INTEGER,
     isViewed: DataTypes.BOOLEAN
   }, {
