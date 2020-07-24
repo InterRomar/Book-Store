@@ -1,3 +1,4 @@
+import io from 'socket.io-client';
 import axiosInstance from '../../axios';
 
 import { registerActions,
@@ -10,6 +11,8 @@ import { registerActions,
   LOGOUT_USER,
   getNotificationsActions,
   ADD_NOTIFICATION } from '../action_names/action_names';
+
+const socket = io.connect(process.env.REACT_APP_BASE_URL);
 
 
 const {
@@ -129,6 +132,7 @@ export const userPostLogin = user => {
       localStorage.setItem('token', res.data.token);
       dispatch(successLogin(res.data.currentUser));
 
+      socket.emit('userJoined', { room: res.data.currentUser.id });
       return res.data;
     } catch (error) {
       console.log(error.message);
@@ -147,6 +151,8 @@ export const userPostReg = user => {
 
       localStorage.setItem('token', res.data.token);
       dispatch(successReg(res.data.user));
+
+      socket.emit('userJoined', { room: res.data.user.id });
       return res.data;
     } catch (error) {
       dispatch(failureReg(error.message));
@@ -182,12 +188,17 @@ export const getNotifications = () => {
   return async dispatch => {
     dispatch(requestGetNotifications());
     try {
-      const res = await axiosInstance.get('notifications/');
+      const resBookNotifications = await axiosInstance.get('notifications/new-books');
+      const resMentionNotifications = await axiosInstance.get('notifications/mentions');
+      if (!resBookNotifications.data.success && !resMentionNotifications.data.success) {
+        throw new Error(resBookNotifications.data.message);
+      }
 
-      if (!res.data.success) throw new Error(res.data.message);
-
-      dispatch(successGetNotifications(res.data.notifications));
-      return res.data;
+      dispatch(successGetNotifications([
+        ...resBookNotifications.data.notifications,
+        ...resMentionNotifications.data.notifications
+      ]));
+      return [...resBookNotifications, ...resMentionNotifications];
     } catch (error) {
       dispatch(failureGetNotifications(error.message));
       return error;
@@ -201,19 +212,7 @@ export const getProfileFetch = () => {
     if (!localStorage.token) return dispatch(failureLogin('token not found'));
     const token = localStorage.token.split(' ')[1];
 
-    function parseJwt (token) {
-      const base64Url = token.split('.')[1];
-      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-      const jsonPayload = decodeURIComponent(atob(base64).split('').map((c) => {
-        return `%${(`00${c.charCodeAt(0).toString(16)}`).slice(-2)}`;
-      }).join(''));
-
-      return JSON.parse(jsonPayload);
-    }
-
     if (token) {
-      const decodedToken = parseJwt(token);
-
       const res = await axiosInstance.get('auth/profile');
       let notifications = [];
       const bookNotificationsRes = await axiosInstance.get('notifications/new-books');

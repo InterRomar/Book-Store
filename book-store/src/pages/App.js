@@ -37,11 +37,13 @@ class App extends React.Component {
       loading: false
     });
 
-    const socket = io('http://localhost:5000/', {
+    const socket = io(process.env.REACT_APP_BASE_URL, {
       query: {
         user_id: this.props.user.id
       }
     });
+
+    socket.emit('userJoined', { room: this.props.user.id });
 
     // С сервера приходит уведомление, что книга была создана
     socket.on('bookAdded', data => {
@@ -53,12 +55,13 @@ class App extends React.Component {
         }
       }
     });
+    // Если да, то диспатчим
+    // Если нет, то ничего не делаем
+
 
     socket.on('mentionAdded', data => {
       this.props.addNotification(data);
     });
-    // Если да, то диспатчим
-    // Если нет, то ничего не делаем
   }
 
   render() {

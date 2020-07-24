@@ -29,7 +29,7 @@ const Select = styled.select`
   padding: 5px 10px;
 `;
 
-const socket = io.connect('http://localhost:5000');
+const socket = io.connect(process.env.REACT_APP_BASE_URL);
 
 
 class AddBook extends Component {
