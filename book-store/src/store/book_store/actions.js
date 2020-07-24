@@ -81,8 +81,9 @@ export const setComment = (socket, comment) => {
       const res = await axiosInstance.post('books/set-comment', comment);
 
       if (!res.data.success) throw new Error(res.data.message);
-
-      socket.emit('addMention', { ...res.data.comment, target_user_id: res.data.target_user_id });
+      if (res.data.target_user_id) {
+        socket.emit('addMention', { ...res.data.comment, target_user_id: res.data.target_user_id });
+      }
 
       return dispatch(successSetComment(res.data.comment));
     } catch (error) {

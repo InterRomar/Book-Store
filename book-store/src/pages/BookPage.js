@@ -11,7 +11,7 @@ import { addBookToFavorite } from '../store/current_user/actions';
 import { Form, FormCol, SubmitBtn } from '../forms/SignInForm';
 import { Textarea } from './AddBook';
 
-const socket = io.connect('http://localhost:5000');
+const socket = io.connect(process.env.REACT_APP_BASE_URL);
 
 
 function prepareCommentText(comment) {
@@ -217,6 +217,15 @@ const CommentForm = styled(Form)`
 
 `;
 
+const CommentFormPlaceholder = styled.p`
+  font-size: 17px;
+  font-family: 'Roboto';
+  color: red;
+  padding: 15px;
+  border: 1px solid red;
+  margin-bottom: 40px;
+`;
+
 class BookPage extends Component {
   constructor(props) {
     super(props);
@@ -259,7 +268,6 @@ class BookPage extends Component {
 
   setMention = (id) => {
     const { book } = this.props;
-
     const comment = book.comments.find(comment => comment.id === id);
 
     this.setState({
@@ -293,10 +301,6 @@ class BookPage extends Component {
         comment.target_user_id = answerTarget.id;
       }
     }
-
-
-    console.log(comment.target_user_id, ' BookPage TUI');
-
     await setComment(socket, comment);
 
     this.setState({
@@ -314,7 +318,7 @@ class BookPage extends Component {
   }
 
   commentClick = (event, answerTo) => {
-    if (!answerTo) {
+    if (!answerTo || event.target.tagName === 'BUTTON') {
       event.preventDefault();
     }
   }
@@ -326,7 +330,9 @@ class BookPage extends Component {
 
     if (loading) {
       return (
-        <h1>loading..</h1>
+        <Container>
+          <h1>loading..</h1>
+        </Container>
       );
     }
 
@@ -343,7 +349,6 @@ class BookPage extends Component {
       price,
       rating,
       img,
-      demo_fragment,
       isAppreciated,
       isFavorite } = book;
 
@@ -375,18 +380,26 @@ class BookPage extends Component {
             <BookComments>
               <h3>Отзывы</h3>
 
-              <CommentForm onSubmit={this.addComment}>
-                <FormCol>
-                  <Textarea
-                    name="commentText"
-                    placeholder='Напишите ваш отзыв..'
-                    value={commentText}
-                    onChange={this.handleChange}
-                    ref={(textArea) => { this.nameTextArea = textArea; }}
-                  />
-                </FormCol>
-                <SubmitBtn type='submit' disabled={commentText === ''} value='Отправить' />
-              </CommentForm>
+              {isAuth &&
+                <CommentForm onSubmit={this.addComment}>
+                  <FormCol>
+                    <Textarea
+                      name="commentText"
+                      placeholder='Напишите ваш отзыв..'
+                      value={commentText}
+                      onChange={this.handleChange}
+                      ref={(textArea) => { this.nameTextArea = textArea; }}
+                    />
+                  </FormCol>
+                  <SubmitBtn type='submit' disabled={commentText === ''} value='Отправить' />
+                </CommentForm>
+              }
+              {!isAuth &&
+                <CommentFormPlaceholder
+                >
+                  Комментировать могуть только авторизованные пользователи
+                </CommentFormPlaceholder>
+              }
 
               {book.comments &&
                 book.comments.map(comment => <Comment

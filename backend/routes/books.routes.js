@@ -130,7 +130,7 @@ router.post('/set-comment', attachCurrentUser, async (req, res) => {
     }
   })
   
-  res.json({success: true, comment: newComment, target_user_id: target_comment.user_id})
+  res.json({success: true, comment: newComment, target_user_id: target_comment ? target_comment.user_id : null})
 });
 
 router.get('/:id', userFromToken, async (req, res) => {

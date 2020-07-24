@@ -38,13 +38,15 @@ app.use(function (err, req, res, next) {
 
 
 
-const sockets_id = [];
+
 io.on('connection', socket => {
 
-  sockets_id.push({
-    id: socket.id,
-    user_id: socket.handshake.query.user_id
-  });
+  socket.on('userJoined', (data) => {
+    
+    socket.join(String(data.room));
+    const message = `user ${socket.id} has connected to the ${data.room} room`;
+    io.to(data.room).emit('onUserJoined', message)
+  })
 
   socket.on('addBook', async (book)=>{
     const { id, user_id, category_id } = book;
@@ -97,8 +99,6 @@ io.on('connection', socket => {
       target_user_id,
       isViewed: false
     });
-
-    // const user = await User.findByPk(user_id.id);
     const newNotification = {
       id: notification.id,
       type: notification.type,
@@ -107,20 +107,10 @@ io.on('connection', socket => {
         id: user_id.id,
         email: user_id.email,
       },
-    }
+    }    
     
-    
-    const target = sockets_id.find(s => +s.user_id === answerTo);
-    if (target) {
-      io.to(target.id).emit('mentionAdded', newNotification)
-    }
-
-    
-
-    
-	})
-
-
+    io.to(target_user_id).emit('mentionAdded', newNotification);
+	});
 })
 
 

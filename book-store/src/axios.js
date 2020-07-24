@@ -3,7 +3,7 @@ import { store } from './store/index';
 import { userLogOut } from './store/current_user/actions';
 
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:5000/',
+  baseURL: process.env.REACT_APP_BASE_URL,
 });
 
 

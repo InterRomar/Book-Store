@@ -68,8 +68,7 @@ router.get('/:type', attachCurrentUser, async (req, res) => {
     let notifications = await Notification.findAll({
       where: {
         type: 'MENTION',
-        // Проблема здесь, target_id - это не id юзера, а id коммента
-        target_id: req.currentUserId
+        target_user_id: req.currentUserId
       }
     });
     notifications = notifications.filter(n => !n.isViewed)

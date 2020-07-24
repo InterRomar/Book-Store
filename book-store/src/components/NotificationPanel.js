@@ -123,16 +123,15 @@ const NotificationPanel = (props) => {
                   />
                 </NotificationItem>
               );
-            } if (notification.type === 'MENTION') {
-              return (
-                <NotificationItem key={notification.id}>
-                  <MentionNotification
-                    notification={notification}
-                    removeNotification={removeNotification}
-                  />
-                </NotificationItem>
-              );
             }
+            return (
+              <NotificationItem key={notification.id}>
+                <MentionNotification
+                  notification={notification}
+                  removeNotification={removeNotification}
+                />
+              </NotificationItem>
+            );
           })
         }
       </NotificationList>
