@@ -1,6 +1,4 @@
 const express = require('express');
-const jwt = require('jsonwebtoken');
-const config = require('config');
 const bcrypt = require('bcrypt');
 const createHash = require('hash-generator');
 
@@ -59,45 +57,46 @@ router.post('/link-request', async (req, res) => {
     user_id: user.id
   });
 
-  const data = {
-    email: user_email,
-    password: user.password,
-    createdAt: new Date().getTime() 
-  }
-  const token = jwt.sign({ data }, config.get("secretKey"), { expiresIn: '1h' });  
 
   const info = await transporter.sendMail({
     from: '"Fred Foo 👻" <foo@example.com>', 
     to: user_email, 
     subject: "Hello ✔", 
     text: "Hello world?", 
-    html: `<b>http://localhost:3000/password-reset/${token}</b>`, 
+    html: `<b>http://localhost:3000/password-reset/${hash}</b>`, 
   });
 
   res.json({success: true, message: 'Письмо с ссылкой было отправлено на ' + user_email})
 });
 
-router.post('/token-verification', async (req,res) => {
+router.post('/hash-verification', async (req,res) => {
   try {
-    const { token } = req.body;
-    const decodedToken = jwt.verify(token, config.get("secretKey"));
+    const { hash } = req.body;
     
-    const tokenLifeСycle = new Date().getTime() - decodedToken.data.createdAt;
-    if (tokenLifeСycle >= decodedToken.exp) {
-      return res.json({success: false, message: "Срок действия ссылки истёк, повторите попытку."})
-    }
-
-    const user = await User.findOne({
+    const passwordReset = await PasswordReset.findOne({
       where: {
-        email: decodedToken.data.email
+        hash
       }
     });
-
     
-    if (user.password === decodedToken.data.password) {
-      return res.json({success: true});
+    if (!passwordReset) throw new Error();
+    if (passwordReset.done) throw new Error();
+
+    if (Date.now >= passwordReset.untilAt.getTime()) {
+      return res.json({
+        success: false, 
+        message: "Срок действия ссылки истёк, повторите попытку."
+      })
     }
-    throw new Error();
+    const user = await User.findByPk(passwordReset.user_id);
+
+    await PasswordReset.update({done: true}, {
+      where: {
+        hash
+      }
+    })
+    return res.json({success: true, email: user.email});
+  
   } catch (error) {
     console.log(error.message);
     return res.json({success: false, message: 'Ссылка недействительна, повторите попытку.'})

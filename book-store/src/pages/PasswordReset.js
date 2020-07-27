@@ -6,16 +6,6 @@ import { Container } from '../components/Header';
 import { Form, Title, FormCol, Input, SubmitBtn } from '../forms/SignInForm';
 import FormErrors from '../forms/FormErrors';
 
-function parseJwt (token) {
-  const base64Url = token.split('.')[1];
-  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-  const jsonPayload = decodeURIComponent(atob(base64).split('').map((c) => {
-    return `%${(`00${c.charCodeAt(0).toString(16)}`).slice(-2)}`;
-  }).join(''));
-
-  return JSON.parse(jsonPayload);
-}
-
 class PasswordReset extends Component {
   constructor(props) {
     super(props);
@@ -35,9 +25,9 @@ class PasswordReset extends Component {
   }
 
   async componentDidMount() {
-    const token = this.props.location.pathname.split('/').slice(-1).join('');
+    const hash = this.props.location.pathname.split('/').slice(-1).join('');
 
-    const res = await axiosInstance.post('password-reset/token-verification', { token });
+    const res = await axiosInstance.post('password-reset/hash-verification', { hash });
 
     this.setState({
       loading: false
@@ -46,7 +36,7 @@ class PasswordReset extends Component {
     if (res.data.success) {
       this.setState({
         success: true,
-        email: parseJwt(token).data.email
+        email: res.data.email
       });
     } else {
       this.setState({
