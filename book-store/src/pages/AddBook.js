@@ -81,18 +81,18 @@ class AddBook extends Component {
     };
   }
 
-  handleChange = async event => {
+  handleChange = event => {
     const name = event.target.name;
     const value = event.target.value;
 
     if (name === 'myImage') {
-      await this.setState({
+      this.setState({
         file: event.target.files[0]
       });
       return;
     }
 
-    await this.setState({
+    this.setState({
       [name]: value
     }, () => {
       this.validateField(name, value);

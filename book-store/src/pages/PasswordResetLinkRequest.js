@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useReducer } from 'react';
 import styled from 'styled-components';
 
 import { Container } from '../components/Header';
@@ -11,12 +11,52 @@ const LinkRequestTitle = styled(Title)`
   margin-bottom: 50px;
 `;
 
+const initialState = {
+  value: '',
+  formErrors: {
+    email: ''
+  },
+  emailValid: false,
+  loading: false,
+  infoLabel: 'Укажите ваш email для получения ссылки на восстановление пароля'
+};
+
+function reducer(state, action) {
+  switch (action.type) {
+    case 'setValue':
+      return {
+        ...state,
+        value: action.payload
+      };
+    case 'setFormErrors':
+      return {
+        ...state,
+        formErrors: action.payload
+      };
+    case 'setEmailValid':
+      return {
+        ...state,
+        emailValid: action.payload
+      };
+    case 'setLoading':
+      return {
+        ...state,
+        loading: action.payload
+      };
+    case 'setInfoLabel':
+      return {
+        ...state,
+        infoLabel: action.payload
+      };
+
+    default:
+      return new Error();
+  }
+}
+
 const PasswordResetLinkRequest = () => {
-  const [value, setValue] = useState('');
-  const [formErrors, setFormErrors] = useState({ email: '' });
-  const [emailValid, setEmailValid] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [infoLabel, setInfoLabel] = useState('Укажите ваш email для получения ссылки на восстановление пароля');
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const { value, formErrors, emailValid, loading, infoLabel } = state;
 
   const validateField = (fieldName, value) => {
     const fieldValidationErrors = formErrors;
@@ -29,26 +69,27 @@ const PasswordResetLinkRequest = () => {
       default:
         break;
     }
-    setFormErrors(fieldValidationErrors);
-    setEmailValid(emailValidField);
+    dispatch({ type: 'setFormErrors', payload: fieldValidationErrors });
+    dispatch({ type: 'setEmailValid', payload: emailValidField });
   };
 
   const handleChange = (event) => {
-    setValue(event.target.value);
+    dispatch({ type: 'setValue', payload: event.target.value });
     validateField(event.target.name, event.target.value);
   };
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    setLoading(true);
-    setInfoLabel('Проверяем ваш email..');
+    dispatch({ type: 'setLoading', payload: true });
+    dispatch({ type: 'setInfoLabel', payload: 'Проверяем ваш email..' });
+
     const res = await axiosInstance.post('password-reset/link-request', { user_email: value });
-    setLoading(false);
+    dispatch({ type: 'setLoading', payload: false });
 
     if (res.data.success) {
-      setInfoLabel('Пиьсьмо с ссылкой было отправлена на ваш email');
+      dispatch({ type: 'setInfoLabel', payload: 'Пиьсьмо с ссылкой было отправлена на ваш email' });
     } else {
-      setInfoLabel(res.data.message);
+      dispatch({ type: 'setInfoLabel', payload: res.data.message });
     }
   };
 
