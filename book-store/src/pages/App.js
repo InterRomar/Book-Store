@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import io from 'socket.io-client';
+import { Socket } from '../Socket';
 
 import { getProfileFetch, userLogOut, addNotification, userPostLogin } from '../store/current_user/actions';
 import Header from '../components/Header';
@@ -30,38 +30,32 @@ class App extends React.Component {
   }
 
   componentDidMount = async () => {
-    const { getProfileFetch, getAllCategories } = this.props;
+    const { getProfileFetch, getAllCategories, addNotification } = this.props;
     await getProfileFetch();
     await getAllCategories();
     this.setState({
       loading: false
     });
 
-    const socket = io(process.env.REACT_APP_BASE_URL, {
-      query: {
-        user_id: this.props.user.id
-      }
-    });
 
-    socket.emit('userJoined', { room: this.props.user.id });
+    if (Socket.socket) {
+      Socket.socket.on('mentionAdded', data => {
+        addNotification(data);
+      });
 
-    // С сервера приходит уведомление, что книга была создана
-    socket.on('bookAdded', data => {
-      const user = data.user;
-      // проверяется, есть ли категория новой книги в списке подписок данного сокета
-      if (user.subscriptions) {
-        if (this.props.user.subscriptions.includes(data.category.id)) {
-          this.props.addNotification(data);
+      // С сервера приходит уведомление, что книга была создана
+      Socket.socket.on('bookAdded', data => {
+        const user = data.user;
+        // проверяется, есть ли категория новой книги в списке подписок данного сокета
+        if (user.subscriptions) {
+          if (user.subscriptions.includes(data.category.id)) {
+            addNotification(data);
+          }
         }
-      }
-    });
-    // Если да, то диспатчим
-    // Если нет, то ничего не делаем
-
-
-    socket.on('mentionAdded', data => {
-      this.props.addNotification(data);
-    });
+      });
+      // Если да, то диспатчим
+      // Если нет, то ничего не делаем
+    }
   }
 
   render() {

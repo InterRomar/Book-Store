@@ -36,7 +36,6 @@ app.use(function (err, req, res, next) {
 
 
 io.on('connection', socket => {
-
   socket.on('userJoined', (data) => {
     
     socket.join(String(data.room));

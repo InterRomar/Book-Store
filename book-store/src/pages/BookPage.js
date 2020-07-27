@@ -2,16 +2,14 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ReactStars from 'react-rating-stars-component';
-import io from 'socket.io-client';
-
 import styled from 'styled-components';
+
+import { Socket } from '../Socket';
 import { Container, Avatar } from '../components/Header';
 import { getBookById, setBookRating, setComment } from '../store/book_store/actions';
 import { addBookToFavorite } from '../store/current_user/actions';
 import { Form, FormCol, SubmitBtn } from '../forms/SignInForm';
 import { Textarea } from './AddBook';
-
-const socket = io.connect(process.env.REACT_APP_BASE_URL);
 
 
 function prepareCommentText(comment) {
@@ -237,6 +235,8 @@ class BookPage extends Component {
     };
   }
 
+  socket = Socket.socket;
+
   async componentDidMount() {
     await this.props.getBookById(this.props.match.params.id);
   }
@@ -296,7 +296,8 @@ class BookPage extends Component {
         comment.target_user_id = answerTarget.id;
       }
     }
-    await setComment(socket, comment);
+    await setComment(this.socket, comment);
+
 
     this.setState({
       commentText: '',
@@ -488,7 +489,7 @@ const mapDispatchToProps = dispatch => ({
   getBookById: id => dispatch(getBookById(id)),
   setBookRating: data => dispatch(setBookRating(data)),
   addBookToFavorite: data => dispatch(addBookToFavorite(data)),
-  setComment: (socket, comment) => dispatch(setComment(socket, comment))
+  setComment: (socket, comment) => dispatch(setComment(socket, comment)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(BookPage);

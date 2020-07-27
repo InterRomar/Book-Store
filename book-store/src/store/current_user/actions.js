@@ -1,6 +1,8 @@
 import io from 'socket.io-client';
 import axiosInstance from '../../axios';
 
+import { Socket } from '../../Socket';
+
 import { registerActions,
   loginActions,
   uploadAvatarActions,
@@ -128,11 +130,12 @@ export const userPostLogin = user => {
 
       if (!res.data.success) throw new Error(res.data.message);
 
+      Socket.connect(res.data.currentUser.id);
 
       localStorage.setItem('token', res.data.token);
       dispatch(successLogin(res.data.currentUser));
 
-      socket.emit('userJoined', { room: res.data.currentUser.id });
+      Socket.socket.on('onUserJoined', message => console.log(message));
       return res.data;
     } catch (error) {
       console.log(error.message);
@@ -149,6 +152,7 @@ export const userPostReg = user => {
 
       if (!res.data.success) throw new Error(res.data.message);
 
+      Socket.connect(res.data.user.id);
       localStorage.setItem('token', res.data.token);
       dispatch(successReg(res.data.user));
 
@@ -181,6 +185,7 @@ export const userLogOut = () => {
   return dispatch => {
     dispatch(logout());
     localStorage.removeItem('token');
+    Socket.disconnect();
   };
 };
 
@@ -214,6 +219,7 @@ export const getProfileFetch = () => {
 
     if (token) {
       const res = await axiosInstance.get('auth/profile');
+
       let notifications = [];
       const bookNotificationsRes = await axiosInstance.get('notifications/new-books');
       if (bookNotificationsRes.data.success) {
@@ -225,6 +231,8 @@ export const getProfileFetch = () => {
         notifications = [...notifications, ...mentionNotificationsRes.data.notifications];
       }
       if (res.data.success) {
+        Socket.connect(res.data.user.id);
+        Socket.socket.on('onUserJoined', message => console.log(message));
         return dispatch(successLogin(res.data.user, notifications));
       }
     }

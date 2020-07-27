@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import io from 'socket.io-client';
-
+import { Socket } from '../Socket';
 
 import { Container } from '../components/Header';
 import { Title, Form, FormCol, Input, SubmitBtn } from '../forms/SignInForm';
@@ -28,8 +27,6 @@ const Select = styled.select`
   border-radius: 4px;
   padding: 5px 10px;
 `;
-
-const socket = io.connect(process.env.REACT_APP_BASE_URL);
 
 
 class AddBook extends Component {
@@ -81,6 +78,8 @@ class AddBook extends Component {
     };
   }
 
+  socket = Socket.socket;
+
   handleChange = event => {
     const name = event.target.name;
     const value = event.target.value;
@@ -109,11 +108,12 @@ class AddBook extends Component {
       demo_fragment,
       user_id,
       category_id } = this.state;
+    const { addBookAxios } = this.props;
 
     const formData = new FormData();
     formData.append('myImage', this.state.file);
 
-    const res = await this.props.addBookAxios(socket, { title,
+    const res = await addBookAxios(this.socket, { title,
       author,
       description,
       price,

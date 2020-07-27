@@ -1,4 +1,5 @@
 import QueryParser from 'query-string';
+import { Socket } from '../../Socket';
 import axiosInstance from '../../axios';
 
 import { addBookActions,
@@ -46,9 +47,13 @@ export const addBookAxios = (socket, book, img) => {
       const coverRes = await axiosInstance.post(`books/upload-cover/${res.data.book.id}`, img);
 
       dispatch(successAddBook(coverRes.data.book));
-      socket.emit('addBook', res.data.book);
+
+      // Это удалится
+      Socket.socket.emit('addBook', res.data.book);
+
       return res.data;
     } catch (error) {
+      console.log(error);
       console.log(error.response.data.message);
       dispatch(failureAddBook(error.response.data.message));
       return { succes: false, message: error.response.data.message };
