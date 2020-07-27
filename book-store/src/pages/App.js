@@ -2,7 +2,6 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Socket } from '../Socket';
 
 import { getProfileFetch, userLogOut, addNotification, userPostLogin } from '../store/current_user/actions';
 import Header from '../components/Header';
@@ -30,32 +29,12 @@ class App extends React.Component {
   }
 
   componentDidMount = async () => {
-    const { getProfileFetch, getAllCategories, addNotification } = this.props;
+    const { getProfileFetch, getAllCategories } = this.props;
     await getProfileFetch();
     await getAllCategories();
     this.setState({
       loading: false
     });
-
-
-    if (Socket.socket) {
-      Socket.socket.on('mentionAdded', data => {
-        addNotification(data);
-      });
-
-      // С сервера приходит уведомление, что книга была создана
-      Socket.socket.on('bookAdded', data => {
-        const user = data.user;
-        // проверяется, есть ли категория новой книги в списке подписок данного сокета
-        if (user.subscriptions) {
-          if (user.subscriptions.includes(data.category.id)) {
-            addNotification(data);
-          }
-        }
-      });
-      // Если да, то диспатчим
-      // Если нет, то ничего не делаем
-    }
   }
 
   render() {

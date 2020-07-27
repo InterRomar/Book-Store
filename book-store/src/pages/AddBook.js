@@ -113,7 +113,7 @@ class AddBook extends Component {
     const formData = new FormData();
     formData.append('myImage', this.state.file);
 
-    const res = await addBookAxios(this.socket, { title,
+    const res = await addBookAxios({ title,
       author,
       description,
       price,
@@ -327,7 +327,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  addBookAxios: (socket, book, formData) => dispatch(addBookAxios(socket, book, formData)),
+  addBookAxios: (book, formData) => dispatch(addBookAxios(book, formData)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddBook);

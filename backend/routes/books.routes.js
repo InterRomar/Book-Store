@@ -5,7 +5,9 @@ const { sequelize, Sequelize } = require('../models/index');
 const User = require('../models/User')(sequelize, Sequelize);
 const Book = require('../models/Book')(sequelize, Sequelize);
 const Comment = require('../models/Comment')(sequelize, Sequelize);
+const Category = require('../models/Category')(sequelize, Sequelize);
 const Rating = require('../models/Rating')(sequelize, Sequelize);
+const Notification = require('../models/Notification')(sequelize, Sequelize);
 const attachCurrentUser = require('../middlewares/attachCurrentUser')
 const upload = require('../middlewares/upload');
 const userFromToken = require('../middlewares/userFromToken');
@@ -128,7 +130,29 @@ router.post('/set-comment', attachCurrentUser, async (req, res) => {
     where: {
       id: book_id
     }
-  })
+  });
+
+  if (target_comment) {
+    //Здесь создаю новое уведомление в БД
+    const notification = await Notification.create({
+      type: 'MENTION',
+      user_id: req.currentUserId,
+      target_id: answerTo,
+      target_user_id: target_comment.user_id,
+      isViewed: false
+    });
+    const newNotification = {
+      id: notification.id,
+      type: notification.type,
+      isViewed: false,
+      user: {
+        id: user.id,
+        email: user.email,
+      },
+    }    
+    req.io.to(target_comment.user_id).emit('mentionAdded', newNotification);
+  }
+  
   
   res.json({success: true, comment: newComment, target_user_id: target_comment ? target_comment.user_id : null})
 });
@@ -206,6 +230,43 @@ router.post('/', attachCurrentUser, upload, async (req, res) => {
       book_id: newBook.id,
       user_id: []
     })
+    
+    //Здесь создаю новое уведомление в БД
+    const notification = await Notification.create({
+      type: 'NEW_BOOK',
+      book_id: newBook.id,
+      user_id,
+      category_id,
+      isViewed: false
+    });
+
+    const user = await User.findByPk(user_id);
+    const category = await Category.findByPk(category_id);
+    const newNotification = {
+      id: notification.id,
+      type: notification.type,
+      isViewed: false,
+      user: {
+        id: user.id,
+        email: user.email,
+        subscriptions: user.subscriptions,
+        avatar: user.avatar
+      },
+      book: {
+        id: newBook.id,
+        title: newBook.title,
+        author: newBook.author,
+        category: newBook.category_id,
+        price: newBook.price
+      },
+      category: {
+        id: category.id,
+        title: category.title
+      }
+    }
+
+    // Дальше отправляю его клиентам
+    req.io.emit('bookAdded', newNotification)
     
     res.status(200).json({
       success: true,

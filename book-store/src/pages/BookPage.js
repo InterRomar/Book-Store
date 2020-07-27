@@ -296,7 +296,7 @@ class BookPage extends Component {
         comment.target_user_id = answerTarget.id;
       }
     }
-    await setComment(this.socket, comment);
+    await setComment(comment);
 
 
     this.setState({
@@ -489,7 +489,7 @@ const mapDispatchToProps = dispatch => ({
   getBookById: id => dispatch(getBookById(id)),
   setBookRating: data => dispatch(setBookRating(data)),
   addBookToFavorite: data => dispatch(addBookToFavorite(data)),
-  setComment: (socket, comment) => dispatch(setComment(socket, comment)),
+  setComment: (comment) => dispatch(setComment(comment)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(BookPage);

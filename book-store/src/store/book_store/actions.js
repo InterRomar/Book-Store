@@ -1,5 +1,4 @@
 import QueryParser from 'query-string';
-import { Socket } from '../../Socket';
 import axiosInstance from '../../axios';
 
 import { addBookActions,
@@ -35,7 +34,7 @@ const {
   SET_COMMENT_FAILURE } = setCommentActions;
 
 
-export const addBookAxios = (socket, book, img) => {
+export const addBookAxios = (book, img) => {
   return async dispatch => {
     dispatch(requestAddBook());
 
@@ -48,8 +47,6 @@ export const addBookAxios = (socket, book, img) => {
 
       dispatch(successAddBook(coverRes.data.book));
 
-      // Это удалится
-      Socket.socket.emit('addBook', res.data.book);
 
       return res.data;
     } catch (error) {
@@ -78,7 +75,7 @@ export const setBookRating = (data) => {
     }
   };
 };
-export const setComment = (socket, comment) => {
+export const setComment = (comment) => {
   return async dispatch => {
     dispatch(requestSetComment());
 
@@ -86,9 +83,6 @@ export const setComment = (socket, comment) => {
       const res = await axiosInstance.post('books/set-comment', comment);
 
       if (!res.data.success) throw new Error(res.data.message);
-      if (res.data.target_user_id) {
-        socket.emit('addMention', { ...res.data.comment, target_user_id: res.data.target_user_id });
-      }
 
       return dispatch(successSetComment(res.data.comment));
     } catch (error) {
