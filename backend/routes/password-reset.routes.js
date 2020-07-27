@@ -2,10 +2,12 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const bcrypt = require('bcrypt');
+const createHash = require('hash-generator');
 
 const salt = require('../middlewares/getSalt');
 const { sequelize, Sequelize } = require('../models/index');
 const User = require('../models/User')(sequelize, Sequelize);
+const PasswordReset = require('../models/PasswordReset')(sequelize, Sequelize);
 const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
@@ -47,6 +49,15 @@ router.post('/link-request', async (req, res) => {
   if (!user) {
     return res.json({success: false, message: 'Пользователь с таким email не найден'});
   }
+
+  const hash = createHash(30);
+  const exp = new Date().getTime() + 43200000; // Ссылка действительна в течение 12ти часов с момента генерации
+  const newPasswordReset = await PasswordReset.create({
+    hash,
+    untilAt: new Date(exp),
+    done: false,
+    user_id: user.id
+  });
 
   const data = {
     email: user_email,

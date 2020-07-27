@@ -2,7 +2,6 @@ const express = require('express');
 const jsonParser = express.json();
 const http = require('http');
 const socketIO = require("socket.io");
-
 const app = express();
 const db = require('./models/index');
 const { sequelize, Sequelize } = db;
@@ -34,9 +33,6 @@ app.use(function (err, req, res, next) {
     res.status(401).json({message: 'invalid token...'});
   }
 });
-
-
-
 
 
 io.on('connection', socket => {
