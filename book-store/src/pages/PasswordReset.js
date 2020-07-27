@@ -34,10 +34,10 @@ class PasswordReset extends Component {
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const token = this.props.location.pathname.split('/').slice(-1).join('');
 
-    const res = axiosInstance.post('password-reset/token-verification', { token });
+    const res = await axiosInstance.post('password-reset/token-verification', { token });
 
     this.setState({
       loading: false

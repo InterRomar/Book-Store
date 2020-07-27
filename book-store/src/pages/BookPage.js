@@ -283,11 +283,6 @@ class BookPage extends Component {
     const { setComment, book } = this.props;
     const { commentText, answerTo } = this.state;
 
-    let answerTarget;
-    if (answerTo) {
-      answerTarget = book.comments.find(c => c.id === answerTo).user_id.email;
-    }
-
     const comment = {
       book_id: book.id,
       text: commentText,
